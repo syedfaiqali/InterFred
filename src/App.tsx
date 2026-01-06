@@ -8,6 +8,14 @@ import Hero from './components/Hero'
 import Home from './components/Home'
 const About = lazy(() => import('./components/About'))
 
+const Highlights = lazy(() => import('./components/Highlights'))
+const ValueProp = lazy(() => import('./components/ValueProp'))
+const Specialization = lazy(() => import('./components/Specialization'))
+const Partners = lazy(() => import('./components/Partners'))
+const FAQ = lazy(() => import('./components/FAQ'))
+const Subscribe = lazy(() => import('./components/Subscribe'))
+const Footer = lazy(() => import('./components/Footer'))
+
 const App: React.FC = () => {
   const count = useSelector((s: RootState) => s.counter.value)
   const dispatch = useDispatch()
@@ -17,27 +25,19 @@ const App: React.FC = () => {
       <main>
         <Hero />
 
-        <div className="max-w-4xl mx-auto p-6 space-y-6">
-          <Home />
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => dispatch(decrement())}
-              className="px-3 py-1 bg-red-500 text-white rounded"
-            >
-              -
-            </button>
-            <div className="font-mono">{count}</div>
-            <button
-              onClick={() => dispatch(increment())}
-              className="px-3 py-1 bg-green-500 text-white rounded"
-            >
-              +
-            </button>
+        <div className="space-y-6">
+          <div className="max-w-6xl mx-auto px-6">
+            <Home />
           </div>
 
-          <Suspense fallback={<div>Loading about...</div>}>
-            <About />
+          <Suspense fallback={<div className="py-12 text-center">Loading highlights...</div>}>
+            <Highlights />
+            <ValueProp />
+            <Specialization />
+            <Partners />
+            <FAQ />
+            <Subscribe />
+            <Footer />
           </Suspense>
         </div>
       </main>
