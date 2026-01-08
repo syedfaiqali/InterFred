@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import hazardousImage from '../assets/Rectangle 56.svg'
 import cargoImage from '../assets/Rectangle 57.svg'
 import regularatoryImage from '../assets/Rectangle 58.svg'
@@ -36,15 +36,50 @@ const Highlights: React.FC = () => {
       image: UC,
     },
   ]
-
+  const [isVisible, setIsVisible] = useState(false);
   const welcomeSectionData = {
     label: 'Problem',
-    title: <>Welcome to <span className="text-[#07119B]">Inter-Fret Consolidators,</span> where innovation meets global compliance.</>,
+    title: <><span
+      className={`inline-block transition-all duration-500 ${isVisible
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 -translate-y-8'
+        }`}
+      style={{ transitionDelay: isVisible ? '100ms' : '0ms' }}
+    >
+      Welcome to{' '}
+    </span>
+      <span
+        className={`inline-block text-[#07119B] transition-all duration-500 ${isVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+      >
+        Inter-Fret Consolidators,
+      </span>
+      <span
+        className={`inline-block transition-all duration-500 ${isVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isVisible ? '300ms' : '0ms' }}
+      >
+        {' '}where innovation
+      </span>
+      <span
+        className={`inline-block transition-all duration-500 ${isVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isVisible ? '400ms' : '0ms' }}
+      >
+        {' '}meets global compliance.
+      </span></>,
     image: welcomeImage,
     firstText: 'Established in 1987 in Karachi, Inter-Fret is now one of Pakistan’s top five freight forwarders, with a head office strategically located near the airport and seaport.',
     secondText: 'We believe in exceeding customer expectations by being highly innovative and strictly compliant with global quality and safety standards. Our mission is to sustain our leadership role in supply chain solutions.',
     moreLinkVisible: true,
-    bgColor: '#ffffff'
+    bgColor: '#ffffff',
   }
 
   const IndustrySectionData = {
@@ -59,7 +94,7 @@ const Highlights: React.FC = () => {
 
   return (
     <>
-      <Home sectionData={welcomeSectionData} />
+      <Home sectionData={welcomeSectionData} setIsVisible={setIsVisible} />
 
       <section className="relative py-20 bg-[#f9fafb] pt-60">
 
