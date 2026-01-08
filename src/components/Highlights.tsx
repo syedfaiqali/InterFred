@@ -3,8 +3,9 @@ import hazardousImage from '../assets/Rectangle 56.svg'
 import cargoImage from '../assets/Rectangle 57.svg'
 import regularatoryImage from '../assets/Rectangle 58.svg'
 import Lis from '../assets/Rectangle 59.svg'
-import BreakSection from '../assets/2151998711 1.svg'
 import UC from '../assets/Rectangle 60.svg'
+import BreakSection from '../assets/2151998711 1.svg'
+import welcomeImage from '../assets/Rectangle 54.svg'
 import Home from './Home'
 
 const Highlights: React.FC = () => {
@@ -36,9 +37,29 @@ const Highlights: React.FC = () => {
     },
   ]
 
+  const welcomeSectionData = {
+    label: 'Problem',
+    title: <>Welcome to <span className="text-[#07119B]">Inter-Fret Consolidators,</span> where innovation meets global compliance.</>,
+    image: welcomeImage,
+    firstText: 'Established in 1987 in Karachi, Inter-Fret is now one of Pakistan’s top five freight forwarders, with a head office strategically located near the airport and seaport.',
+    secondText: 'We believe in exceeding customer expectations by being highly innovative and strictly compliant with global quality and safety standards. Our mission is to sustain our leadership role in supply chain solutions.',
+    moreLinkVisible: true,
+    bgColor: '#ffffff'
+  }
+
+  const IndustrySectionData = {
+    label: 'Problem',
+    title: <>The industry<br />challenges<span className="block">that <span className="text-blue-900">Inter-Fret</span></span><span className="block text-blue-900">solves</span></>,
+    image: hazardousImage,
+    firstText: <><span>Handling Hazardous Materials</span></>,
+    secondText: 'Many carriers refuse to transport dangerous goods. Inter-Fret\'s expertise in chemical logistics requires strict adherence to safety protocols that most logistics providers lack.',
+    moreLinkVisible: false,
+    bgColor: '#f9fafb'
+  }
+
   return (
     <>
-      <Home />
+      <Home sectionData={welcomeSectionData} />
 
       <section className="relative py-20 bg-[#f9fafb] pt-60">
 
@@ -54,6 +75,8 @@ const Highlights: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <Home sectionData={IndustrySectionData} />
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
