@@ -68,6 +68,10 @@
   margin-right: auto;
 }
 
+.desktop-br {
+  display: block;
+}
+
 /* Text Animation Section */
 .text-animation-section {
   margin-top: 120px;
@@ -186,6 +190,10 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .desktop-br {
+    display: none;
+  }
+
   .container-section {
     margin-bottom: -15%;
   }
@@ -220,10 +228,15 @@
   }
 
   .info-box-top-left,
+  .info-box-bottom-left {
+    max-width: 220px;
+    margin-right: 20px;
+  }
+
   .info-box-top-right,
-  .info-box-bottom-left,
   .info-box-bottom-right {
     max-width: 220px;
+    margin-left: 20px;
   }
 }
 
@@ -263,12 +276,27 @@
   }
 
   .plane-section {
-    min-height: 450px;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    gap: 30px;
+  }
+
+  .plane-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    order: 2;
+    /* Put plane in the middle */
+    width: 100%;
+    margin: 20px 0;
   }
 
   .plane-img {
-    max-width: 550px;
+    max-width: 100%;
+    opacity: 0.8;
   }
 
   .info-box h3 {
@@ -279,11 +307,27 @@
     font-size: 12px;
   }
 
-  .info-box-top-left,
-  .info-box-top-right,
-  .info-box-bottom-left,
+  .info-box {
+    max-width: 100% !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 10px;
+  }
+
+  .info-box-top-left {
+    order: 1;
+  }
+
+  .info-box-top-right {
+    order: 3;
+  }
+
+  .info-box-bottom-left {
+    order: 4;
+  }
+
   .info-box-bottom-right {
-    max-width: 180px;
+    order: 5;
   }
 }
 
@@ -295,12 +339,12 @@
 
   .text-animation-section {
     margin-top: 60px;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
   }
 
   .colored-section {
     min-height: 500px;
-    padding: 150px 12px 40px;
+    padding: 100px 12px 40px;
   }
 
   .solution-heading {
@@ -309,16 +353,8 @@
     margin-top: 40px;
   }
 
-  .container-section {
-    margin-bottom: -12%;
-  }
-
   .container-img {
     max-width: 40%;
-  }
-
-  .text-animation-section {
-    margin-bottom: 80px;
   }
 
   .main-text {
@@ -327,31 +363,14 @@
   }
 
   .plane-section {
-    min-height: 400px;
-    gap: 12px;
-  }
-
-  .plane-img {
-    max-width: 450px;
-  }
-
-  .info-box {
-    padding: 12px;
+    gap: 24px;
   }
 
   .info-box h3 {
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 16px;
   }
 
   .info-box p {
-    font-size: 11px;
-  }
-
-  .info-box-top-left,
-  .info-box-top-right,
-  .info-box-bottom-left,
-  .info-box-bottom-right {
-    max-width: 140px;
+    font-size: 13px;
   }
 }

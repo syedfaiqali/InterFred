@@ -95,7 +95,7 @@ const Answer: React.FC = () => {
                                 }}
                             >
                                 {word}
-                                {index === 3 && <br />}
+                                {index === 3 && <br className="desktop-br" />}
                                 {' '}
                             </span>
                         ))}
