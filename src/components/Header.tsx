@@ -3,7 +3,7 @@ import mainLogo from '../assets/Main Logo.png'
 
 const Header: React.FC = () => {
   return (
-    <div className="w-full">
+    <div className="w-full shadow-lg">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img src={mainLogo} alt="InterFret" className="h-14 object-contain" />

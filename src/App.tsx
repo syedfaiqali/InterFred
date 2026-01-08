@@ -26,9 +26,9 @@ const App: React.FC = () => {
         <Hero />
 
         <div className="space-y-6">
-          <div className="max-w-6xl mx-auto px-6">
+          {/* <div className="max-w-6xl mx-auto px-6">
             <Home />
-          </div>
+          </div> */}
 
           <Suspense fallback={<div className="py-12 text-center">Loading highlights...</div>}>
             <Highlights />
