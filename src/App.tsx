@@ -15,6 +15,7 @@ const Specialization = lazy(() => import('./components/Specialization'))
 const Partners = lazy(() => import('./components/Partners'))
 const FAQ = lazy(() => import('./components/FAQ'))
 const Subscribe = lazy(() => import('./components/Subscribe'))
+const ScrollingText = lazy(() => import('./components/ScrollingText'))
 const Footer = lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
             <Partners />
             <FAQ />
             <Subscribe />
+            <ScrollingText />
           </Suspense>
         </div>
       </main>
