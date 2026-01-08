@@ -138,19 +138,43 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-[100] bg-white transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="p-6 flex justify-between items-center border-b">
-          <img src={mainLogo} alt="InterFret" className="h-10 object-contain" />
-          <button onClick={() => setMobileMenuOpen(false)} className="text-3xl text-gray-800">×</button>
-        </div>
-        <div className="p-6 flex flex-col gap-6 text-xl font-medium text-gray-800">
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#07119B]">About us</a>
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#07119B]">Services</a>
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#07119B]">Achievements</a>
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#07119B]">Network</a>
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#07119B]">Tracking</a>
-          <button className="px-6 py-3 bg-[#07119B] text-white rounded-md shadow-md hover:bg-[#0a1bc0] transition-colors w-full mt-4">
-            Get in Touch
+      <div className={`fixed inset-0 z-[100] bg-[#1a1a1a] transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto`}>
+        <button onClick={() => setMobileMenuOpen(false)} className="absolute top-4 right-6 text-white text-4xl z-50 font-light">✕</button>
+
+        <div className="grid grid-cols-2 w-full min-h-full content-start">
+          {/* Home - Blue Block */}
+          <div className="aspect-square bg-[#07119B] p-6 flex flex-col justify-end border border-white/5" onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+            <span className="text-white text-lg font-bold">Home.</span>
+          </div>
+
+          {/* About Us */}
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+            <span className="text-white text-lg font-bold">About us.</span>
+          </a>
+
+          {/* Services */}
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+            <span className="text-white text-lg font-bold">Services.</span>
+          </a>
+
+          {/* Achievements */}
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+            <span className="text-white text-lg font-bold">Achievements.</span>
+          </a>
+
+          {/* Network */}
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+            <span className="text-white text-lg font-bold">Network.</span>
+          </a>
+
+          {/* Tracking */}
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+            <span className="text-white text-lg font-bold">Tracking.</span>
+          </a>
+
+          {/* Get in Touch - Spanning */}
+          <button className="col-span-2 bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors text-left h-32">
+            <span className="text-white text-lg font-bold">Get in Touch.</span>
           </button>
         </div>
       </div>
