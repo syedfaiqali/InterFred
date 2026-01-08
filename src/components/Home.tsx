@@ -73,57 +73,66 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
           </div>
 
           {/* Content Column - 4/12 */}
-          <div className="lg:col-span-4 flex flex-col gap-8 lg:pl-8" ref={contentRef}>
-            <img
-              src={sectionData.image}
-              alt="Port Operations"
-              className={`w-full rounded-lg shadow-sm transition-all duration-500 ${isContentVisible
-                ? 'opacity-100 scale-100'
-                : 'opacity-0 scale-90'
-                }`}
-              style={{
-                transitionDelay: isContentVisible ? '0ms' : '0ms',
-                clipPath: isContentVisible
-                  ? 'circle(100% at 50% 50%)'
-                  : 'circle(0% at 50% 50%)',
-                transitionProperty: 'opacity, transform, clip-path'
-              }}
-            />
-            <div className="space-y-6">
-              <p
-                className={`text-lg font-bold text-gray-900 leading-snug transition-all duration-600 ${isContentVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 -translate-y-8'
-                  }`}
-                style={{ transitionDelay: isContentVisible ? '400ms' : '0ms' }}
-              >
-                {sectionData.firstText}
-              </p>
-              <p
-                className={`text-base text-gray-600 leading-relaxed transition-all duration-500 ${isContentVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 -translate-y-8'
-                  }`}
-                style={{ transitionDelay: isContentVisible ? '400ms' : '0ms' }}
-              >
-                {sectionData.secondText}
-              </p>
-
-              {sectionData.moreLinkVisible && (
-                <a
-                  href="#"
-                  className={`inline-block relative text-[#07119B] font-bold text-lg group transition-all duration-500 ${isContentVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 -translate-y-8'
+          {(sectionData.image || sectionData.firstText) && (
+            <div className="lg:col-span-4 flex flex-col gap-8 lg:pl-8" ref={contentRef}>
+              {sectionData.image && (
+                <img
+                  src={sectionData.image}
+                  alt="Port Operations"
+                  className={`w-full rounded-lg shadow-sm transition-all duration-500 ${isContentVisible
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-90'
                     }`}
-                  style={{ transitionDelay: isContentVisible ? '300ms' : '0ms' }}
-                >
-                  More about us
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#07119B] transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                  style={{
+                    transitionDelay: isContentVisible ? '0ms' : '0ms',
+                    clipPath: isContentVisible
+                      ? 'circle(100% at 50% 50%)'
+                      : 'circle(0% at 50% 50%)',
+                    transitionProperty: 'opacity, transform, clip-path'
+                  }}
+                />
               )}
+
+              <div className="space-y-6">
+                {sectionData.firstText && (
+                  <p
+                    className={`text-lg font-bold text-gray-900 leading-snug transition-all duration-600 ${isContentVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 -translate-y-8'
+                      }`}
+                    style={{ transitionDelay: isContentVisible ? '400ms' : '0ms' }}
+                  >
+                    {sectionData.firstText}
+                  </p>
+                )}
+                {sectionData.secondText && (
+                  <p
+                    className={`text-base text-gray-600 leading-relaxed transition-all duration-500 ${isContentVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 -translate-y-8'
+                      }`}
+                    style={{ transitionDelay: isContentVisible ? '400ms' : '0ms' }}
+                  >
+                    {sectionData.secondText}
+                  </p>
+                )}
+
+                {sectionData.moreLinkVisible && (
+                  <a
+                    href="#"
+                    className={`inline-block relative text-[#07119B] font-bold text-lg group transition-all duration-500 ${isContentVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 -translate-y-8'
+                      }`}
+                    style={{ transitionDelay: isContentVisible ? '300ms' : '0ms' }}
+                  >
+                    More about us
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#07119B] transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
         </div>
       </div>
