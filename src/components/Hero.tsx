@@ -4,6 +4,11 @@ import svglogos from '../assets/Group 124.png';
 import backgroundImage from '../assets/1.svg';
 
 const Hero: React.FC = () => {
+  const scrollingTexts = [
+    "Scroll down to discover how it works",
+    "Scroll down to discover how it works",
+  ];
+
   return (
     <section
       className="h-[78vh] lg:h-screen bg-cover bg-center relative flex flex-col"
@@ -30,10 +35,25 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-12 right-6 max-w-md text-white/90 hidden md:block">
-        <div className="p-0">
+      <div className="absolute bottom-12 right-6 max-w-sm text-white/90 hidden md:block">
+        <div className="px-6">
           <h4 className="font-semibold mb-4 leading-relaxed text-base">We are a leader in <span style={{ color: '#75C3FF' }}>professional logistics, evolving from an airfreight forwarder to a top-tier global network covering over</span> <span className="text-white font-bold">250 destinations.</span></h4>
-          <p className="text-sm text-white/70 mt-6">• Scroll down to discover how it works •</p>
+          <div className="overflow-hidden mt-2 flex">
+            <div className="flex gap-4 animate-slide-in-left whitespace-nowrap pr-4">
+              {scrollingTexts.map((text, index) => (
+                <p key={index} className="text-sm text-white/70">
+                  <span className="text-blue-400">•</span> {text}
+                </p>
+              ))}
+            </div>
+            <div className="flex gap-4 animate-slide-in-left whitespace-nowrap pr-4">
+              {scrollingTexts.map((text, index) => (
+                <p key={`copy-${index}`} className="text-sm text-white/70">
+                  <span className="text-blue-400">•</span> {text}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
