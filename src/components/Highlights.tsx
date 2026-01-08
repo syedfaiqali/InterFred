@@ -11,11 +11,6 @@ import Home from './Home'
 const Highlights: React.FC = () => {
   const challenges = [
     {
-      title: 'Handling Hazardous Materials',
-      description: 'Many carriers refuse to transport dangerous goods. Inter-Fret\'s expertise in chemical logistics requires strict adherence to safety protocols that most logistics providers lack.',
-      image: hazardousImage,
-    },
-    {
       title: 'Complex Oversized Cargo',
       description: 'Incorporating industrial machinery like 25-foot tall structures or wide cargo equipment is logistically complex. Our expertise results in costly delays.',
       image: cargoImage,
@@ -37,8 +32,9 @@ const Highlights: React.FC = () => {
     },
   ]
   const [isVisible, setIsVisible] = useState(false);
+  const [isIndustryVisible, setIsIndustryVisible] = useState(false);
   const welcomeSectionData = {
-    label: 'Problem',
+    label: 'Company',
     title: <><span
       className={`inline-block transition-all duration-500 ${isVisible
         ? 'opacity-100 translate-y-0'
@@ -84,19 +80,57 @@ const Highlights: React.FC = () => {
 
   const IndustrySectionData = {
     label: 'Problem',
-    title: <>The industry<br />challenges<span className="block">that <span className="text-blue-900">Inter-Fret</span></span><span className="block text-blue-900">solves</span></>,
+    title: <>
+      <span
+        className={`inline-block transition-all duration-500 ${isIndustryVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isIndustryVisible ? '100ms' : '0ms' }}
+      >
+        The industry
+        <br />
+      </span>
+      <span
+        className={`inline-block transition-all duration-500 ${isIndustryVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isIndustryVisible ? '200ms' : '0ms' }}
+      >
+        challenges
+      </span>
+      <span
+        className={`block transition-all duration-500 ${isIndustryVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isIndustryVisible ? '300ms' : '0ms' }}
+      >
+        that <span className="text-blue-900">Inter-Fret</span>
+      </span>
+      <span
+        className={`block text-blue-900 transition-all duration-500 ${isIndustryVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{ transitionDelay: isIndustryVisible ? '400ms' : '0ms' }}
+      >
+        solves
+      </span>
+    </>,
     image: hazardousImage,
     firstText: <><span>Handling Hazardous Materials</span></>,
     secondText: 'Many carriers refuse to transport dangerous goods. Inter-Fret\'s expertise in chemical logistics requires strict adherence to safety protocols that most logistics providers lack.',
     moreLinkVisible: false,
-    bgColor: '#f9fafb'
+    bgColor: '#f9fafb',
   }
 
   return (
     <>
       <Home sectionData={welcomeSectionData} setIsVisible={setIsVisible} />
 
-      <section className="relative py-20 bg-[#f9fafb] pt-60">
+      <section className="relative py-20 bg-[#f9fafb]">
 
         {/* Absolute Image Overlay Centered on Section Boundary */}
         <div className="absolute top-0 left-0 w-full -translate-y-[75%] z-10 px-6 pointer-events-none">
@@ -111,15 +145,15 @@ const Highlights: React.FC = () => {
           </div>
         </div>
 
-        <Home sectionData={IndustrySectionData} />
+        <Home sectionData={IndustrySectionData} setIsVisible={setIsIndustryVisible} />
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
 
             {/* LEFT COLUMN (40%) - Title Section */}
             <div className="lg:col-span-2">
-              <div className="sticky top-24">
-                <p className="text-sm font-medium text-gray-400 mb-4 sticky top-32">Problem</p>
+              <div className=" top-24">
+                <p className="text-sm font-medium text-gray-400 mb-4 top-32">Problem</p>
                 <h2 className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900">
                   The industry<br />challenges<span className="block">that <span className="text-blue-900">Inter-Fret</span></span>
                   <span className="block text-blue-900">solves</span>
