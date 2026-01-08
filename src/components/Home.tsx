@@ -67,7 +67,7 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
 
           {/* Heading Column - 5/12 */}
           <div className="lg:col-span-5" ref={headingRef}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight">
               {sectionData.title}
             </h2>
           </div>
