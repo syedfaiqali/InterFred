@@ -154,42 +154,6 @@ const Highlights: React.FC = () => {
 
         <Home sectionData={IndustrySectionData} setIsVisible={setIsIndustryVisible} />
         <ChallengeGrid />
-        {/* Challenge Section */}
-        {/* <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-
-            <div className="lg:col-span-2">
-              <div className=" top-24">
-                <p className="text-sm font-medium text-gray-400 mb-4 top-32">Problem</p>
-                <h2 className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900">
-                  The industry<br />challenges<span className="block">that <span className="text-blue-900">Inter-Fret</span></span>
-                  <span className="block text-blue-900">solves</span>
-                </h2>
-              </div>
-            </div>
-
-            <div className="lg:col-span-3">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {challenges.map((challenge, index) => (
-                  <div key={index} className="flex flex-col h-full">
-                    <div className="flex-shrink-0 mb-5">
-                      <img
-                        src={challenge.image}
-                        alt={challenge.title}
-                        className="w-full h-56 object-cover rounded-lg"
-                      />
-                    </div>
-                    <div className="flex-grow flex flex-col">
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 leading-snug">{challenge.title}</h3>
-                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{challenge.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div> */}
       </section>
     </>
   )
