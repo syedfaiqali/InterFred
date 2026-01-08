@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Answer.css';
-import ContainerImg from '../Assets/Container.svg';
-import PlaneImg from '../Assets/PLANE.svg';
+import ContainerImg from '../assets/Container.svg';
+import PlaneImg from '../assets/PLANE.svg';
 
 const Answer: React.FC = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -106,20 +106,20 @@ const Answer: React.FC = () => {
                 {/* Plane Section with Corner Text Boxes */}
                 <div className="plane-section">
                     {/* Top Left Info Box - Dangerous Goods */}
-                    <div className="info-box info-box-top-left">
+                    <div className="info-box info-box-top-left text-right">
                         <h3>Dangerous<br />Goods Specialists</h3>
                         <p>
-                            We are certified to handle dangerous goods shipments, ensuring compliance with all safety regulations.
+                            We are the only freight forwarder in Pakistan with DGAC (USA) membership. We  safely manage explosives and radioactive materials compliant with IATA DGR  and IMO guidelines.
                         </p>
                     </div>
 
                     {/* Top Right Info Box - Syed Faiq Ali */}
                     <div className="info-box info-box-top-right">
                         <div className="info-header">
-                            <span className="logo-text">Syed Faiq Ali</span>
+                            <span className="logo-text">Aviation & <br />Ground Services</span>
                         </div>
                         <p>
-                            Leading innovation in drone logistics with cutting-edge technology and expertise.
+                            From crew handling and flight support to ramp services and customs formalities,  we offer a complete range of ground and flight support services.
                         </p>
                     </div>
 
@@ -129,18 +129,18 @@ const Answer: React.FC = () => {
                     </div>
 
                     {/* Bottom Left Info Box - Freight Cargo */}
-                    <div className="info-box info-box-bottom-left">
-                        <h3>Freight Cargo<br />Specialists</h3>
+                    <div className="info-box info-box-bottom-left text-right">
+                        <h3>Project Cargo<br />Expertise</h3>
                         <p>
-                            Expert handling of all types of cargo with specialized equipment and trained personnel.
+                            We specialize in large, heavy, and oversized shipments. We are the only  company in Pakistan with practical experience transporting 15-20ft oil drilling  equipment by air via passenger aircraft.
                         </p>
                     </div>
 
                     {/* Bottom Right Info Box - End-to-End Solutions */}
                     <div className="info-box info-box-bottom-right">
-                        <h3>End-to-End<br />Solutions</h3>
+                        <h3>End-to-End<br />Supply Chain</h3>
                         <p>
-                            Complete logistics solutions from pickup to delivery, with real-time tracking and support.
+                            Seamless door-to-door delivery, warehousing with modern inventory systems,  and expert customs brokerage to ensure your goods move without interruption.
                         </p>
                     </div>
                 </div>

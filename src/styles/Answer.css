@@ -7,7 +7,7 @@
 
 /* White Background Section */
 .white-section {
-  background: #f0f4f8;
+  background: #f9fafb;
   width: 100%;
   min-height: 300px;
   display: flex;
@@ -104,7 +104,7 @@
 
 .plane-img {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   height: auto;
   object-fit: contain;
   opacity: 0.75;
@@ -137,35 +137,39 @@
 .info-box-top-left {
   grid-column: 1;
   grid-row: 1;
-  justify-self: start;
+  justify-self: end;
   align-self: start;
   max-width: 250px;
+  margin-right: 80px;
 }
 
 .info-box-top-right {
   grid-column: 2;
   grid-row: 1;
-  justify-self: end;
+  justify-self: start;
   align-self: start;
   max-width: 250px;
-  text-align: right;
+  text-align: left;
+  margin-left: 80px;
 }
 
 .info-box-bottom-left {
   grid-column: 1;
   grid-row: 3;
-  justify-self: start;
+  justify-self: end;
   align-self: end;
   max-width: 250px;
+  margin-right: 80px;
 }
 
 .info-box-bottom-right {
   grid-column: 2;
   grid-row: 3;
-  justify-self: end;
+  justify-self: start;
   align-self: end;
   max-width: 250px;
-  text-align: right;
+  text-align: left;
+  margin-left: 80px;
 }
 
 /* Info Header for Right Boxes */
@@ -191,7 +195,7 @@
   }
 
   .plane-img {
-    max-width: 500px;
+    max-width: 650px;
   }
 
   .plane-section {
@@ -264,7 +268,7 @@
   }
 
   .plane-img {
-    max-width: 400px;
+    max-width: 550px;
   }
 
   .info-box h3 {
@@ -328,7 +332,7 @@
   }
 
   .plane-img {
-    max-width: 300px;
+    max-width: 450px;
   }
 
   .info-box {
