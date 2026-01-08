@@ -7,9 +7,15 @@ import UC from '../assets/Rectangle 60.svg'
 import BreakSection from '../assets/2151998711 1.svg'
 import welcomeImage from '../assets/Rectangle 54.svg'
 import Home from './Home'
+import ChallengeGrid from './ChallengeGrid'
 
 const Highlights: React.FC = () => {
   const challenges = [
+    // {
+    //   title: 'Handling Hazardous Materials',
+    //   description: 'Many carriers refuse to transport dangerous goods. Inter-Fret\'s expertise in chemical logistics requires strict adherence to safety protocols that most logistics providers lack.',
+    //   image: hazardousImage,
+    // },
     {
       title: 'Complex Oversized Cargo',
       description: 'Incorporating industrial machinery like 25-foot tall structures or wide cargo equipment is logistically complex. Our expertise results in costly delays.',
@@ -31,6 +37,7 @@ const Highlights: React.FC = () => {
       image: UC,
     },
   ]
+
   const [isVisible, setIsVisible] = useState(false);
   const [isIndustryVisible, setIsIndustryVisible] = useState(false);
   const welcomeSectionData = {
@@ -146,11 +153,11 @@ const Highlights: React.FC = () => {
         </div>
 
         <Home sectionData={IndustrySectionData} setIsVisible={setIsIndustryVisible} />
-
-        <div className="max-w-7xl mx-auto px-6">
+        <ChallengeGrid />
+        {/* Challenge Section */}
+        {/* <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
 
-            {/* LEFT COLUMN (40%) - Title Section */}
             <div className="lg:col-span-2">
               <div className=" top-24">
                 <p className="text-sm font-medium text-gray-400 mb-4 top-32">Problem</p>
@@ -161,7 +168,6 @@ const Highlights: React.FC = () => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN (60%) - 2x3 Card Grid */}
             <div className="lg:col-span-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {challenges.map((challenge, index) => (
@@ -183,7 +189,7 @@ const Highlights: React.FC = () => {
             </div>
 
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   )
