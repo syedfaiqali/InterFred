@@ -6,6 +6,7 @@ import { increment, decrement } from './features/counter/counterSlice'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Home from './components/Home'
+import Answer from './components/Answer'
 const About = lazy(() => import('./components/About'))
 
 const Highlights = lazy(() => import('./components/Highlights'))
@@ -32,6 +33,7 @@ const App: React.FC = () => {
 
           <Suspense fallback={<div className="py-12 text-center">Loading highlights...</div>}>
             <Highlights />
+            <Answer />
             <ValueProp />
             <Specialization />
             <Partners />
