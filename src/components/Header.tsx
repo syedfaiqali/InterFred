@@ -11,18 +11,21 @@ const Header: React.FC = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const [currentScrollY, setCurrentScrollY] = useState(0)
+
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      const scrollPos = window.scrollY
+      setCurrentScrollY(scrollPos)
 
-      if (currentScrollY > lastScrollY.current) {
+      if (scrollPos > lastScrollY.current) {
         setScrollDirection('down')
       } else {
         setScrollDirection('up')
       }
-      lastScrollY.current = currentScrollY
+      lastScrollY.current = scrollPos
 
-      if (currentScrollY > 100) {
+      if (scrollPos > 30) {
         setScrolled(true)
       } else {
         setScrolled(false)
@@ -48,7 +51,7 @@ const Header: React.FC = () => {
     <>
       {/* Original Header - Hidden on scroll */}
       <div className={`w-full shadow-lg transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src={mainLogo} alt="InterFret" className="h-14 object-contain" />
           </div>
@@ -73,7 +76,7 @@ const Header: React.FC = () => {
       {/* Sticky Burger Menu & Get in Touch - Appears on scroll */}
       {/* Sticky Burger Menu & Get in Touch - Appears on scroll */}
       <div className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="max-w-6xl mx-auto px-6 pt-6 flex justify-between items-center">
+        <div className="ml-4 mr-4 mx-auto px-6 pt-6 flex justify-between items-center">
           {/* Sticky Logo - Scroll to Top */}
           <div
             className={`pointer-events-auto cursor-pointer transition-transform duration-500 ${scrolled ? 'translate-y-0' : '-translate-y-12'}`}

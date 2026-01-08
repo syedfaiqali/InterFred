@@ -22,10 +22,10 @@ const Hero: React.FC = () => {
         <Header />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-6 flex-1 flex items-start w-full pt-12">
+      <div className="relative items-center ml-4 mr-4 mx-auto px-6 flex-1 flex items-start w-100 pt-12">
         <div className="w-full">
           <div className="text-white mb-12">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-8">
               Global<br />Logistics & <br />Industrial<br />Solutions
             </h1>
             <div className="flex items-center gap-3">
