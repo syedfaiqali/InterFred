@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import { Suspense, lazy } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from './store'
 import { increment, decrement } from './features/counter/counterSlice'
@@ -39,7 +39,6 @@ const App: React.FC = () => {
             <Partners />
             <FAQ />
             <Subscribe />
-            <Footer />
           </Suspense>
         </div>
       </main>

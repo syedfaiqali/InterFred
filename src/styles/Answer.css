@@ -262,7 +262,8 @@
   }
 
   .container-img {
-    max-width: 45%;
+    max-width: 80%;
+    /* Made bigger as requested */
   }
 
   .text-animation-section {
@@ -297,14 +298,6 @@
   .plane-img {
     max-width: 100%;
     opacity: 0.8;
-  }
-
-  .info-box h3 {
-    font-size: 15px;
-  }
-
-  .info-box p {
-    font-size: 12px;
   }
 
   .info-box {
@@ -354,7 +347,8 @@
   }
 
   .container-img {
-    max-width: 40%;
+    max-width: 90%;
+    /* Much bigger on mobile */
   }
 
   .main-text {
