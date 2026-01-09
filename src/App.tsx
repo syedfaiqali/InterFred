@@ -39,18 +39,24 @@ const App: React.FC = () => {
                   <Highlights />
                   <Answer />
                   <SlideGallery />
+                  <ValueProp />
                   <Specialization />
                   <Partners />
                   <FAQ />
                 </div>
               </>
             } />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={
+              <div className="space-y-6">
+                <About />
+                <ValueProp />
+                {/* <FAQ /> */}
+              </div>
+            } />
           </Routes>
 
           {/* Common Footer Sections for all pages as requested */}
           <div className="mt-12 space-y-6">
-            <ValueProp />
             <Subscribe />
             <ScrollingText />
           </div>
