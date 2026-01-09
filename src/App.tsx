@@ -8,7 +8,7 @@ import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
 const About = lazy(() => import('./components/About'))
-
+const SlideGallery = lazy(() => import('./components/SlideGallery'))
 const Highlights = lazy(() => import('./components/Highlights'))
 const ValueProp = lazy(() => import('./components/ValueProp'))
 const Specialization = lazy(() => import('./components/Specialization'))
@@ -35,6 +35,7 @@ const App: React.FC = () => {
           <Suspense fallback={<div className="py-12 text-center">Loading highlights...</div>}>
             <Highlights />
             <Answer />
+            <SlideGallery />
             <ValueProp />
             <Specialization />
             <Partners />

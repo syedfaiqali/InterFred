@@ -86,20 +86,20 @@ const Answer: React.FC = () => {
 
                     {/* Main Text */}
                     <p className="main-text">
-                        {words.slice(1).map((word, index) => (
-                            <span
-                                key={index}
-                                style={{
-                                    color: getWordColor(index + 1),
-                                    transition: 'color 0.3s ease'
-                                }}
-                            >
-                                {word}
-                                {index === 3 && <br className="desktop-br" />}
-                                {' '}
-                            </span>
-                        ))}
-                    </p>
+  {words.slice(1).map((word, index) => (
+    <span
+      key={index}
+      style={{
+        color: getWordColor(index + 1),
+        transition: 'color 0.3s ease'
+      }}
+    >
+      {word + ' '}
+      {index === 3 && <br className="desktop-br" />}
+    </span>
+  ))}
+</p>
+
                 </div>
 
 
