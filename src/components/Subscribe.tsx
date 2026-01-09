@@ -117,9 +117,9 @@ const Subscribe: FC = () => {
                 <p className="text-sm md:text-base text-gray-500 font-medium whitespace-nowrap">
                   © 2025, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
                 </p>
-                <div className="flex gap-6 md:gap-10">
-                  <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Privacy policy</a>
-                  <a href="#legal" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Legal notice</a>
+                <div className="flex gap-6">
+                  <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors whitespace-nowrap">Privacy policy</a>
+                  <a href="#legal" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors whitespace-nowrap">Legal notice</a>
                 </div>
               </div>
             </div>
