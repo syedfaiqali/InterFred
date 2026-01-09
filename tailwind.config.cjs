@@ -13,8 +13,9 @@ module.exports = {
         }
       },
       animation: {
-        marquee: 'marquee 30s linear infinite',
-        'marquee-reverse': 'marquee-reverse 30s linear infinite',
+        marquee: 'marquee 60s linear infinite',
+        'marquee-reverse': 'marquee-reverse 60s linear infinite',
+        'slide-in-left': 'marquee 60s linear infinite',
       },
     },
   },
