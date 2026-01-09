@@ -1,5 +1,5 @@
-import React from 'react'
-import Header from './Header'
+import * as React from 'react'
+
 import svglogos from '../assets/Group 124.png';
 import backgroundImage from '../assets/1.svg';
 
@@ -18,9 +18,7 @@ const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/40" />
 
-      <div className="relative w-full">
-        <Header />
-      </div>
+
 
       <div className="relative items-center ml-4 mr-4 mx-auto px-6 flex-1 flex items-start w-100 pt-12">
         <div className="w-full">
