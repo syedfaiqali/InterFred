@@ -7,7 +7,7 @@ const Subscribe: FC = () => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
           {/* Left Column - Subscription Box */}
-          <div className="lg:w-2/5 bg-[#07119B] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
+          <div className="lg:w-2/5 lg:ml-12 bg-[#07119B] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
             <div className="mb-10">
               <svg
                 width="60"
