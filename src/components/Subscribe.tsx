@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 const Subscribe: FC = () => {
   return (
-    <footer className="bg-[#E9EDF0] pt-12 md:pt-20 pb-10">
+    <footer className="pt-12 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
@@ -55,80 +55,74 @@ const Subscribe: FC = () => {
           </div>
 
           {/* Right Column - Navigation & Contact */}
-          <div className="lg:w-3/5">
+          <div className="lg:w-3/5 flex flex-col">
             {/* Top Navigation */}
-            <nav className="flex flex-wrap justify-start md:justify-start gap-x-6 md:gap-x-8 gap-y-4 mb-8">
+            <nav className="flex flex-wrap justify-start gap-x-8 gap-y-4 mb-4">
               {['About us.', 'Services.', 'Achievements.', 'Network.', 'Tracking.'].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase().replace('.', '')}`}
-                  className="text-base md:text-lg font-bold text-gray-800 hover:text-[#07119B] transition-colors"
+                  className="text-lg md:text-xl font-medium text-gray-800 hover:text-[#07119B] transition-colors"
                 >
                   {item}
                 </a>
               ))}
             </nav>
 
-            <hr className="border-gray-300 mb-8 md:mb-10" />
+            <div className="w-full h-[1px] bg-gray-300 mb-5" />
 
-            {/* Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-              {/* Head Office */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Head Office</h3>
-                <address className="not-italic text-gray-600 text-sm leading-relaxed max-w-[280px]">
-                  Suite 814, 815, Park Avenue, PECHS Block 6,<br />
-                  Shahra-e-Faisal, Karachi,<br />
-                  Pakistan.
-                </address>
+            {/* Info Grid and Copyright integrated in right column */}
+            <div className="flex-1 flex flex-col">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 mb-10">
+                {/* Left Side: Offices */}
+                <div className="space-y-12">
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Head Office</h3>
+                    <address className="not-italic text-gray-600 leading-relaxed max-w-[320px]">
+                      Suite 814, 815, Park Avenue, PECHS Block 6,<br />
+                      Shahra-e-Faisal, Karachi,<br />
+                      Pakistan.
+                    </address>
+                  </div>
+
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Branch Office</h3>
+                    <div className="space-y-3 text-base text-gray-600 font-medium">
+                      <p><span className="text-gray-900 font-bold">Lahore:</span> Cavalry Ground (+92 42 3662-0837-9)</p>
+                      <p><span className="text-gray-900 font-bold">Rawalpindi:</span> New Gulzar-E-Quaid (+92 51 3570-7924-5)</p>
+                      <p><span className="text-gray-900 font-bold">Sialkot:</span> Ugoki Road (+92 52 3355-4468)</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side: Contact */}
+                <div className="flex flex-col gap-8 md:pt-20">
+                  <div>
+                    <span className="block text-sm font-medium text-gray-500 mb-2">Email</span>
+                    <a href="mailto:info@interfret.com" className="text-xl font-medium text-gray-900 hover:text-[#07119B] transition-colors">
+                      info@interfret.com
+                    </a>
+                  </div>
+                  <div>
+                    <span className="block text-sm font-medium text-gray-500 mb-2">Phone</span>
+                    <a href="tel:+9233154989455" className="text-xl font-medium text-gray-900 hover:text-[#07119B] transition-colors">
+                      +9233154989455
+                    </a>
+                  </div>
+                </div>
               </div>
 
-              {/* Email & Phone */}
-              <div className="flex flex-col gap-10">
-                <div>
-                  <span className="block text-xs font-medium text-gray-400 mb-2">Email</span>
-                  <a href="mailto:info@interfret.com" className="text-xl md:text-2xl font-bold text-gray-900 border-b border-gray-200 pb-1 hover:border-[#07119B] transition-colors">
-                    info@interfret.com
-                  </a>
-                </div>
-                <div>
-                  <span className="block text-xs font-medium text-gray-400 mb-2">Phone</span>
-                  <a href="tel:+9233154989455" className="text-xl md:text-2xl font-bold text-gray-900 border-b border-gray-200 pb-1 hover:border-[#07119B] transition-colors">
-                    +9233154989455
-                  </a>
-                </div>
-              </div>
-
-              {/* Branch Office */}
-              <div className="md:col-start-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Branch Office</h3>
-                <div className="space-y-6 text-sm text-gray-500 font-medium">
-                  <div>
-                    <span className="block text-gray-900 font-bold mb-1 underline decoration-gray-200 md:no-underline">Lahore:</span>
-                    Cavalry Ground (+92 42 3662-0837-9)
-                  </div>
-                  <div>
-                    <span className="block text-gray-900 font-bold mb-1">Rawalpindi:</span>
-                    New Gulzar-E-Quaid (+92 51 3570-7924-5)
-                  </div>
-                  <div>
-                    <span className="block text-gray-900 font-bold mb-1">Sialkot:</span>
-                    Ugoki Road (+92 52 3355-4468)
-                  </div>
+              {/* Copyright Row - Now inside the right column block */}
+              <div className="mt-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p className="text-sm md:text-base text-gray-500 font-medium whitespace-nowrap">
+                  © 2025, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
+                </p>
+                <div className="flex gap-6 md:gap-10">
+                  <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Privacy policy</a>
+                  <a href="#legal" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Legal notice</a>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom Footer */}
-        <div className="mt-12 md:mt-20 pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4 md:gap-6">
-          <p className="text-xs md:text-sm text-gray-500 font-medium">
-            © 2025, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
-          </p>
-          <div className="flex gap-4 md:gap-8">
-            <a href="#privacy" className="text-xs md:text-sm text-gray-500 hover:text-gray-900 font-medium">Privacy policy</a>
-            <a href="#legal" className="text-xs md:text-sm text-gray-500 hover:text-gray-900 font-medium">Legal notice</a>
           </div>
         </div>
       </div>
