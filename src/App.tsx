@@ -40,10 +40,9 @@ const App: React.FC = () => {
                 <Hero />
                 <div className="">
                   <div className="space-y-6">
-                  <Highlights />
+                    <Highlights />
                   </div>
                   <Answer />
-                  <ServicesSection />
                   <SlideGallery />
                   <ValueProp />
                   <Specialization />
