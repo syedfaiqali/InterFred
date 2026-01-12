@@ -41,8 +41,7 @@ const FAQ: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
           {/* Left Side: Header Info */}
-          {/* <div className="hidden lg:block lg:col-span-1"></div> */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 pl-12">
             <span className="text-gray-400 font-medium tracking-widest text-sm uppercase mb-6 block">FAQ</span>
             <h2 className="text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1] mb-12">
               Quick<br />answers to<br />questions you<br />may have

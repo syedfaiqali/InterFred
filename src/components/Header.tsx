@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import * as React from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import mainLogo from '../assets/Main Logo.png'
 import stickyLogo from '../assets/Vector.svg'
 
@@ -12,6 +14,8 @@ const Header: React.FC = () => {
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const [currentScrollY, setCurrentScrollY] = useState(0)
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,13 +56,14 @@ const Header: React.FC = () => {
       {/* Original Header - Hidden on scroll */}
       <div className={`w-full shadow-lg transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 cursor-pointer">
             <img src={mainLogo} alt="InterFret" className="h-14 object-contain" />
-          </div>
+          </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-white text-sm">
-            <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'}`}>
-              <a href="#" className="hover:underline">About us</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm">
+            <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
+              <Link to="/about" className="hover:underline">About us</Link>
+              <Link to="/" className="hover:underline">Home</Link>
               <a href="#" className="hover:underline">Services</a>
               <a href="#" className="hover:underline">Achievements</a>
               <a href="#" className="hover:underline">Network</a>
@@ -68,12 +73,11 @@ const Header: React.FC = () => {
           </nav>
 
           <div className="md:hidden">
-            <button className="text-white text-2xl" onClick={() => setMobileMenuOpen(true)}>☰</button>
+            <button className={`${isHomePage ? 'text-white' : 'text-gray-800'} text-2xl`} onClick={() => setMobileMenuOpen(true)}>☰</button>
           </div>
         </div>
       </div>
 
-      {/* Sticky Burger Menu & Get in Touch - Appears on scroll */}
       {/* Sticky Burger Menu & Get in Touch - Appears on scroll */}
       <div className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
         <div className="ml-4 mr-4 mx-auto px-6 pt-6 flex justify-between items-center">
@@ -102,7 +106,8 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">About us</a>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">About us</Link>
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Home</Link>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Services</a>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Achievements</a>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Network</a>
@@ -141,34 +146,34 @@ const Header: React.FC = () => {
       <div className={`fixed inset-0 z-[100] bg-[#1a1a1a] transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto`}>
         <button onClick={() => setMobileMenuOpen(false)} className="absolute top-4 right-6 text-white text-4xl z-50 font-light">✕</button>
 
-        <div className="grid grid-cols-2 w-full min-h-full content-start">
+        <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
           {/* Home - Blue Block */}
-          <div className="aspect-square bg-[#07119B] p-6 flex flex-col justify-end border border-white/5" onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+          <Link to="/" className="aspect-square bg-[#07119B] p-6 flex flex-col justify-end border border-white/5 cursor-pointer no-underline" onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
             <span className="text-white text-lg font-bold">Home.</span>
-          </div>
+          </Link>
 
           {/* About Us */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+          <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">About us.</span>
-          </a>
+          </Link>
 
           {/* Services */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">Services.</span>
           </a>
 
           {/* Achievements */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">Achievements.</span>
           </a>
 
           {/* Network */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">Network.</span>
           </a>
 
           {/* Tracking */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors">
+          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">Tracking.</span>
           </a>
 

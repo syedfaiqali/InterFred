@@ -7,7 +7,7 @@ const Subscribe: FC = () => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
           {/* Left Column - Subscription Box */}
-          <div className="lg:w-2/5 bg-[#07119B] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
+          <div className="lg:w-2/5 lg:ml-12 bg-[#07119B] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
             <div className="mb-10">
               <svg
                 width="60"
@@ -117,9 +117,9 @@ const Subscribe: FC = () => {
                 <p className="text-sm md:text-base text-gray-500 font-medium whitespace-nowrap">
                   © 2025, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
                 </p>
-                <div className="flex gap-6 md:gap-10">
-                  <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Privacy policy</a>
-                  <a href="#legal" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors">Legal notice</a>
+                <div className="flex gap-6">
+                  <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors whitespace-nowrap">Privacy policy</a>
+                  <a href="#legal" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors whitespace-nowrap">Legal notice</a>
                 </div>
               </div>
             </div>

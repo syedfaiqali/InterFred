@@ -1,4 +1,5 @@
-import { Suspense, lazy } from 'react'
+import * as React from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from './store'
 import { increment, decrement } from './features/counter/counterSlice'
@@ -7,43 +8,61 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
-const About = lazy(() => import('./components/About'))
-const SlideGallery = lazy(() => import('./components/SlideGallery'))
-const Highlights = lazy(() => import('./components/Highlights'))
-const ValueProp = lazy(() => import('./components/ValueProp'))
-const Specialization = lazy(() => import('./components/Specialization'))
-const Partners = lazy(() => import('./components/Partners'))
-const FAQ = lazy(() => import('./components/FAQ'))
-const Subscribe = lazy(() => import('./components/Subscribe'))
-const ScrollingText = lazy(() => import('./components/ScrollingText'))
-const Footer = lazy(() => import('./components/Footer'))
+const About = React.lazy(() => import('./components/About'))
+const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
+const Highlights = React.lazy(() => import('./components/Highlights'))
+const ValueProp = React.lazy(() => import('./components/ValueProp'))
+const Specialization = React.lazy(() => import('./components/Specialization'))
+const Partners = React.lazy(() => import('./components/Partners'))
+const FAQ = React.lazy(() => import('./components/FAQ'))
+const Subscribe = React.lazy(() => import('./components/Subscribe'))
+const ScrollingText = React.lazy(() => import('./components/ScrollingText'))
+const Footer = React.lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
-  const count = useSelector((s: RootState) => s.counter.value)
-  const dispatch = useDispatch()
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
-      <main>
-        <Hero />
+    <div className="min-h-screen  text-gray-800">
+      <main className="relative">
+        <div className="absolute top-0 left-0 right-0 z-50">
+          <Header />
+        </div>
 
-        <div className="space-y-6">
-          {/* <div className="max-w-6xl mx-auto px-6">
-            <Home />
-          </div> */}
+        <React.Suspense fallback={<div className="py-12 text-center">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <div className="">
+                  <div className="space-y-6">
+                  <Highlights />
+                  </div>
+                  <Answer />
+                  <SlideGallery />
+                  <ValueProp />
+                  <Specialization />
+                  <Partners />
+                  <FAQ />
+                </div>
+              </>
+            } />
+            <Route path="/about" element={
+              <div className="space-y-6">
+                <About />
+                <ValueProp />
+                {/* <FAQ /> */}
+              </div>
+            } />
+          </Routes>
 
-          <Suspense fallback={<div className="py-12 text-center">Loading highlights...</div>}>
-            <Highlights />
-            <Answer />
-            <SlideGallery />
-            <ValueProp />
-            <Specialization />
-            <Partners />
-            <FAQ />
+          {/* Common Footer Sections for all pages as requested */}
+          <div className="mt-12 space-y-6">
             <Subscribe />
             <ScrollingText />
-          </Suspense>
-        </div>
+          </div>
+        </React.Suspense>
       </main>
     </div>
   )
