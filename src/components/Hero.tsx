@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import svglogos from '../assets/Group 124.png';
+import svglogos from '../assets/Group 124.svg';
 import backgroundImage from '../assets/1.svg';
 
 const Hero: React.FC = () => {
