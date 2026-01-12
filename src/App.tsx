@@ -18,6 +18,7 @@ const Partners = React.lazy(() => import('./components/Partners'))
 const FAQ = React.lazy(() => import('./components/FAQ'))
 const Subscribe = React.lazy(() => import('./components/Subscribe'))
 const ScrollingText = React.lazy(() => import('./components/ScrollingText'))
+const ServicesSection = React.lazy(() => import('./components/ServicesSection'))
 const Footer = React.lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
                 <div className="space-y-6">
                   <Highlights />
                   <Answer />
+                  <ServicesSection />
                   <SlideGallery />
                   <ValueProp />
                   <Specialization />
@@ -54,8 +56,13 @@ const App: React.FC = () => {
                 <ValueProp />
               </div>
             } />
+            <Route path="/service" element={
+              <div className="space-y-0 text-gray-800">
+                <ServicesSection />
+                <FAQ />
+              </div>
+            } />
           </Routes>
-
           {/* Common Footer Sections for all pages as requested */}
           <div className="mt-12 space-y-6">
             <Subscribe />
