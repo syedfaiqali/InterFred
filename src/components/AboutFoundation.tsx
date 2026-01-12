@@ -108,13 +108,40 @@ const AboutFoundation: React.FC = () => {
     const [scrollProgress, setScrollProgress] = React.useState(0);
     const milestoneRef = React.useRef<HTMLDivElement>(null);
 
+    // Determine the heading content based on scroll progress
+    const getHeadingContent = () => {
+        if (scrollProgress < 0.28) {
+            return {
+                label: "Our History",
+                line1: "The",
+                line2: "Foundation &",
+                line3: "Early Expansion"
+            };
+        } else if (scrollProgress < 0.72) {
+            return {
+                label: "Global Reach",
+                line1: "Global",
+                line2: "Standards &",
+                line3: "Authority"
+            };
+        } else {
+            return {
+                label: "Excellence",
+                line1: "Excellence &",
+                line2: "Integrated",
+                line3: "Safety"
+            };
+        }
+    };
+
+    const currentHeading = getHeadingContent();
+
     React.useEffect(() => {
         const handleScroll = () => {
             if (!milestoneRef.current) return;
 
             const rect = milestoneRef.current.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
-
             const stickyOffset = 160;
 
             const startScroll = rect.top - stickyOffset;
@@ -137,7 +164,7 @@ const AboutFoundation: React.FC = () => {
                 <div className="grid grid-cols-4 lg:grid-cols-12 gap-4 lg:gap-12 relative items-start">
 
                     {/* Left: Ship (Mobile and Desktop) */}
-                    <div className="col-span-1 lg:col-span-2 lg:col-start-5 justify-center flex relative self-stretch">
+                    <div className="col-span-1 lg:col-span-2 lg:col-start-5 row-span-2 justify-center flex relative self-stretch">
                         <div className="absolute top-0 bottom-0 w-px border-l border-dashed border-gray-700/20"></div>
 
                         {/* Ship Container */}
@@ -161,37 +188,42 @@ const AboutFoundation: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right side for Mobile / Left for Desktop: Heading */}
-                    <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-[15vh] lg:top-[25vh] z-30 self-start">
-                        <div className="space-y-4">
-                            <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block">Our History</span>
-                            <h2 className="text-2xl lg:text-6xl font-bold leading-tight">
-                                The<br />
-                                <span className="text-blue-600">Foundation &</span><br />
-                                Early Expansion
+                    {/* Dynamic Heading */}
+                    <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-0 lg:top-[25vh] z-30 self-start pt-24 pb-8 bg-[#1A1A1A] lg:bg-transparent">
+                        <div key={currentHeading.line1} className="space-y-4 transition-all duration-700 animate-in fade-in slide-in-from-bottom-2">
+                            <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block">
+                                {currentHeading.label}
+                            </span>
+                            <h2 className="text-2xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                                {currentHeading.line1}<br />
+                                <span className="text-[#5EAFEA]">{currentHeading.line2}</span><br />
+                                <span className="text-[#5EAFEA]">{currentHeading.line3}</span>
                             </h2>
                         </div>
 
-                        {/* Milestones Content (Mobile only) */}
-                        <div className="lg:hidden mt-12 mb-24 space-y-20">
-                            {milestones.map((milestone, index) => (
-                                <div key={index} className="space-y-6 relative">
-                                    <span className="text-4xl font-bold text-white/90 leading-none block">{milestone.year}</span>
-                                    <div className="space-y-6">
-                                        <div className="text-gray-400 text-base leading-relaxed font-light">
-                                            {milestone.description}
-                                        </div>
-                                        <div className="w-full h-32 bg-zinc-800/20 flex items-center justify-center rounded-sm overflow-hidden shadow-lg border border-white/5">
-                                            <img
-                                                src={milestone.image}
-                                                alt={milestone.year}
-                                                className="w-full h-full object-cover opacity-70 grayscale transition-all duration-700"
-                                            />
-                                        </div>
+                        {/* Mobile Gradient Mask for smooth scrolling transition */}
+                        <div className="absolute left-0 right-0 top-full h-16 bg-gradient-to-b from-[#1A1A1A] to-transparent lg:hidden pointer-events-none"></div>
+                    </div>
+
+                    {/* Milestones Content (Mobile only) */}
+                    <div className="col-span-3 lg:hidden mt-12 mb-24 space-y-20 relative z-10">
+                        {milestones.map((milestone, index) => (
+                            <div key={index} className="space-y-6 relative">
+                                <span className="text-4xl font-bold text-white/90 leading-none block">{milestone.year}</span>
+                                <div className="space-y-6">
+                                    <div className="text-gray-400 text-base leading-relaxed font-light">
+                                        {milestone.description}
+                                    </div>
+                                    <div className="w-full h-32 bg-zinc-800/20 flex items-center justify-center rounded-sm overflow-hidden shadow-lg border border-white/5">
+                                        <img
+                                            src={milestone.image}
+                                            alt={milestone.year}
+                                            className="w-full h-full object-cover opacity-70 grayscale transition-all duration-700"
+                                        />
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
 
                     {/* Right side: Milestones content (Desktop only) */}
