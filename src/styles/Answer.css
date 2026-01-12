@@ -5,6 +5,11 @@
   overflow: hidden;
   scroll-behavior: smooth;
 }
+.word {
+  display: inline-block;
+  color: #666666;
+  will-change: color;
+}
 
 /* White Background Section */
 .white-section {

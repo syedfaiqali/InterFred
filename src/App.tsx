@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const isHomePage = location.pathname === '/'
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
+    <div className="min-h-screen  text-gray-800">
       <main className="relative">
         <div className="absolute top-0 left-0 right-0 z-50">
           <Header />
@@ -38,8 +38,10 @@ const App: React.FC = () => {
             <Route path="/" element={
               <>
                 <Hero />
-                <div className="space-y-6">
+                <div className="">
+                  <div className="space-y-6">
                   <Highlights />
+                  </div>
                   <Answer />
                   <ServicesSection />
                   <SlideGallery />
