@@ -115,14 +115,11 @@ const AboutFoundation: React.FC = () => {
             const rect = milestoneRef.current.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
 
-            // The sticky threshold for the left column (top-40 is about 160px)
             const stickyOffset = 160;
 
-            // Calculate progress based on the section's position relative to the sticky scroll area
             const startScroll = rect.top - stickyOffset;
             const totalScrollable = rect.height - viewportHeight + stickyOffset;
 
-            // Progress 0 when starting to scroll, 1 when last milestone is reached
             const currentScroll = -startScroll;
             const progress = Math.min(Math.max(currentScroll / totalScrollable, 0), 1);
 
@@ -130,30 +127,17 @@ const AboutFoundation: React.FC = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <div ref={milestoneRef} className="bg-[#1A1A1A] text-white py-32 relative overflow-visible">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative items-start">
+        <div ref={milestoneRef} className="bg-[#1A1A1A] text-white py-24 lg:py-32 relative overflow-visible">
+            <div className="max-w-[1400px] mx-auto px-4 lg:px-12">
+                <div className="grid grid-cols-4 lg:grid-cols-12 gap-4 lg:gap-12 relative items-start">
 
-                    {/* Left side: Heading - Sticky throughout scroll */}
-                    <div className="lg:col-start-2 lg:col-span-3 sticky top-[25vh] z-30 self-start">
-                        <div className="space-y-4">
-                            <span className="text-gray-500 font-medium tracking-widest text-sm uppercase block">Our History</span>
-                            <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                                The<br />
-                                <span className="text-blue-600">Foundation &</span><br />
-                                Early Expansion
-                            </h2>
-                        </div>
-                    </div>
-
-                    {/* Center: Ship path and moving ship */}
-                    <div className="hidden lg:flex lg:col-span-2 justify-center relative self-stretch">
-                        {/* Vertical Path Line */}
+                    {/* Left: Ship (Mobile and Desktop) */}
+                    <div className="col-span-1 lg:col-span-2 lg:col-start-5 justify-center flex relative self-stretch">
                         <div className="absolute top-0 bottom-0 w-px border-l border-dashed border-gray-700/20"></div>
 
                         {/* Ship Container */}
@@ -169,7 +153,7 @@ const AboutFoundation: React.FC = () => {
                             <img
                                 src={centerShip}
                                 alt="Moving Ship"
-                                className="w-16 h-auto object-contain"
+                                className="w-10 lg:w-16 h-auto object-contain"
                                 style={{
                                     filter: 'brightness(1.5)'
                                 }}
@@ -177,8 +161,41 @@ const AboutFoundation: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right side: Milestones content */}
-                    <div className="lg:col-span-5 space-y-24 pb-48">
+                    {/* Right side for Mobile / Left for Desktop: Heading */}
+                    <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-[15vh] lg:top-[25vh] z-30 self-start">
+                        <div className="space-y-4">
+                            <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block">Our History</span>
+                            <h2 className="text-2xl lg:text-6xl font-bold leading-tight">
+                                The<br />
+                                <span className="text-blue-600">Foundation &</span><br />
+                                Early Expansion
+                            </h2>
+                        </div>
+
+                        {/* Milestones Content (Mobile only) */}
+                        <div className="lg:hidden mt-12 mb-24 space-y-20">
+                            {milestones.map((milestone, index) => (
+                                <div key={index} className="space-y-6 relative">
+                                    <span className="text-4xl font-bold text-white/90 leading-none block">{milestone.year}</span>
+                                    <div className="space-y-6">
+                                        <div className="text-gray-400 text-base leading-relaxed font-light">
+                                            {milestone.description}
+                                        </div>
+                                        <div className="w-full h-32 bg-zinc-800/20 flex items-center justify-center rounded-sm overflow-hidden shadow-lg border border-white/5">
+                                            <img
+                                                src={milestone.image}
+                                                alt={milestone.year}
+                                                className="w-full h-full object-cover opacity-70 grayscale transition-all duration-700"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right side: Milestones content (Desktop only) */}
+                    <div className="hidden lg:block lg:col-span-5 space-y-24 pb-48 lg:col-start-7">
                         {milestones.map((milestone, index) => (
                             <div key={index} className="space-y-6 relative pl-12">
                                 <span className="text-5xl lg:text-7xl font-bold text-white/90 leading-none block">{milestone.year}</span>
