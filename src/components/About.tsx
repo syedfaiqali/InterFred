@@ -4,7 +4,7 @@ import howWeDoItImage from '../assets/how we do it.svg';
 
 const About: React.FC = () => {
   return (
-    <section className="py-24">
+    <div className="py-24">
       {/* Section 1 */}
       <div className="max-w-7xl mx-auto px-6 lg:pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -84,7 +84,7 @@ const About: React.FC = () => {
                   (Integrated Management System) for Quality, Environment, Health and Safety as follows:
                 </p>
 
-                <ul className="space-y-2 font-medium text-gray-800">
+                <ul className="space-y-1 font-medium text-gray-800">
                   <li className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-[#07119B] rounded-full"></span>
                     Quality 19001:2000
@@ -121,7 +121,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

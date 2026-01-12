@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
 const About = React.lazy(() => import('./components/About'))
+const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
 const Highlights = React.lazy(() => import('./components/Highlights'))
 const ValueProp = React.lazy(() => import('./components/ValueProp'))
@@ -47,8 +48,9 @@ const App: React.FC = () => {
               </>
             } />
             <Route path="/about" element={
-              <div className="space-y-6">
+              <div className="space-y-0">
                 <About />
+                <AboutFoundation />
                 <ValueProp />
               </div>
             } />
