@@ -50,7 +50,6 @@ const App: React.FC = () => {
               <div className="space-y-6">
                 <About />
                 <ValueProp />
-                {/* <FAQ /> */}
               </div>
             } />
           </Routes>
