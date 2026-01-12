@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import mainLogo from '../assets/Main Logo.png'
 import stickyLogo from '../assets/Vector.svg'
 
 const Header: React.FC = () => {
@@ -56,8 +55,16 @@ const Header: React.FC = () => {
       {/* Original Header - Hidden on scroll */}
       <div className={`w-full shadow-lg transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 cursor-pointer">
-            <img src={mainLogo} alt="InterFret" className="h-14 object-contain" />
+          <Link to="/" className="flex items-center gap-4 cursor-pointer group">
+            <img src={stickyLogo} alt="InterFret" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
+            <div className="flex flex-col">
+              <h1 className={`text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
+                <span className="text-[#07119B]">I</span>NTER-<span className="text-[#07119B]">F</span>RET
+              </h1>
+              <p className={`text-[0.65rem] font-bold tracking-[0.15em] leading-tight ${isHomePage ? 'text-gray-200' : 'text-gray-600'}`}>
+                <span className="text-[#07119B]">C</span>ONSOLIDATORS (PVT) LTD
+              </p>
+            </div>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
