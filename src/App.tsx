@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
 const About = React.lazy(() => import('./components/About'))
+const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
 const Highlights = React.lazy(() => import('./components/Highlights'))
 const ValueProp = React.lazy(() => import('./components/ValueProp'))
@@ -17,6 +18,7 @@ const Partners = React.lazy(() => import('./components/Partners'))
 const FAQ = React.lazy(() => import('./components/FAQ'))
 const Subscribe = React.lazy(() => import('./components/Subscribe'))
 const ScrollingText = React.lazy(() => import('./components/ScrollingText'))
+const ServicesSection = React.lazy(() => import('./components/ServicesSection'))
 const Footer = React.lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
@@ -40,6 +42,7 @@ const App: React.FC = () => {
                   <Highlights />
                   </div>
                   <Answer />
+                  <ServicesSection />
                   <SlideGallery />
                   <ValueProp />
                   <Specialization />
@@ -49,14 +52,19 @@ const App: React.FC = () => {
               </>
             } />
             <Route path="/about" element={
-              <div className="space-y-6">
+              <div className="space-y-0">
                 <About />
+                <AboutFoundation />
                 <ValueProp />
-                {/* <FAQ /> */}
+              </div>
+            } />
+            <Route path="/service" element={
+              <div className="space-y-0 text-gray-800">
+                <ServicesSection />
+                <FAQ />
               </div>
             } />
           </Routes>
-
           {/* Common Footer Sections for all pages as requested */}
           <div className="mt-12 space-y-6">
             <Subscribe />

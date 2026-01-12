@@ -63,8 +63,8 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
               <Link to="/about" className="hover:underline">About us</Link>
-              <Link to="/" className="hover:underline">Home</Link>
-              <a href="#" className="hover:underline">Services</a>
+              <Link to="/service" className="hover:underline">Services</Link>
+              {/* <a href="#" className="hover:underline">Services</a> */}
               <a href="#" className="hover:underline">Achievements</a>
               <a href="#" className="hover:underline">Network</a>
               <a href="#" className="hover:underline">Tracking</a>
@@ -107,8 +107,7 @@ const Header: React.FC = () => {
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
               <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">About us</Link>
-              <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Home</Link>
-              <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Services</a>
+              <Link to="/service" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Services</Link>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Achievements</a>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Network</a>
               <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Tracking</a>
@@ -147,20 +146,15 @@ const Header: React.FC = () => {
         <button onClick={() => setMobileMenuOpen(false)} className="absolute top-4 right-6 text-white text-4xl z-50 font-light">✕</button>
 
         <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
-          {/* Home - Blue Block */}
-          <Link to="/" className="aspect-square bg-[#07119B] p-6 flex flex-col justify-end border border-white/5 cursor-pointer no-underline" onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-            <span className="text-white text-lg font-bold">Home.</span>
-          </Link>
-
           {/* About Us */}
           <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">About us.</span>
           </Link>
 
           {/* Services */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
+          <Link to="/service" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
             <span className="text-white text-lg font-bold">Services.</span>
-          </a>
+          </Link>
 
           {/* Achievements */}
           <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
