@@ -1,0 +1,129 @@
+import * as React from 'react';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import orangeTruck from '../assets/serviceslider1.svg';
+import specializedLogistics from '../assets/serviceslider2.svg';
+import aviationServices from '../assets/serviceslider3.svg';
+import outsourcingAndMaintenance from '../assets/serviceslider4.svg';
+import tradingAndEquipmentSupply from '../assets/serviceslider5.svg';
+import valueAddedServices from '../assets/serviceslider6.svg';
+import warehouse from '../assets/serviceslider7.svg';
+
+interface ServiceSlide {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+}
+
+const services: ServiceSlide[] = [
+    {
+        id: 1,
+        title: "Core Freight & Logistics",
+        image: orangeTruck,
+        description: "Comprehensive freight solutions tailored to your global needs."
+    },
+    {
+        id: 2,
+        title: "Specialized Cargo & DG",
+        image: specializedLogistics,
+        description: "State-of-the-art storage and distribution networks."
+    },
+    {
+        id: 3,
+        title: "Specialized Logistics",
+        image: aviationServices,
+        description: "State-of-the-art storage and distribution networks."
+    },
+    {
+        id: 4,
+        title: "Aviation Services",
+        image: outsourcingAndMaintenance,
+        description: "State-of-the-art storage and distribution networks."
+    },
+    {
+        id: 5,
+        title: "Outsourcing & Maintenance",
+        image: tradingAndEquipmentSupply,
+        description: "State-of-the-art storage and distribution networks."
+    },
+    {
+        id: 6,
+        title: "Trading & Equipment Supply",
+        image: valueAddedServices,
+        description: "State-of-the-art storage and distribution networks."
+    },
+    {
+        id: 7,
+        title: "Value-Added Services",
+        image: warehouse,
+        description: "State-of-the-art storage and distribution networks."
+    }
+];
+
+const ServiceSlider: React.FC = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const nextSlide = () => {
+        setActiveIndex((prev) => (prev + 1) % services.length);
+    };
+
+    const prevSlide = () => {
+        setActiveIndex((prev) => (prev - 1 + services.length) % services.length);
+    };
+
+    return (
+        <section className="bg-white py-16 px-4">
+            <div className="max-w-[1200px] mx-auto text-center mb-12">
+                <span className="text-gray-500 text-sm font-medium uppercase tracking-wider block mb-2">Explore</span>
+                <h2 className="text-4xl font-bold text-[#1A1A1A]">Inter-Fret Services</h2>
+            </div>
+
+            <div className="max-w-[1000px] mx-auto relative flex items-center justify-center gap-4 md:gap-8">
+
+                {/* Previous Button */}
+                <button
+                    onClick={prevSlide}
+                    className="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
+                    aria-label="Previous slide"
+                >
+                    <ChevronLeft className="w-8 h-8 text-gray-700" />
+                </button>
+
+                {/* Card Container */}
+                <div className="relative w-full max-w-[800px] aspect-[16/9] rounded-[2rem] overflow-hidden shadow-2xl group">
+                    {/* Image */}
+                    <img
+                        src={services[activeIndex].image}
+                        alt={services[activeIndex].title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+
+                    {/* Learn More Badge */}
+                    <div className="absolute top-8 left-8 bg-black text-white px-6 py-2 rounded-full text-sm font-medium z-10">
+                        Learn More
+                    </div>
+
+                    {/* Blue Bottom Bar with Title */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-[#07119B] py-6 px-8 transition-transform duration-300 translate-y-0">
+                        <h3 className="text-center text-3xl font-bold text-white">
+                            {services[activeIndex].title}
+                        </h3>
+                    </div>
+                </div>
+
+                {/* Next Button */}
+                <button
+                    onClick={nextSlide}
+                    className="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
+                    aria-label="Next slide"
+                >
+                    <ChevronRight className="w-8 h-8 text-gray-700" />
+                </button>
+
+            </div>
+        </section>
+    );
+};
+
+export default ServiceSlider;
