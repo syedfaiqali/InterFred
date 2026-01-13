@@ -413,7 +413,11 @@ const ServiceDetail: React.FC = () => {
 
                     {/* Back Link */}
                     <div className="mt-16">
-                        <Link to="/service" className="text-[#07119B] font-semibold hover:underline flex items-center gap-2">
+                        <Link
+                            to="/service"
+                            state={{ fromDetail: true }}
+                            className="text-[#07119B] font-semibold hover:underline flex items-center gap-2"
+                        >
                             &larr; Back to Services
                         </Link>
                     </div>

@@ -72,7 +72,29 @@ const services: ServiceSlide[] = [
 
 const ServiceSlider: React.FC = () => {
     const location = useLocation();
-    const [activeIndex, setActiveIndex] = useState(location.state?.sliderIndex || 0);
+
+    // Initialize from localStorage if available
+    const [activeIndex, setActiveIndex] = React.useState(() => {
+        const saved = localStorage.getItem('lastServiceSliderIndex');
+        return saved ? parseInt(saved, 10) : 0;
+    });
+
+    // Save index to localStorage whenever it changes
+    React.useEffect(() => {
+        localStorage.setItem('lastServiceSliderIndex', activeIndex.toString());
+    }, [activeIndex]);
+
+    React.useEffect(() => {
+        // Check if we came back from a detail page via state
+        if (location.state && (location.state as any).fromDetail) {
+            const element = document.getElementById('services-slider');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Clean up state to prevent scrolling on every refresh
+                window.history.replaceState({}, document.title);
+            }
+        }
+    }, [location.state]);
 
     const nextSlide = () => {
         setActiveIndex((prev) => (prev + 1) % services.length);
@@ -83,7 +105,7 @@ const ServiceSlider: React.FC = () => {
     };
 
     return (
-        <section className="bg-white py-16 px-4">
+        <section id="services-slider" className="bg-white py-16 px-4">
             <div className="max-w-[1200px] mx-auto text-center mb-12">
                 <span className="text-gray-500 text-sm font-medium uppercase tracking-wider block mb-2">Explore</span>
                 <h2 className="text-4xl font-bold text-[#1A1A1A]">Inter-Fret Services</h2>
@@ -112,7 +134,6 @@ const ServiceSlider: React.FC = () => {
                     {/* Learn More Badge */}
                     <Link
                         to={`/service/${services[activeIndex].slug}`}
-                        state={{ sliderIndex: activeIndex }}
                         className="absolute top-8 left-8 bg-black text-white px-6 py-2 rounded-full text-sm font-medium z-10 hover:bg-gray-800 transition-colors"
                     >
                         Learn More
