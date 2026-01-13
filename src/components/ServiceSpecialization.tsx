@@ -80,25 +80,31 @@ const ServiceSpecialization: React.FC = () => {
         <section className="bg-[#1A1A1A] pt-24 pb-0 overflow-hidden relative">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
 
-                {/* Header Section with Floating Plane */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                    <div className="space-y-6">
-                        <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
-                            Areas of<br />
-                            <span className="text-[#5EAFEA] font-bold">Specialization</span>
-                        </h2>
-                        <p className="text-gray-400 text-lg max-w-md leading-relaxed">
-                            We pride ourselves on serving niche industries where precision and safety are paramount. Our core competencies include:
-                        </p>
-                    </div>
 
-                    {/* Floating Plane Image - Styled to look like it's entering from right */}
-                    <div className="relative h-64 lg:h-96 w-full flex items-center justify-end">
-                        <img
-                            src={planeSide}
-                            alt="Logistics Aircraft"
-                            className="absolute right-[-10%] lg:right-[-15%] w-[120%] max-w-none object-contain drop-shadow-2xl pointer-events-none"
-                        />
+                {/* Header Section with Floating Plane */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-center mb-20">
+                    <div className="hidden lg:block lg:col-span-1"></div>
+                    <div className="col-span-12 lg:col-span-11">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div className="space-y-6">
+                                <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
+                                    Areas of<br />
+                                    <span className="text-[#5EAFEA] font-bold">Specialization</span>
+                                </h2>
+                                <p className="text-gray-400 text-lg max-w-md leading-relaxed">
+                                    We pride ourselves on serving niche industries where precision and safety are paramount. Our core competencies include:
+                                </p>
+                            </div>
+
+                            {/* Floating Plane Image - Styled to look like it's entering from right */}
+                            <div className="relative h-64 lg:h-96 w-full flex items-center justify-end">
+                                <img
+                                    src={planeSide}
+                                    alt="Logistics Aircraft"
+                                    className="absolute right-[-10%] lg:right-[-15%] w-[120%] max-w-none object-contain drop-shadow-2xl pointer-events-none -translate-y-8 lg:-translate-y-16"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
