@@ -24,7 +24,6 @@ const items: SpecializationItem[] = [
         description: "Priority handling for time-sensitive global cargo.",
         image: airFreightImg
     },
-    // Placeholder items for carousel functionality demonstration
     {
         id: 2,
         title: "Movement of Explosives",
@@ -111,6 +110,7 @@ const ServiceSpecialization: React.FC = () => {
                             {/* Hidden Column for consistent left alignment */}
                             <div className="hidden lg:block lg:col-span-1"></div>
 
+                            {/* Image - Swaps position based on index */}
                             {/* Image - Swaps position based on index */}
                             <div className={`relative rounded-[2rem] overflow-hidden aspect-square lg:aspect-[4/3] w-full shadow-2xl border border-white/5 lg:col-span-5 ${index % 2 === 1 ? 'lg:order-3' : 'lg:order-2'}`}>
                                 <img

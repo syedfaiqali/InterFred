@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import orangeTruck from '../assets/serviceslider1.svg';
 import specializedLogistics from '../assets/serviceslider2.svg';
@@ -14,6 +15,7 @@ interface ServiceSlide {
     title: string;
     image: string;
     description: string;
+    slug: string;
 }
 
 const services: ServiceSlide[] = [
@@ -21,48 +23,56 @@ const services: ServiceSlide[] = [
         id: 1,
         title: "Core Freight & Logistics",
         image: orangeTruck,
-        description: "Comprehensive freight solutions tailored to your global needs."
+        description: "Comprehensive freight solutions tailored to your global needs.",
+        slug: "CoreFreightLogistics"
     },
     {
         id: 2,
         title: "Specialized Cargo & DG",
         image: specializedLogistics,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "SpecializedCargoDG"
     },
     {
         id: 3,
         title: "Specialized Logistics",
         image: aviationServices,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "SpecializedLogistics"
     },
     {
         id: 4,
         title: "Aviation Services",
         image: outsourcingAndMaintenance,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "AviationServices"
     },
     {
         id: 5,
         title: "Outsourcing & Maintenance",
         image: tradingAndEquipmentSupply,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "OutsourcingMaintenance"
     },
     {
         id: 6,
         title: "Trading & Equipment Supply",
         image: valueAddedServices,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "TradingEquipmentSupply"
     },
     {
         id: 7,
         title: "Value-Added Services",
         image: warehouse,
-        description: "State-of-the-art storage and distribution networks."
+        description: "State-of-the-art storage and distribution networks.",
+        slug: "ValueAddedServices"
     }
 ];
 
 const ServiceSlider: React.FC = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const location = useLocation();
+    const [activeIndex, setActiveIndex] = useState(location.state?.sliderIndex || 0);
 
     const nextSlide = () => {
         setActiveIndex((prev) => (prev + 1) % services.length);
@@ -100,9 +110,13 @@ const ServiceSlider: React.FC = () => {
                     />
 
                     {/* Learn More Badge */}
-                    <div className="absolute top-8 left-8 bg-black text-white px-6 py-2 rounded-full text-sm font-medium z-10">
+                    <Link
+                        to={`/service/${services[activeIndex].slug}`}
+                        state={{ sliderIndex: activeIndex }}
+                        className="absolute top-8 left-8 bg-black text-white px-6 py-2 rounded-full text-sm font-medium z-10 hover:bg-gray-800 transition-colors"
+                    >
                         Learn More
-                    </div>
+                    </Link>
 
                     {/* Blue Bottom Bar with Title */}
                     <div className="absolute bottom-0 left-0 right-0 bg-[#07119B] py-6 px-8 transition-transform duration-300 translate-y-0">
