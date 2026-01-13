@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
+import ScrollToTop from './components/ScrollToTop'
 const About = React.lazy(() => import('./components/About'))
 const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
@@ -31,6 +32,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen  text-gray-800">
       <main className="relative">
+        <ScrollToTop />
         <div className="absolute top-0 left-0 right-0 z-50">
           <Header />
         </div>

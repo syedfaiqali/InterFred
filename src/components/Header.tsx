@@ -50,6 +50,12 @@ const Header: React.FC = () => {
     }
   }, [])
 
+  const navLinkClass = "transition-all duration-300 hover:underline font-medium";
+  const navLinkScrolledClass = "transition-all duration-300 hover:text-[#07119B] hover:underline font-medium";
+
+  const isActive = (path: string) => location.pathname === path;
+  const activeClass = "underline underline-offset-8 decoration-2";
+
   return (
     <>
       {/* Original Header - Hidden on scroll */}
@@ -69,12 +75,11 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className="hover:underline">About us</Link>
-              <Link to="/service" className="hover:underline">Services</Link>
-              {/* <a href="#" className="hover:underline">Services</a> */}
-              <a href="#" className="hover:underline">Achievements</a>
-              <a href="#" className="hover:underline">Network</a>
-              <a href="#" className="hover:underline">Tracking</a>
+              <Link to="/about" className={`${navLinkClass} ${isActive('/about') ? activeClass : ''}`}>About us</Link>
+              <Link to="/service" className={`${navLinkClass} ${isActive('/service') ? activeClass : ''}`}>Services</Link>
+              <Link to="/achievements" className={`${navLinkClass} ${isActive('/achievements') ? activeClass : ''}`}>Achievements</Link>
+              <Link to="/network" className={`${navLinkClass} ${isActive('/network') ? activeClass : ''}`}>Network</Link>
+              <Link to="/tracking" className={`${navLinkClass} ${isActive('/tracking') ? activeClass : ''}`}>Tracking</Link>
             </div>
             <button className="ml-4 px-4 py-2 bg-[#07119B] text-white rounded-md hover:bg-[#0a1bc0] transition-colors">Get in Touch</button>
           </nav>
@@ -113,11 +118,11 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">About us</Link>
-              <Link to="/service" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Services</Link>
-              <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Achievements</a>
-              <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Network</a>
-              <a href="#" className="text-gray-800 hover:text-[#07119B] text-sm font-medium whitespace-nowrap transition-colors">Tracking</a>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/about') ? `text-[#07119B] ${activeClass}` : ''}`}>About us</Link>
+              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/service') ? `text-[#07119B] ${activeClass}` : ''}`}>Services</Link>
+              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/achievements') ? `text-[#07119B] ${activeClass}` : ''}`}>Achievements</Link>
+              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/network') ? `text-[#07119B] ${activeClass}` : ''}`}>Network</Link>
+              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/tracking') ? `text-[#07119B] ${activeClass}` : ''}`}>Tracking</Link>
             </div>
 
             {/* Custom Burger Button - Desktop Only */}
@@ -154,29 +159,29 @@ const Header: React.FC = () => {
 
         <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
           {/* About Us */}
-          <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
-            <span className="text-white text-lg font-bold">About us.</span>
+          <Link to="/about" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/about') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
+            <span className={`text-lg font-bold ${isActive('/about') ? 'text-[#5EAFEA]' : 'text-white'}`}>About us.</span>
           </Link>
 
           {/* Services */}
-          <Link to="/service" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
-            <span className="text-white text-lg font-bold">Services.</span>
+          <Link to="/service" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/service') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
+            <span className={`text-lg font-bold ${isActive('/service') ? 'text-[#5EAFEA]' : 'text-white'}`}>Services.</span>
           </Link>
 
           {/* Achievements */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
-            <span className="text-white text-lg font-bold">Achievements.</span>
-          </a>
+          <Link to="/achievements" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/achievements') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
+            <span className={`text-lg font-bold ${isActive('/achievements') ? 'text-[#5EAFEA]' : 'text-white'}`}>Achievements.</span>
+          </Link>
 
           {/* Network */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
-            <span className="text-white text-lg font-bold">Network.</span>
-          </a>
+          <Link to="/network" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/network') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
+            <span className={`text-lg font-bold ${isActive('/network') ? 'text-[#5EAFEA]' : 'text-white'}`}>Network.</span>
+          </Link>
 
           {/* Tracking */}
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="aspect-square bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors no-underline">
-            <span className="text-white text-lg font-bold">Tracking.</span>
-          </a>
+          <Link to="/tracking" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/tracking') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
+            <span className={`text-lg font-bold ${isActive('/tracking') ? 'text-[#5EAFEA]' : 'text-white'}`}>Tracking.</span>
+          </Link>
 
           {/* Get in Touch - Spanning */}
           <button className="col-span-2 bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors text-left h-32">

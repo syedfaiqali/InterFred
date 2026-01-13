@@ -1,6 +1,10 @@
 import type { FC } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Subscribe: FC = () => {
+  const location = useLocation();
+  const isLinkActive = (path: string) => location.pathname === path;
+
   return (
     <footer className="pt-12 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -58,15 +62,30 @@ const Subscribe: FC = () => {
           <div className="lg:w-3/5 flex flex-col">
             {/* Top Navigation */}
             <nav className="flex flex-wrap justify-start gap-x-8 gap-y-4 mb-4">
-              {['About us.', 'Services.', 'Achievements.', 'Network.', 'Tracking.'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace('.', '')}`}
-                  className="text-lg md:text-xl font-medium text-gray-800 hover:text-[#07119B] transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
+              {['About us.', 'Services.', 'Achievements.', 'Network.', 'Tracking.'].map((item) => {
+                const href = item === 'About us.' ? '/about' :
+                  item === 'Services.' ? '/service' :
+                    item === 'Achievements.' ? '/achievements' :
+                      item === 'Network.' ? '/network' :
+                        item === 'Tracking.' ? '/tracking' : '#';
+
+                const isActive = isLinkActive(href);
+                const className = `text-lg md:text-xl font-medium transition-all duration-300 hover:text-[#07119B] hover:underline ${isActive ? 'text-[#07119B] underline underline-offset-8 decoration-2' : 'text-gray-800'}`;
+
+                if (href.startsWith('/')) {
+                  return (
+                    <Link key={item} to={href} className={className}>
+                      {item}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a key={item} href={href} className={className}>
+                    {item}
+                  </a>
+                );
+              })}
             </nav>
 
             <div className="w-full h-[1px] bg-gray-300 mb-5" />
