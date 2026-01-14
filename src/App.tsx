@@ -33,7 +33,7 @@ const App: React.FC = () => {
   const isHomePage = location.pathname === '/'
 
   return (
-    <div className="min-h-screen  text-gray-800">
+    <div className="min-h-screen text-gray-800 overflow-x-hidden">
       <main className="relative">
         <ScrollToTop />
         <div className="absolute top-0 left-0 right-0 z-50">

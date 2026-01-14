@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
 
   return (
     <section
-      className="min-h-screen lg:h-screen bg-cover bg-center relative flex flex-col"
+      className="min-h-screen lg:h-screen bg-cover bg-center relative flex flex-col overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
