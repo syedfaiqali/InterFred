@@ -15,9 +15,11 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
   const text1Ref = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLDivElement>(null);
   const shipImgRef = useRef<HTMLDivElement>(null);
+  const waterRef = useRef<HTMLDivElement>(null);
   const text2Ref = useRef<HTMLDivElement>(null);
   const truckRef = useRef<HTMLDivElement>(null);
   const truckImgRef = useRef<HTMLDivElement>(null);
+  const roadRef = useRef<HTMLDivElement>(null);
   const text3Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,8 +28,10 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       gsap.set(
         [
           shipRef.current,
+          waterRef.current,
           text2Ref.current,
           truckRef.current,
+          roadRef.current,
           text3Ref.current,
         ],
         { opacity: 0 }
@@ -56,25 +60,25 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       // ---- PHASE 1: TEXT 1 -> SHIP ----
       tl.to(text1Ref.current, { opacity: 0, duration: 1.5 }, "+=0.5")
 
-        // Ship reveal
-        .to(shipRef.current, { opacity: 1, duration: 1 }, "-=0.5")
+        // Ship and Water reveal
+        .to([shipRef.current, waterRef.current], { opacity: 1, duration: 1 }, "-=0.5")
         .to(shipImgRef.current, { xPercent: -220, duration: 6, ease: 'none' }, "<")
 
         // ---- PHASE 2: SHIP -> TEXT 2 ----
         // Start revealing Text 2 as the ship's main body clears the center
         .to(text2Ref.current, { opacity: 1, duration: 1.5 }, "-=2.5")
         // Fade out ship quickly as text 2 becomes the focus
-        .to(shipRef.current, { opacity: 0, duration: 0.8 }, "-=1.5")
+        .to([shipRef.current, waterRef.current], { opacity: 0, duration: 0.8 }, "-=1.5")
 
         // ---- PHASE 3: TEXT 2 -> TRUCK ----
         .to(text2Ref.current, { opacity: 0, duration: 1.5 }, "+=1.5")
-        .to(truckRef.current, { opacity: 1, duration: 1 }, "-=0.5")
+        .to([truckRef.current, roadRef.current], { opacity: 1, duration: 1 }, "-=0.5")
         .to(truckImgRef.current, { xPercent: -220, duration: 6, ease: 'none' }, "<")
 
         // ---- PHASE 4: TRUCK -> TEXT 3 ----
         // Start final text as truck clears
         .to(text3Ref.current, { opacity: 1, duration: 1.5 }, "-=2.5")
-        .to(truckRef.current, { opacity: 0, duration: 0.8 }, "-=1.5")
+        .to([truckRef.current, roadRef.current], { opacity: 0, duration: 0.8 }, "-=1.5")
 
         // FINAL HOLD
         .to(text3Ref.current, { opacity: 1, duration: 3 });
@@ -104,7 +108,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
         </div>
       </div>
 
-      {/* SHIP */}
+      {/* SHIP & WATER */}
       <div
         ref={shipRef}
         className="absolute inset-0 flex items-center justify-center z-10"
@@ -113,6 +117,17 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
         <div ref={shipImgRef} className="translate-y-12 lg:translate-y-20">
           <img src={ShipSVG} alt="Ship" className="w-[80vw] lg:w-[70vw]" />
         </div>
+      </div>
+      <div
+        ref={waterRef}
+        className="absolute bottom-0 left-0 w-full h-[15vh] bg-[#75C3FF]/20 backdrop-blur-sm z-5 pointer-events-none"
+        style={{
+          opacity: 0,
+          clipPath: 'polygon(0 30%, 100% 0%, 100% 100%, 0% 100%)'
+        }}
+      >
+        {/* Simple animated waves could go here */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-[#75C3FF]/40"></div>
       </div>
 
       {/* TEXT 2 */}
@@ -131,7 +146,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
         </div>
       </div>
 
-      {/* TRUCK */}
+      {/* TRUCK & ROAD */}
       <div
         ref={truckRef}
         className="absolute inset-0 flex items-center justify-center z-10"
@@ -139,6 +154,21 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div ref={truckImgRef} className="translate-y-12 lg:translate-y-20">
           <img src={TruckSVG} alt="Truck" className="w-[80vw] lg:w-[70vw]" />
+        </div>
+      </div>
+      <div
+        ref={roadRef}
+        className="absolute bottom-0 left-0 w-full h-[12vh] bg-gray-100 z-5 pointer-events-none flex items-center"
+        style={{
+          opacity: 0,
+        }}
+      >
+        <div className="w-full h-px bg-gray-300 relative">
+          <div className="absolute w-full flex justify-around">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="w-12 h-1 bg-gray-300"></div>
+            ))}
+          </div>
         </div>
       </div>
 
