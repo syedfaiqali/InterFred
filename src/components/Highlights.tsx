@@ -137,10 +137,10 @@ const Highlights: React.FC = () => {
     <>
       <Home sectionData={welcomeSectionData} setIsVisible={setIsVisible} />
 
-      <section className="relative py-20 bg-[#f9fafb]">
+      <section className="relative py-20 bg-[#f9fafb] mt-32 md:mt-0">
 
         {/* Absolute Image Overlay Centered on Section Boundary */}
-        <div className="absolute top-0 left-0 w-full -translate-y-[75%] z-10 px-6 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full -translate-y-[35%] md:-translate-y-[75%] z-10 px-6 pointer-events-none">
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               <div className="hidden lg:block lg:col-span-1"></div>
