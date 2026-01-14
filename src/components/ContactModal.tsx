@@ -125,7 +125,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                                 onClick={handleSend}
                                 className="bg-white px-10 py-4 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors w-full"
                             >
-                                <span className="text-[#1A1A1A] text-2xl lg:text-3xl font-medium text-left leading-tight">
+                                <span className="text-[#1A1A1A] hover:text-[#0000A3] text-2xl lg:text-3xl font-medium text-left leading-tight">
                                     Send<br />message
                                 </span>
                                 <div className="text-[#0000A3] transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 mt-4">
