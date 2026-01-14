@@ -21,17 +21,25 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative grid grid-cols-1 min-h-[350px] max-h-[525px] md:grid-cols-2 bg-[#0000A3] shadow-2xl rounded-sm my-12"
+                        className="relative grid grid-cols-1 min-h-[350px] max-h-[530px] md:grid-cols-2 bg-[#0000A3] shadow-2xl rounded-sm my-12"
                     >
-                        {/* 1. Top Left - White Information */}
-                        {/* MANUAL HEIGHT: Change 'min-h-[350px]' for minimum height and 'max-h-[450px]' for maximum height */}
-                        <div className="bg-white p-10 flex flex-col justify-start">
-                            <h2 className="text-4xl font-medium text-[#1A1A1A] leading-tight mb-8">
-                                Get in<br />touch with<br />us!
-                            </h2>
-                            <p className="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xs font-medium">
-                                We are currently working at full speed on the development of the ship. Feel free to reach out to us if you are keen on finding out more about InterFret.
-                            </p>
+                        {/* 1. Top Left - White Information with Top Extension */}
+                        <div className="grid grid-cols-[20%_80%] bg-[#0000A3] relative">
+                            {/* Extension that goes to the top of the screen */}
+                            <div className="absolute bottom-full right-0 w-[80%] h-[100vh] bg-white z-30 hidden md:block"></div>
+
+                            {/* Top Accent Bar */}
+                            <div className="absolute top-0 right-0 w-[80%] h-2 bg-white z-[40]"></div>
+
+                            <div className="bg-[#0000A3]"></div>
+                            <div className="bg-white p-10 pt-16 flex flex-col justify-start relative z-20">
+                                <h2 className="text-4xl font-medium text-[#1A1A1A] leading-tight mb-8">
+                                    Get in<br />touch with<br />us!
+                                </h2>
+                                <p className="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xs font-medium">
+                                    We are currently working at full speed on the development of the ship. Feel free to reach out to us if you are keen on finding out more about InterFret.
+                                </p>
+                            </div>
                         </div>
 
                         {/* 2. Top Right - Blue Form Area */}
@@ -70,34 +78,38 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                             </form>
                         </div>
 
-                        {/* 3. Bottom Left - Blue Email Area */}
-                        {/* MANUAL HEIGHT: Change 'min-h-[250px]' for minimum and 'max-h-[350px]' for maximum height */}
-                        <div className="p-10 flex flex-col bg-[#0000A3] max-h-[150px] overflow-y-auto">
-                            <p className="text-white/80 text-xs font-medium mb-3 tracking-wider">Or just wanna say hi?</p>
-                            <a
-                                href="mailto:info@interfret.com"
-                                className="text-white text-xl lg:text-2xl font-medium transition-all truncate"
-                            >
-                                info@interfret.com
-                            </a>
+                        {/* 3. Bottom Left - Blue Email Area aligned with top */}
+                        <div className="grid grid-cols-[20%_80%] bg-[#0000A3] min-h-[150px]">
+                            <div className="bg-[#0000A3]"></div>
+                            <div className="p-10 pl-0 flex flex-col justify-center overflow-y-auto">
+                                <p className="text-white/80 text-xs font-medium tracking-wider">Or just wanna say hi?</p>
+                                <a
+                                    href="mailto:info@interfret.com"
+                                    className="text-white text-xl lg:text-2xl underline font-medium transition-all truncate"
+                                >
+                                    info@interfret.com
+                                </a>
+                            </div>
                         </div>
 
-                        {/* 4. Bottom Right - White Send Message Button */}
-                        {/* MANUAL HEIGHT: Match these 'min-h' and 'max-h' values with section 3 */}
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onClose();
-                            }}
-                            className="bg-white px-10 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors min-h-[150px] max-h-[200px]"
-                        >
-                            <span className="text-[#1A1A1A] text-3xl font-medium text-left leading-tight">
-                                Send<br />message
-                            </span>
-                            <div className="text-[#0000A3] transition-transform group-hover:translate-x-2 group-hover:-translate-y-2">
-                                <ArrowUpRight size={56} strokeWidth={3} />
-                            </div>
-                        </button>
+                        {/* 4. Bottom Right - White Send Message Button + Blue Space */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 bg-[#0000A3] min-h-[150px]">
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    onClose();
+                                }}
+                                className="bg-white px-10 py-4 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors w-full"
+                            >
+                                <span className="text-[#1A1A1A] text-2xl lg:text-3xl font-medium text-left leading-tight">
+                                    Send<br />message
+                                </span>
+                                <div className="text-[#0000A3] transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 mt-4">
+                                    <ArrowUpRight size={48} strokeWidth={3} />
+                                </div>
+                            </button>
+                            <div className="hidden md:block bg-[#0000A3]"></div>
+                        </div>
                     </motion.div>
                 </div>
             )}
