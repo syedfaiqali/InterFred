@@ -1,14 +1,15 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Subscribe: FC = () => {
+  const location = useLocation();
   return (
     <footer className="pt-12 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
           {/* Left Column - Subscription Box */}
-          <div className="lg:w-2/5 lg:ml-12 bg-[#07119B] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
+          <div className="lg:w-2/5 lg:ml-12 bg-[#0000A3] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
             <div className="mb-10">
               <svg
                 width="60"
@@ -39,7 +40,7 @@ const Subscribe: FC = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full bg-[#050D8A] border border-blue-400/30 rounded-sm py-4 px-5 text-white placeholder-blue-300 outline-none focus:border-white transition-colors"
+                className="w-full bg-white/5 border border-white/20 rounded-sm py-4 px-5 text-white placeholder-blue-300 outline-none focus:border-white focus:bg-white/10 transition-all font-medium"
                 aria-label="Email address"
               />
               <button
@@ -66,7 +67,7 @@ const Subscribe: FC = () => {
                       item === 'Network.' ? '/network' :
                         item === 'Tracking.' ? '/tracking' : '#';
 
-                const className = "text-lg md:text-xl font-medium text-gray-800 hover:text-[#07119B] transition-colors";
+                const className = `text-lg md:text-xl font-medium transition-colors ${location.pathname === href ? 'text-[#5EAFEA]' : 'text-gray-800'} hover:text-[#5EAFEA]`;
 
                 // Use Link for existing routes, a tag for others (placeholders for now)
                 if (href.startsWith('/')) {
@@ -115,13 +116,13 @@ const Subscribe: FC = () => {
                 <div className="flex flex-col gap-8 md:pt-20">
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Email</span>
-                    <a href="mailto:info@interfret.com" className="text-xl font-medium text-gray-900 hover:text-[#07119B] transition-colors">
+                    <a href="mailto:info@interfret.com" className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
                       info@interfret.com
                     </a>
                   </div>
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Phone</span>
-                    <a href="tel:+9233154989455" className="text-xl font-medium text-gray-900 hover:text-[#07119B] transition-colors">
+                    <a href="tel:+9233154989455" className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
                       +9233154989455
                     </a>
                   </div>

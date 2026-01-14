@@ -79,7 +79,7 @@ const App: React.FC = () => {
             <Route path="/tracking" element={<Tracking />} />
           </Routes>
           {/* Common Footer Sections for all pages as requested */}
-          <div className="mt-12 space-y-6">
+          <div className="mt-12">
             <Subscribe />
             <ScrollingText />
           </div>

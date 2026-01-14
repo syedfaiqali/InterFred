@@ -73,11 +73,11 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className={`transition-all duration-300 hover:underline ${isActive('/about') ? 'underline underline-offset-8 decoration-2' : ''}`}>About us</Link>
-              <Link to="/service" className={`transition-all duration-300 hover:underline ${isActive('/service') ? 'underline underline-offset-8 decoration-2' : ''}`}>Services</Link>
-              <Link to="/achievements" className={`transition-all duration-300 hover:underline ${isActive('/achievements') ? 'underline underline-offset-8 decoration-2' : ''}`}>Achievements</Link>
-              <Link to="/network" className={`transition-all duration-300 hover:underline ${isActive('/network') ? 'underline underline-offset-8 decoration-2' : ''}`}>Network</Link>
-              <Link to="/tracking" className={`transition-all duration-300 hover:underline ${isActive('/tracking') ? 'underline underline-offset-8 decoration-2' : ''}`}>Tracking</Link>
+              <Link to="/about" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/about') ? 'text-[#5EAFEA] font-semibold' : ''}`}>About us</Link>
+              <Link to="/service" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/service') ? 'text-[#5EAFEA] font-semibold' : ''}`}>Services</Link>
+              <Link to="/achievements" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/achievements') ? 'text-[#5EAFEA] font-semibold' : ''}`}>Achievements</Link>
+              <Link to="/network" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/network') ? 'text-[#5EAFEA] font-semibold' : ''}`}>Network</Link>
+              <Link to="/tracking" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/tracking') ? 'text-[#5EAFEA] font-semibold' : ''}`}>Tracking</Link>
             </div>
             <button
               onClick={() => setIsContactModalOpen(true)}
@@ -121,11 +121,11 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/about') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>About us</Link>
-              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/service') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Services</Link>
-              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Achievements</Link>
-              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/network') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Network</Link>
-              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Tracking</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/about') ? 'text-[#5EAFEA] font-semibold' : 'text-gray-800'}`}>About us</Link>
+              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/service') ? 'text-[#5EAFEA] font-semibold' : 'text-gray-800'}`}>Services</Link>
+              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-[#5EAFEA] font-semibold' : 'text-gray-800'}`}>Achievements</Link>
+              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/network') ? 'text-[#5EAFEA] font-semibold' : 'text-gray-800'}`}>Network</Link>
+              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-[#5EAFEA] font-semibold' : 'text-gray-800'}`}>Tracking</Link>
             </div>
 
             {/* Custom Burger Button - Desktop Only */}
