@@ -72,6 +72,29 @@ const services: ServiceSlide[] = [
 
 const ServiceSlider: React.FC = () => {
     const location = useLocation();
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = React.useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
 
     // Initialize from localStorage if available
     const [activeIndex, setActiveIndex] = React.useState(() => {
@@ -105,13 +128,20 @@ const ServiceSlider: React.FC = () => {
     };
 
     return (
-        <section id="services-slider" className="bg-white py-16 px-4">
+        <section id="services-slider" ref={sectionRef} className="bg-white py-16 px-4">
             <div className="max-w-[1200px] mx-auto text-center mb-12">
-                <span className="text-gray-500 text-sm font-medium uppercase tracking-wider block mb-2">Explore</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A1A]">Inter-Fret Services</h2>
+                <span className={`text-gray-500 text-sm font-medium uppercase tracking-wider block mb-2 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}>
+                    Explore
+                </span>
+                <h2 className={`text-3xl md:text-4xl font-bold text-[#1A1A1A] transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}>
+                    Inter-Fret Services
+                </h2>
             </div>
 
-            <div className="max-w-[1000px] mx-auto relative flex items-center justify-center gap-2 md:gap-8">
+            <div className={`max-w-[1000px] mx-auto relative flex items-center justify-center gap-2 md:gap-8 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'
+                }`}>
 
                 {/* Previous Button */}
                 <button

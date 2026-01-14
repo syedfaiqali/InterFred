@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface FAQItem {
   question: string
@@ -31,24 +31,52 @@ const faqs: FAQItem[] = [
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
           {/* Left Side: Header Info */}
           <div className="lg:col-span-5 lg:pl-12 pl-0">
-            <span className="text-gray-400 font-medium tracking-widest text-sm uppercase mb-6 block">FAQ</span>
-            <h2 className="text-4xl lg:text-6xl font-medium text-gray-900 leading-[1.1] mb-12">
+            <span className={`text-gray-400 font-medium tracking-widest text-sm uppercase mb-6 block transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
+              FAQ
+            </span>
+            <h2 className={`text-4xl lg:text-6xl font-medium text-gray-900 leading-[1.1] mb-12 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               Quick<br />answers to<br />questions you<br />may have
             </h2>
 
-            <div className="space-y-4">
+            <div className={`space-y-4 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               <p className="text-xl text-gray-900 font-semibold">
                 Can't find what you're looking for?<br />
                 Contact us here:
@@ -63,7 +91,8 @@ const FAQ: React.FC = () => {
           </div>
 
           {/* Right Side: FAQ Accordion */}
-          <div className="lg:col-span-6">
+          <div className={`lg:col-span-6 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+            }`}>
             <div className="border-t border-gray-100">
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b border-gray-100">

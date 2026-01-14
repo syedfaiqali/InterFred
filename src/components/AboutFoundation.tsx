@@ -106,6 +106,7 @@ const milestones: Milestone[] = [
 
 const AboutFoundation: React.FC = () => {
     const [scrollProgress, setScrollProgress] = React.useState(0);
+    const [isVisible, setIsVisible] = React.useState(false);
     const milestoneRef = React.useRef<HTMLDivElement>(null);
 
     // Determine the heading content based on scroll progress
@@ -153,9 +154,25 @@ const AboutFoundation: React.FC = () => {
             setScrollProgress(progress);
         };
 
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.05 }
+        );
+
+        if (milestoneRef.current) {
+            observer.observe(milestoneRef.current);
+        }
+
         window.addEventListener('scroll', handleScroll);
         handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (milestoneRef.current) observer.unobserve(milestoneRef.current);
+        };
     }, []);
 
     return (
@@ -180,7 +197,7 @@ const AboutFoundation: React.FC = () => {
                             <img
                                 src={centerShip}
                                 alt="Moving Ship"
-                                className="w-10 lg:w-16 h-auto object-contain"
+                                className={`w-10 lg:w-16 h-auto object-contain transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
                                 style={{
                                     filter: 'brightness(1.5)'
                                 }}
@@ -189,15 +206,15 @@ const AboutFoundation: React.FC = () => {
                     </div>
 
                     {/* Dynamic Heading */}
-                    <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-0 lg:top-[25vh] z-30 self-start pt-24 pb-8 bg-[#1A1A1A] lg:bg-transparent">
-                        <div key={currentHeading.line1} className="space-y-4 transition-all duration-700 animate-in fade-in slide-in-from-bottom-2">
+                    <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-0 lg:top-[15vh] z-30 self-start pt-12 lg:pt-8 pb-12 bg-[#1A1A1A] lg:bg-transparent overflow-visible">
+                        <div key={currentHeading.line1} className={`space-y-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                             <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block">
                                 {currentHeading.label}
                             </span>
-                            <h2 className="text-2xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                            <h2 className="text-2xl lg:text-4xl xl:text-5xl font-bold leading-[1.1]">
                                 {currentHeading.line1}<br />
-                                <span className="text-[#5EAFEA]">{currentHeading.line2}</span><br />
-                                <span className="text-[#5EAFEA]">{currentHeading.line3}</span>
+                                <span className="text-[#5EAFEA] block md:inline">{currentHeading.line2}</span><br className="hidden md:block" />
+                                <span className="text-[#5EAFEA] block md:inline">{currentHeading.line3}</span>
                             </h2>
                         </div>
 
@@ -208,7 +225,12 @@ const AboutFoundation: React.FC = () => {
                     {/* Milestones Content (Mobile only) */}
                     <div className="col-span-3 lg:hidden mt-12 mb-24 space-y-20 relative z-10">
                         {milestones.map((milestone, index) => (
-                            <div key={index} className="space-y-6 relative">
+                            <div
+                                key={index}
+                                className={`space-y-6 relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                                    }`}
+                                style={{ transitionDelay: `${index * 150}ms` }}
+                            >
                                 <span className="text-4xl font-bold text-white/90 leading-none block">{milestone.year}</span>
                                 <div className="space-y-6">
                                     <div className="text-gray-400 text-base leading-relaxed font-light">
@@ -229,7 +251,12 @@ const AboutFoundation: React.FC = () => {
                     {/* Right side: Milestones content (Desktop only) */}
                     <div className="hidden lg:block lg:col-span-5 space-y-24 pb-48 lg:col-start-7">
                         {milestones.map((milestone, index) => (
-                            <div key={index} className="space-y-6 relative pl-12">
+                            <div
+                                key={index}
+                                className={`space-y-6 relative pl-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                                    }`}
+                                style={{ transitionDelay: `${index * 150}ms` }}
+                            >
                                 <span className="text-5xl lg:text-7xl font-bold text-white/90 leading-none block">{milestone.year}</span>
 
                                 <div className="space-y-6 max-w-sm">
