@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from './store'
@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import Home from './components/Home'
 import Answer from './components/Answer'
 import ScrollToTop from './components/ScrollToTop'
+import Loader from './components/Loader'
 const About = React.lazy(() => import('./components/About'))
 const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
@@ -40,7 +41,7 @@ const App: React.FC = () => {
           <Header />
         </div>
 
-        <React.Suspense fallback={<div className="py-12 text-center">Loading...</div>}>
+        <React.Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={
               <>
