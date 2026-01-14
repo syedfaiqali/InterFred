@@ -10,7 +10,7 @@ const Network: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
 
                     {/* Hero Section */}
-                    <div className="relative mb-16 pt-20">
+                    <div className="relative mb-16 pt-24 md:pt-32 lg:pt-0">
                         <div className="relative w-full aspect-[21/9] lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10">
                             <img
                                 src={networkHero}

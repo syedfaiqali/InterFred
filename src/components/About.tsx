@@ -13,7 +13,7 @@ const About: React.FC = () => {
             <div className="space-y-12">
               <div>
                 <span className="text-gray-400 font-medium tracking-wide text-sm block mb-6">What we do</span>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
                   Top IATA-rated<br />
                   freight partner,<br />
                   connecting <br />

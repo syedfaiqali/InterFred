@@ -74,11 +74,11 @@ const NetworkLocations: React.FC = () => {
                     </h2>
                 </div>
 
-                <div className="grid gap-3 md:gap-6 lg:gap-8" style={{ gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' }}>
+                <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-6 lg:gap-8">
                     {countries.map((country, index) => (
                         <div key={index} className="flex flex-col group">
                             {/* Flag Container */}
-                            <div className="relative aspect-[4/3] rounded-t-[2rem] lg:rounded-t-[2.5rem] overflow-hidden bg-gray-50 flex items-center justify-center">
+                            <div className="relative aspect-[4/3] rounded-t-[1.5rem] md:rounded-t-[2rem] lg:rounded-t-[2.5rem] overflow-hidden bg-gray-50 flex items-center justify-center">
                                 <img
                                     src={`https://flagcdn.com/w320/${country.code.toLowerCase()}.png`}
                                     alt={`${country.name} flag`}
@@ -87,8 +87,8 @@ const NetworkLocations: React.FC = () => {
                             </div>
 
                             {/* Label Container */}
-                            <div className="bg-[#07119B] py-2 px-2 text-center">
-                                <span className="text-white font-medium text-xs lg:text-sm">
+                            <div className="bg-[#07119B] py-5 md:py-2 px-1 md:px-2 text-center flex items-center justify-center min-h-[60px] md:min-h-0">
+                                <span className="text-white font-medium text-[0.65rem] md:text-xs lg:text-sm leading-tight">
                                     {country.name}
                                 </span>
                             </div>

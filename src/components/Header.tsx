@@ -63,10 +63,10 @@ const Header: React.FC = () => {
             <img src={stickyLogo} alt="InterFret" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
             <div className="flex flex-col">
               <h1 className={`text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
-                <span className="text-[#07119B]">I</span>NTER-<span className="text-[#07119B]">F</span>RET
+                INTER-FRET
               </h1>
               <p className={`text-[0.65rem] font-bold tracking-[0.15em] leading-tight ${isHomePage ? 'text-gray-200' : 'text-gray-600'}`}>
-                <span className="text-[#07119B]">C</span>ONSOLIDATORS (PVT) LTD
+                CONSOLIDATORS (PVT) LTD
               </p>
             </div>
           </Link>

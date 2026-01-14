@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import orangeTruck from '../assets/serviceslider1.svg';
@@ -108,22 +108,22 @@ const ServiceSlider: React.FC = () => {
         <section id="services-slider" className="bg-white py-16 px-4">
             <div className="max-w-[1200px] mx-auto text-center mb-12">
                 <span className="text-gray-500 text-sm font-medium uppercase tracking-wider block mb-2">Explore</span>
-                <h2 className="text-4xl font-bold text-[#1A1A1A]">Inter-Fret Services</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A1A]">Inter-Fret Services</h2>
             </div>
 
-            <div className="max-w-[1000px] mx-auto relative flex items-center justify-center gap-4 md:gap-8">
+            <div className="max-w-[1000px] mx-auto relative flex items-center justify-center gap-2 md:gap-8">
 
                 {/* Previous Button */}
                 <button
                     onClick={prevSlide}
-                    className="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
+                    className="p-1 md:p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
                     aria-label="Previous slide"
                 >
-                    <ChevronLeft className="w-8 h-8 text-gray-700" />
+                    <ChevronLeft className="w-6 h-6 md:w-8 md:h-8 text-gray-700" />
                 </button>
 
                 {/* Card Container */}
-                <div className="relative w-full max-w-[800px] aspect-[16/9] rounded-[2rem] overflow-hidden shadow-2xl group">
+                <div className="relative w-full max-w-[800px] aspect-square md:aspect-[16/9] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl group">
                     {/* Image */}
                     <img
                         src={services[activeIndex].image}
@@ -134,14 +134,14 @@ const ServiceSlider: React.FC = () => {
                     {/* Learn More Badge */}
                     <Link
                         to={`/service/${services[activeIndex].slug}`}
-                        className="absolute top-8 left-8 bg-black text-white px-6 py-2 rounded-full text-sm font-medium z-10 hover:bg-gray-800 transition-colors"
+                        className="absolute top-4 left-4 md:top-8 md:left-8 bg-black/80 backdrop-blur-sm text-white px-4 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-medium z-10 hover:bg-black transition-colors"
                     >
                         Learn More
                     </Link>
 
                     {/* Blue Bottom Bar with Title */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-[#07119B] py-6 px-8 transition-transform duration-300 translate-y-0">
-                        <h3 className="text-center text-3xl font-bold text-white">
+                    <div className="absolute bottom-0 left-0 right-0 bg-[#07119B] py-4 px-6 md:py-6 md:px-8 transition-transform duration-300 translate-y-0">
+                        <h3 className="text-center text-xl md:text-3xl font-bold text-white">
                             {services[activeIndex].title}
                         </h3>
                     </div>
@@ -150,10 +150,10 @@ const ServiceSlider: React.FC = () => {
                 {/* Next Button */}
                 <button
                     onClick={nextSlide}
-                    className="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
+                    className="p-1 md:p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none"
                     aria-label="Next slide"
                 >
-                    <ChevronRight className="w-8 h-8 text-gray-700" />
+                    <ChevronRight className="w-6 h-6 md:w-8 md:h-8 text-gray-700" />
                 </button>
 
             </div>

@@ -127,11 +127,11 @@ const ServiceSpecialization: React.FC = () => {
                             </div>
 
                             {/* Text Content - Swaps position based on index */}
-                            <div className={`space-y-6 lg:col-span-5 ${index % 2 === 1 ? 'lg:order-2' : 'lg:order-3'} ${index % 2 === 1 ? 'lg:pr-12' : 'lg:pl-12'}`}>
-                                <h3 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
+                            <div className={`space-y-6 lg:col-span-5 ${index % 2 === 1 ? 'lg:order-2' : 'lg:order-3'} ${index % 2 === 1 ? 'lg:pr-12' : 'lg:pl-12'} transition-all`}>
+                                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white leading-tight">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-400 text-xl leading-relaxed max-w-lg">
+                                <p className="text-gray-400 text-lg lg:text-xl leading-relaxed max-w-lg">
                                     {item.description}
                                 </p>
                             </div>

@@ -61,7 +61,7 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12">
 
           {/* Label Column - 2/12 */}
-          <div className="lg:col-span-2 text-right">
+          <div className="lg:col-span-2 lg:text-right text-left">
             <span className="text-gray-400 font-medium tracking-wide text-sm top-32">{sectionData.label}</span>
           </div>
 

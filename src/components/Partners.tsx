@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import logo1 from '../Assets/partner1.svg';
 import logo2 from '../Assets/partner2.svg';
 import logo3 from '../Assets/partner3.svg';
@@ -29,7 +30,7 @@ const Partners: React.FC = () => {
     <section className="py-20 overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 text-center mb-16">
         <p className="text-gray-400 font-medium tracking-widest text-sm uppercase mb-6 block">Partners & Investors</p>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-10 tracking-tight leading-[1.1]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-10 tracking-tight leading-[1.1]">
           Trusted by top<br />Partners & Supporters
         </h2>
         <button className="bg-[#07119B] hover:bg-[#050D8A] text-white font-medium py-4 px-10 rounded-sm transition-all shadow-lg text-sm uppercase tracking-wider">

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import AOS1 from '../assets/AOS1.svg';
 import AOS2 from '../assets/AOS2.svg';
 import AOS3 from '../assets/AOS3.svg';
@@ -28,7 +28,7 @@ const Specialization: React.FC = () => {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 md:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 md:mb-16">
           Areas of Specialization
         </h2>
 

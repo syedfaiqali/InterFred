@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
 
   return (
     <section
-      className="h-[78vh] lg:h-screen bg-cover bg-center relative flex flex-col"
+      className="min-h-screen lg:h-screen bg-cover bg-center relative flex flex-col"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
@@ -20,22 +20,22 @@ const Hero: React.FC = () => {
 
 
 
-      <div className="relative items-center ml-4 mr-4 mx-auto px-6 flex-1 flex items-start w-100 pt-12">
+      <div className="relative items-center mx-auto px-6 flex-1 flex items-start w-full pt-32 md:pt-40 lg:pt-12">
         <div className="w-full">
-          <div className="text-white mb-12">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-8">
-              Global<br />Logistics & <br />Industrial<br />Solutions
+          <div className="text-white mb-8 md:mb-12">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-6 md:mb-8">
+              Global Logistics<br className="hidden sm:block" /> & <br className="sm:hidden" />Industrial Solutions
             </h1>
             <div className="flex items-center gap-3">
-              <img src={svglogos} alt="InterFret" className="h-16 object-contain" />
+              <img src={svglogos} alt="InterFret Certifications" className="h-12 md:h-16 object-contain" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-12 right-6 max-w-sm text-white/90 hidden md:block">
+      <div className="relative lg:absolute lg:bottom-12 lg:right-6 lg:left-auto lg:max-w-md w-full max-w-sm text-white/90 pb-12 lg:pb-0">
         <div className="px-6">
-          <h4 className="font-semibold mb-4 leading-relaxed text-base">We are a leader in <span style={{ color: '#75C3FF' }}>professional logistics, evolving from an airfreight forwarder to a top-tier global network covering over</span> <span className="text-white font-bold">250 destinations.</span></h4>
+          <h4 className="font-semibold mb-4 leading-relaxed text-sm md:text-base">We are a leader in <span style={{ color: '#75C3FF' }}>professional logistics, evolving from an airfreight forwarder to a top-tier global network covering over</span> <span className="text-white font-bold">250 destinations.</span></h4>
           <div className="overflow-hidden mt-2 flex">
             <div className="flex gap-4 animate-slide-in-left whitespace-nowrap pr-4">
               {scrollingTexts.map((text, index) => (

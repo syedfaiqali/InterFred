@@ -345,7 +345,7 @@ const ServiceDetail: React.FC = () => {
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-12 gap-4">
                 <div className="col-span-12 lg:col-span-12">
                     {/* Hero Section */}
-                    <div className="relative w-full h-[400px] lg:h-[500px] rounded-[3rem] overflow-hidden mb-16 shadow-2xl group">
+                    <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl group">
                         <img
                             src={data.heroImage}
                             alt={data.title}
@@ -361,11 +361,11 @@ const ServiceDetail: React.FC = () => {
                 <div className="col-span-12 lg:col-span-10">
 
                     {/* Main Heading */}
-                    <div className="mb-16">
-                        <h1 className="text-4xl lg:text-6xl font-bold text-[#07119B] mb-4">
+                    <div className="mb-12 lg:mb-16">
+                        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-[#07119B] mb-4">
                             {data.title}
                         </h1>
-                        <p className="text-xl lg:text-2xl text-gray-700 font-medium">
+                        <p className="text-lg lg:text-2xl text-gray-700 font-medium">
                             {data.subtitle}
                         </p>
                     </div>

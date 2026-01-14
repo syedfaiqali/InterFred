@@ -9,7 +9,7 @@ const ServicesSection: React.FC = () => {
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
 
                 {/* Top wide hero image wrapper */}
-                <div className="relative mb-16 lg:mb-24">
+                <div className="relative pt-24 md:pt-32 lg:pt-0 mb-16 lg:mb-24">
                     <div className="relative w-full aspect-[21/9] lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10">
                         <img
                             src={shipGlobal}

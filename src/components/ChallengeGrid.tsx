@@ -69,7 +69,7 @@ const ChallengeGrid: React.FC = () => {
                             />
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                                 <span {...textTransition(isSec2Visible, '100ms')}>Complex&nbsp;</span>
                                 <span {...textTransition(isSec2Visible, '200ms')}>Oversized&nbsp;</span>
                                 <span {...textTransition(isSec2Visible, '300ms')}>Cargo</span>
@@ -101,7 +101,7 @@ const ChallengeGrid: React.FC = () => {
                             />
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                                 <span {...textTransition(isSec4Visible, '100ms')}>Regulatory&nbsp;</span>
                                 <span {...textTransition(isSec4Visible, '200ms')}>Bottlenecks</span>
                             </h3>
@@ -118,7 +118,7 @@ const ChallengeGrid: React.FC = () => {
 
                 {/* Section 6: Lack of Integrated Support */}
                 {/* <div className="hidden lg:block ml-4"></div> */}
-                <div className="lg:col-span-3 lg:col-start-1 ml-8" ref={secLackRef}>
+                <div className="lg:col-span-3 lg:col-start-1 lg:ml-8 ml-0" ref={secLackRef}>
                     <div className="flex flex-col">
                         <div className="flex-shrink-0 mb-6">
                             <img
@@ -133,7 +133,7 @@ const ChallengeGrid: React.FC = () => {
                             />
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                                 <span {...textTransition(isSecLackVisible, '100ms')}>Lack&nbsp;</span>
                                 <span {...textTransition(isSecLackVisible, '200ms')}>of&nbsp;</span>
                                 <span {...textTransition(isSecLackVisible, '300ms')}>Integrated&nbsp;</span>
@@ -166,7 +166,7 @@ const ChallengeGrid: React.FC = () => {
                             />
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                                 <span {...textTransition(isSecCityVisible, '100ms')}>Unequipped&nbsp;</span>
                                 <span {...textTransition(isSecCityVisible, '200ms')}>for&nbsp;</span>
                                 <span {...textTransition(isSecCityVisible, '300ms')}>Every&nbsp;</span>

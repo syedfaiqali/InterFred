@@ -12,9 +12,39 @@
   }
 }
 
+@keyframes marqueeInfinite {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeInfiniteReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-marquee-ltr {
   display: flex;
   animation: marqueeLeftToRight 40s linear infinite;
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  animation: marqueeInfinite 30s linear infinite;
+}
+
+.animate-marquee-infinite-reverse {
+  display: flex;
+  animation: marqueeInfiniteReverse 35s linear infinite;
 }
 
 :root {
