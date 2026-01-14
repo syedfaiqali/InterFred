@@ -8,6 +8,31 @@ interface ContactModalProps {
 }
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+    const [email, setEmail] = React.useState('');
+
+    const validateEmail = (email: string) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
+    const handleSend = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (!email.trim()) {
+            alert("Required field 'email' is missing");
+            return;
+        }
+        if (!validateEmail(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+        // If valid, close the modal (or handle form submission)
+        onClose();
+        setEmail(''); // Reset for next time
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -65,6 +90,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                                     <label className="text-white/70 text-xs font-bold block">Your email</label>
                                     <input
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className="w-full bg-transparent border-b border-white/30 py-1 text-white text-lg outline-none focus:border-white transition-all"
                                     />
                                 </div>
@@ -95,10 +122,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         {/* 4. Bottom Right - White Send Message Button + Blue Space */}
                         <div className="grid grid-cols-1 md:grid-cols-2 bg-[#0000A3] min-h-[150px]">
                             <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onClose();
-                                }}
+                                onClick={handleSend}
                                 className="bg-white px-10 py-4 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors w-full"
                             >
                                 <span className="text-[#1A1A1A] text-2xl lg:text-3xl font-medium text-left leading-tight">
