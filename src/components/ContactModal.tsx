@@ -33,6 +33,18 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         setEmail(''); // Reset for next time
     };
 
+    // Prevent background scrolling when modal is open
+    React.useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -46,7 +58,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative grid grid-cols-1 min-h-[350px] max-h-[530px] md:grid-cols-2 bg-[#0000A3] shadow-2xl rounded-sm my-12"
+                        className="relative grid grid-cols-1 md:grid-cols-2 bg-[#0000A3] shadow-2xl rounded-sm my-12 w-full max-w-4xl max-h-[90vh] md:max-h-[530px] overflow-y-auto md:overflow-visible"
                     >
                         {/* 1. Top Left - White Information with Top Extension */}
                         <div className="grid grid-cols-[20%_80%] bg-[#0000A3] relative">
@@ -56,9 +68,18 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                             {/* Top Accent Bar */}
                             <div className="absolute top-0 right-0 w-[80%] h-2 bg-white z-[40]"></div>
 
-                            <div className="bg-[#0000A3]"></div>
+                            {/* Sidebar Strip with Close Button (MOBILE ONLY) */}
+                            <div className="bg-[#0000A3] flex justify-center pt-6">
+                                <button
+                                    onClick={onClose}
+                                    className="text-white/60 hover:text-white transition-all transform hover:scale-110 h-fit md:hidden"
+                                    aria-label="Close modal"
+                                >
+                                    <X size={28} strokeWidth={1.5} />
+                                </button>
+                            </div>
                             <div className="bg-white p-10 pt-16 flex flex-col justify-start relative z-20">
-                                <h2 className="text-4xl font-medium text-[#1A1A1A] leading-tight mb-8">
+                                <h2 className="text-3xl md:text-4xl font-medium text-[#1A1A1A] leading-tight mb-8">
                                     Get in<br />touch with<br />us!
                                 </h2>
                                 <p className="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xs font-medium">
@@ -68,51 +89,50 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* 2. Top Right - Blue Form Area */}
-                        {/* Note: This side follows the height of the left side. You can also add 'max-h' and 'overflow-y-auto' if needed */}
-                        <div className="p-10 lg:p-16 relative flex flex-col justify-center bg-[#0000A3] max-h-[500px] overflow-y-auto">
-                            {/* Close Button */}
+                        <div className="p-8 md:p-10 lg:p-16 relative flex flex-col justify-center bg-[#0000A3] md:max-h-[500px] overflow-y-auto">
+                            {/* Close Button (DESKTOP ONLY) */}
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 right-6 text-white/60 hover:text-white transition-all transform hover:scale-110"
+                                className="hidden md:block absolute top-6 right-6 text-white/60 hover:text-white transition-all transform hover:scale-110"
                             >
                                 <X size={32} strokeWidth={1.5} />
                             </button>
 
-                            <form className="space-y-8 w-full" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-6 md:space-y-8 w-full" onSubmit={(e) => e.preventDefault()}>
                                 <div className="space-y-1">
-                                    <label className="text-white/70 text-xs font-bold block">Your name</label>
+                                    <label className="text-white/70 text-[10px] md:text-xs font-bold block uppercase tracking-wider">Your name</label>
                                     <input
                                         type="text"
-                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-lg outline-none focus:border-white transition-all"
+                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-base md:text-lg outline-none focus:border-white transition-all"
                                     />
                                 </div>
                                 <div className="space-y-1">
-                                    <label className="text-white/70 text-xs font-bold block">Your email</label>
+                                    <label className="text-white/70 text-[10px] md:text-xs font-bold block uppercase tracking-wider">Your email</label>
                                     <input
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-lg outline-none focus:border-white transition-all"
+                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-base md:text-lg outline-none focus:border-white transition-all"
                                     />
                                 </div>
                                 <div className="space-y-1">
-                                    <label className="text-white/70 text-xs font-bold block">Message</label>
+                                    <label className="text-white/70 text-[10px] md:text-xs font-bold block uppercase tracking-wider">Message</label>
                                     <textarea
                                         rows={1}
-                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-lg outline-none focus:border-white transition-all resize-none"
+                                        className="w-full bg-transparent border-b border-white/30 py-1 text-white text-base md:text-lg outline-none focus:border-white transition-all resize-none"
                                     />
                                 </div>
                             </form>
                         </div>
 
                         {/* 3. Bottom Left - Blue Email Area aligned with top */}
-                        <div className="grid grid-cols-[20%_80%] bg-[#0000A3] min-h-[150px]">
+                        <div className="grid grid-cols-[20%_80%] bg-[#0000A3] min-h-[120px] md:min-h-[150px]">
                             <div className="bg-[#0000A3]"></div>
-                            <div className="p-10 pl-0 flex flex-col justify-center overflow-y-auto">
-                                <p className="text-white/80 text-xs font-medium tracking-wider">Or just wanna say hi?</p>
+                            <div className="p-8 md:p-10 pl-0 flex flex-col justify-center overflow-y-auto">
+                                <p className="text-white/80 text-[10px] md:text-xs font-medium tracking-wider">Or just wanna say hi?</p>
                                 <a
                                     href="mailto:info@interfret.com"
-                                    className="text-white text-xl lg:text-2xl underline font-medium transition-all truncate"
+                                    className="text-white text-lg md:text-xl lg:text-2xl underline font-medium transition-all truncate"
                                 >
                                     info@interfret.com
                                 </a>
@@ -120,16 +140,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* 4. Bottom Right - White Send Message Button + Blue Space */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 bg-[#0000A3] min-h-[150px]">
+                        <div className="grid grid-cols-1 md:grid-cols-2 bg-[#0000A3] min-h-[120px] md:min-h-[150px]">
                             <button
                                 onClick={handleSend}
-                                className="bg-white px-10 py-4 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors w-full"
+                                className="bg-white px-8 md:px-10 py-6 md:py-4 flex flex-col justify-between items-start group hover:bg-gray-50 transition-colors w-full"
                             >
-                                <span className="text-[#1A1A1A] hover:text-[#0000A3] text-2xl lg:text-3xl font-medium text-left leading-tight">
-                                    Send<br />message
+                                <span className="text-[#1A1A1A] group-hover:text-[#0000A3] text-xl md:text-2xl lg:text-3xl font-medium text-left leading-tight transition-colors">
+                                    Send<br className="hidden md:block" /> message
                                 </span>
                                 <div className="text-[#0000A3] transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 mt-4">
-                                    <ArrowUpRight size={48} strokeWidth={3} />
+                                    <ArrowUpRight size={40} md:size={48} strokeWidth={3} />
                                 </div>
                             </button>
                             <div className="hidden md:block bg-[#0000A3]"></div>
