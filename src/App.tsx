@@ -23,7 +23,6 @@ const ServicesSection = React.lazy(() => import('./components/ServicesSection'))
 const ServiceSpecialization = React.lazy(() => import('./components/ServiceSpecialization'))
 const ServiceDetail = React.lazy(() => import('./components/ServiceDetail'))
 const ServiceSlider = React.lazy(() => import('./components/ServiceSlider'))
-const Network = React.lazy(() => import('./components/Network'))
 const Footer = React.lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
@@ -72,7 +71,6 @@ const App: React.FC = () => {
               </div>
             } />
             <Route path="/service/:id" element={<ServiceDetail />} />
-            <Route path="/network" element={<Network />} />
           </Routes>
           {/* Common Footer Sections for all pages as requested */}
           <div className="mt-12 space-y-6">

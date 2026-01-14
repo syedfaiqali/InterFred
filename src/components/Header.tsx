@@ -2,11 +2,13 @@ import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import stickyLogo from '../assets/Vector.svg'
+import ContactModal from './ContactModal'
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const lastScrollY = useRef(0)
   const [scrollDirection, setScrollDirection] = useState('down')
   const [isScrolling, setIsScrolling] = useState(false)
@@ -50,11 +52,7 @@ const Header: React.FC = () => {
     }
   }, [])
 
-  const navLinkClass = "transition-all duration-300 hover:underline font-medium";
-  const navLinkScrolledClass = "transition-all duration-300 hover:text-[#07119B] hover:underline font-medium";
-
   const isActive = (path: string) => location.pathname === path;
-  const activeClass = "underline underline-offset-8 decoration-2";
 
   return (
     <>
@@ -75,13 +73,18 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className={`${navLinkClass} ${isActive('/about') ? activeClass : ''}`}>About us</Link>
-              <Link to="/service" className={`${navLinkClass} ${isActive('/service') ? activeClass : ''}`}>Services</Link>
-              <Link to="/achievements" className={`${navLinkClass} ${isActive('/achievements') ? activeClass : ''}`}>Achievements</Link>
-              <Link to="/network" className={`${navLinkClass} ${isActive('/network') ? activeClass : ''}`}>Network</Link>
-              <Link to="/tracking" className={`${navLinkClass} ${isActive('/tracking') ? activeClass : ''}`}>Tracking</Link>
+              <Link to="/about" className={`transition-all duration-300 hover:underline ${isActive('/about') ? 'underline underline-offset-8 decoration-2' : ''}`}>About us</Link>
+              <Link to="/service" className={`transition-all duration-300 hover:underline ${isActive('/service') ? 'underline underline-offset-8 decoration-2' : ''}`}>Services</Link>
+              <Link to="/achievements" className={`transition-all duration-300 hover:underline ${isActive('/achievements') ? 'underline underline-offset-8 decoration-2' : ''}`}>Achievements</Link>
+              <Link to="/network" className={`transition-all duration-300 hover:underline ${isActive('/network') ? 'underline underline-offset-8 decoration-2' : ''}`}>Network</Link>
+              <Link to="/tracking" className={`transition-all duration-300 hover:underline ${isActive('/tracking') ? 'underline underline-offset-8 decoration-2' : ''}`}>Tracking</Link>
             </div>
-            <button className="ml-4 px-4 py-2 bg-[#07119B] text-white rounded-md hover:bg-[#0a1bc0] transition-colors">Get in Touch</button>
+            <button
+              onClick={() => setIsContactModalOpen(true)}
+              className="ml-4 px-4 py-2 bg-[#07119B] text-white rounded-md hover:bg-[#0a1bc0] transition-colors"
+            >
+              Get in Touch
+            </button>
           </nav>
 
           <div className="md:hidden">
@@ -118,11 +121,11 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/about') ? `text-[#07119B] ${activeClass}` : ''}`}>About us</Link>
-              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/service') ? `text-[#07119B] ${activeClass}` : ''}`}>Services</Link>
-              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/achievements') ? `text-[#07119B] ${activeClass}` : ''}`}>Achievements</Link>
-              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/network') ? `text-[#07119B] ${activeClass}` : ''}`}>Network</Link>
-              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`${navLinkScrolledClass} text-sm whitespace-nowrap ${isActive('/tracking') ? `text-[#07119B] ${activeClass}` : ''}`}>Tracking</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/about') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>About us</Link>
+              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/service') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Services</Link>
+              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Achievements</Link>
+              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/network') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Network</Link>
+              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#07119B] hover:underline text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-[#07119B] underline underline-offset-8 decoration-2' : ''}`}>Tracking</Link>
             </div>
 
             {/* Custom Burger Button - Desktop Only */}
@@ -146,7 +149,10 @@ const Header: React.FC = () => {
             </button>
 
             {/* Get in Touch Button - Desktop Only */}
-            <button className="hidden md:block px-4 py-2 bg-[#07119B] text-white rounded-md text-sm shadow-md hover:bg-[#0a1bc0] transition-colors whitespace-nowrap">
+            <button
+              onClick={() => setIsContactModalOpen(true)}
+              className="hidden md:block px-4 py-2 bg-[#07119B] text-white rounded-md text-sm shadow-md hover:bg-[#0a1bc0] transition-colors whitespace-nowrap"
+            >
               Get in Touch
             </button>
           </div>
@@ -183,12 +189,19 @@ const Header: React.FC = () => {
             <span className={`text-lg font-bold ${isActive('/tracking') ? 'text-[#5EAFEA]' : 'text-white'}`}>Tracking.</span>
           </Link>
 
-          {/* Get in Touch - Spanning */}
-          <button className="col-span-2 bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors text-left h-32">
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setIsContactModalOpen(true);
+            }}
+            className="col-span-2 bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors text-left h-32"
+          >
             <span className="text-white text-lg font-bold">Get in Touch.</span>
           </button>
         </div>
       </div>
+
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </>
   )
 }
