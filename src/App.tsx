@@ -27,7 +27,6 @@ const ServiceSlider = React.lazy(() => import('./components/ServiceSlider'))
 const Network = React.lazy(() => import('./components/Network'))
 const Achievements = React.lazy(() => import('./components/Achievements'))
 const Tracking = React.lazy(() => import('./components/Tracking'))
-const Footer = React.lazy(() => import('./components/Footer'))
 
 const App: React.FC = () => {
   const location = useLocation()
