@@ -23,11 +23,11 @@ const Hero: React.FC = () => {
       <div className="relative items-center mx-auto px-6 flex-1 flex items-start w-full pt-32 md:pt-40 lg:pt-12">
         <div className="w-full">
           <div className="text-white mb-8 md:mb-12">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-6 md:mb-8">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-6 md:mb-8 max-w-[80%]">
               Global Logistics<br className="hidden sm:block" /> & <br className="sm:hidden" />Industrial Solutions
             </h1>
             <div className="flex items-center gap-3">
-              <img src={svglogos} alt="InterFret Certifications" className="h-12 md:h-16 object-contain" />
+              <img src={svglogos} alt="InterFret Certifications" className="h-12 md:h-16 object-contain brightness-0 invert" />
             </div>
           </div>
         </div>

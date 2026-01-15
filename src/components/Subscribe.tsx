@@ -132,7 +132,7 @@ const Subscribe: FC = () => {
               {/* Copyright Row - Now inside the right column block */}
               <div className="mt-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
                 <p className="text-sm md:text-base text-gray-500 font-medium md:whitespace-nowrap">
-                  © 2025, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
+                  © {new Date().getFullYear()}, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.
                 </p>
                 <div className="flex gap-6">
                   <a href="#privacy" className="text-sm md:text-base text-gray-500 hover:text-gray-900 font-medium transition-colors whitespace-nowrap">Privacy policy</a>
