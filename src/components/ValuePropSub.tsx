@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 interface ValueCardProps {
     title: React.ReactNode;
@@ -68,6 +69,8 @@ const ValueCard: React.FC<ValueCardProps> = ({
 const ValueProposition: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -88,7 +91,10 @@ const ValueProposition: React.FC = () => {
     }, []);
 
     return (
-        <section className="bg-white px-4 sm:px-10 pb-6 sm:pb-10" ref={sectionRef}>
+        <section
+            className={`bg-white px-4 sm:px-10 ${isHomePage ? 'pt-0 pb-6 sm:pb-10' : 'py-16 sm:py-24'}`}
+            ref={sectionRef}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-10">
                 <div className="grid grid-cols-1 px-4 sm:px-10 md:grid-cols-3 gap-y-8 sm:gap-y-14 md:gap-y-0">
 

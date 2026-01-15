@@ -64,7 +64,7 @@ const App: React.FC = () => {
               <div className="space-y-0">
                 <About />
                 <AboutFoundation />
-                <ValueProp />
+                <ValuePropSub />
               </div>
             } />
             <Route path="/service" element={

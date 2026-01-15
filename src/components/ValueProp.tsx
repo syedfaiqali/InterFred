@@ -208,82 +208,62 @@ const ValueProp: React.FC = () => {
             </div>
           </div>
         </div>
-          <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 sm:mt-0">
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 sm:mt-0">
+          <div className="flex flex-col lg:flex-row gap-4">
 
-          {/* Spacer to align with left column */}
-          <div className="hidden lg:block lg:w-[25%]" />
+            {/* Spacer to align with left column */}
+            <div className="hidden lg:block lg:w-[25%]" />
 
-          {/* Cards */}
-          <div className="w-full lg:w-[75%] flex flex-col sm:flex-row gap-4 justify-around">
-            <div
-              ref={card5Ref}
-              className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px]"
-            >
-              <h3 className="text-white text-lg font-semibold mb-2">
-                Safety Standard
-              </h3>
-              <p className="text-white/70 text-xs">
-                The only Pakistani forwarder handling DGR explosives /
-                radioactive material.
-              </p>
+            {/* Cards */}
+            <div className="w-full lg:w-[75%] flex flex-col sm:flex-row gap-4 justify-around">
+              <div
+                ref={card5Ref}
+                className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px]"
+              >
+                <h3 className="text-white text-lg font-semibold mb-2">
+                  Safety Standard
+                </h3>
+                <p className="text-white/70 text-xs">
+                  The only Pakistani forwarder handling DGR explosives /
+                  radioactive material.
+                </p>
+              </div>
+
+              <div
+                // ref={card6Ref}
+                className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] p-6 md:p-8 min-h-[1px] md:h-[1px]"
+              >
+                {/* <h3 className="text-white text-lg font-semibold mb-2">
+              </h3> */}
+              </div>
             </div>
 
+          </div>
+        </div>
+        {/* Spacer / Layout Holder */}
+        <div className="relative w-full h-[100vh]">
+          <div
+            className="absolute inset-0 w-[100vw]"
+            style={{ zIndex: 11111 }}
+          >
             <div
-              // ref={card6Ref}
-              className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] p-6 md:p-8 min-h-[1px] md:h-[1px]"
+              ref={shipSectionRef}
+              className="h-full bg-black overflow-hidden "
+              style={{
+                background:
+                  "linear-gradient(156deg, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 40%, rgb(255, 255, 255) 101%)",
+              }}
             >
-              {/* <h3 className="text-white text-lg font-semibold mb-2">
-              </h3> */}
+              <img
+                ref={shipRef}
+                src={ShipSVG}
+                alt="Highlighted Ship"
+                className="absolute top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]"
+              />
             </div>
           </div>
 
         </div>
-      </div>
-        {/* <div
-          className="absolute  w-[100vw]"
-          style={{ display: "block", zIndex: "11111" }}
-        >
-          <div
-            ref={shipSectionRef}
-            className=" h-[100vh] bg-black overflow-hidden pt-32"
-            style={{
-              background:
-                "linear-gradient(156deg, #000000 0%, #000000 59%, #ffffff 50%, #ffffff 100%)",
-            }}
-          >
-            <img
-              ref={shipRef}
-              src={ShipSVG}
-              alt="Highlighted Ship"
-              className="absolute top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]"
-            />
-          </div>
-        </div> */}
-        {/* Spacer / Layout Holder */}
-<div className="relative w-full h-[100vh]">
-  <div
-    className="absolute inset-0 w-[100vw]"
-    style={{ zIndex: 11111 }}
-  >
-    <div
-      ref={shipSectionRef}
-      className="h-full bg-black overflow-hidden "
-      style={{
-        background:
-          "linear-gradient(156deg, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 40%, rgb(255, 255, 255) 101%)",
-      }}
-    >
-      <img
-        ref={shipRef}
-        src={ShipSVG}
-        alt="Highlighted Ship"
-        className="absolute top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]"
-      />
-    </div>
-  </div>
-
-</div>
 
       </div>
 
