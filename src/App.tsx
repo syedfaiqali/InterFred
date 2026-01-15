@@ -15,6 +15,7 @@ const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
 const Highlights = React.lazy(() => import('./components/Highlights'))
 const ValueProp = React.lazy(() => import('./components/ValueProp'))
+const ValuePropSub = React.lazy(() => import('./components/ValuePropSub'))
 const Specialization = React.lazy(() => import('./components/Specialization'))
 const Partners = React.lazy(() => import('./components/Partners'))
 const FAQ = React.lazy(() => import('./components/FAQ'))
@@ -52,6 +53,7 @@ const App: React.FC = () => {
                   <Answer />
                   <SlideGallery />
                   <ValueProp />
+                  <ValuePropSub />
                   <Specialization />
                   <Partners />
                   <FAQ />

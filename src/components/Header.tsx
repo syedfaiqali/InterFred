@@ -60,8 +60,10 @@ const Header: React.FC = () => {
       <div className={`w-full shadow-lg transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-4 cursor-pointer group">
-            <img src={stickyLogo} alt="InterFret" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
-            <div className="flex flex-col">
+            <img src={stickyLogo} alt="InterFret"
+              className={`h-14 w-auto object-contain group-hover:scale-105 transition-all duration-300`}
+            />
+            <div className={`flex flex-col transition-all duration-300 origin-left ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : '-translate-x-8 opacity-0 scale-95'}`}>
               <h1 className={`text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
                 INTER-FRET
               </h1>
@@ -83,7 +85,7 @@ const Header: React.FC = () => {
               onClick={() => setIsContactModalOpen(true)}
               className="ml-4 px-4 py-2 bg-[#07119B] text-white rounded-md hover:bg-[#0a1bc0] transition-colors"
             >
-              Get in Touch
+              Get in touch
             </button>
           </nav>
 
@@ -98,13 +100,13 @@ const Header: React.FC = () => {
         <div className="ml-4 mr-4 mx-auto px-6 pt-6 flex justify-between items-center">
           {/* Sticky Logo - Scroll to Top */}
           <div
-            className={`pointer-events-auto cursor-pointer transition-transform duration-500 ${scrolled ? 'translate-y-0' : '-translate-y-12'}`}
+            className={`pointer-events-auto cursor-pointer transition-all duration-500 flex items-center gap-4 ${scrolled ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'}`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img
               src={stickyLogo}
               alt="Back to Top"
-              className="h-12 object-contain animate-spin"
+              className="h-10 w-10 object-contain animate-spin"
               style={{
                 animationDirection: scrollDirection === 'up' ? 'reverse' : 'normal',
                 animationDuration: '3s',
@@ -153,7 +155,7 @@ const Header: React.FC = () => {
               onClick={() => setIsContactModalOpen(true)}
               className="hidden md:block px-4 py-2 bg-[#07119B] text-white rounded-md text-sm shadow-md hover:bg-[#0a1bc0] transition-colors whitespace-nowrap"
             >
-              Get in Touch
+              Get in touch
             </button>
           </div>
         </div>
@@ -196,7 +198,7 @@ const Header: React.FC = () => {
             }}
             className="col-span-2 bg-[#1a1a1a] p-6 flex flex-col justify-end border border-white/5 hover:bg-[#252525] transition-colors text-left h-32"
           >
-            <span className="text-white text-lg font-bold">Get in Touch.</span>
+            <span className="text-white text-lg font-bold">Get in touch.</span>
           </button>
         </div>
       </div>
