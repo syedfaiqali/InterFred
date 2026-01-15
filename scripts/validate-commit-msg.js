@@ -20,6 +20,11 @@ try {
 // We accept a space after the colon optionally, but strict format was requested.
 // User request: <branch_name>:<commit_message> (e.g. main:update readme)
 
+// Allow standard Merge commits to pass validation
+if (msg.startsWith('Merge branch') || msg.startsWith('Merge remote-tracking branch')) {
+    process.exit(0);
+}
+
 const expectedPrefix = `${currentBranch}:`;
 
 if (!msg.startsWith(expectedPrefix)) {
