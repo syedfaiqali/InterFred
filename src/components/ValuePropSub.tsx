@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface ValueCardProps {
     title: React.ReactNode;
@@ -20,17 +20,20 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, text, bgColor, textColor, 
             onMouseLeave={() => setIsHovered(false)}
         >
             <div
-                className="absolute top-0 left-0 w-full h-full p-10 md:p-12 flex flex-col transition-transform duration-700 ease-in-out"
+                className="absolute top-0 left-0 w-full h-full p-10 md:p-12 flex flex-col transition-transform duration-500 ease-out"
                 style={{
                     transform: isHovered ? 'translateY(0)' : 'translateY(calc(100% - 160px))'
                 }}
             >
-                <h3 className={`text-2xl md:text-3xl font-bold ${titleColor || textColor} mb-12 leading-tight shrink-0`}>
+                <h3 className={`text-2xl md:text-3xl font-bold ${titleColor || textColor} mb-12 leading-tight shrink-0 transition-all duration-500`}>
                     {title}
                 </h3>
                 <p
-                    className={`${textColor === 'text-white' ? 'text-blue-100/90' : 'text-gray-600'} leading-relaxed text-base md:text-lg font-medium transition-opacity duration-700 delay-100`}
-                    style={{ opacity: isHovered ? 1 : 0 }}
+                    className={`${textColor === 'text-white' ? 'text-blue-100/90' : 'text-gray-600'} leading-relaxed text-base md:text-lg font-medium transition-all duration-700 delay-200`}
+                    style={{
+                        opacity: isHovered ? 1 : 0,
+                        transform: isHovered ? 'translateY(0)' : 'translateY(20px)'
+                    }}
                 >
                     {text}
                 </p>
@@ -40,19 +43,52 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, text, bgColor, textColor, 
 };
 
 const ValuePropSub: React.FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section className="py-24 bg-white overflow-hidden">
+        <section className="py-24 bg-white overflow-hidden" ref={sectionRef}>
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 md:gap-y-0 md:gap-x-0 items-stretch">
 
                     {/* Column 1 */}
                     <div className="flex flex-col gap-12 md:pr-12">
                         <div className="pt-4">
-                            <p className="text-[#8E8E8E] text-lg font-medium mb-4 tracking-widest">Why us</p>
+                            <p
+                                className={`text-[#8E8E8E] text-lg font-medium mb-4 tracking-widest transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                            >
+                                Why us
+                            </p>
                             <h2 className="text-5xl font-medium text-[#1A1A1A] mb-8 leading-[1.1]">
-                                Value<br />Proposition
+                                <span className={`inline-block transition-all duration-700 delay-100 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                    Value
+                                </span>
+                                <br />
+                                <span className={`inline-block transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                    Proposition
+                                </span>
                             </h2>
-                            <button className="bg-[#07119B] hover:bg-[#050D8A] text-white font-bold py-4 px-8 rounded-sm transition-all text-sm uppercase tracking-wider shadow-lg">
+                            <button
+                                className={`bg-[#07119B] hover:bg-[#050D8A] text-white font-bold py-4 px-8 rounded-sm transition-all duration-700 delay-300 ease-out text-sm uppercase tracking-wider shadow-lg ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                            >
                                 Let's discuss today!
                             </button>
                         </div>
