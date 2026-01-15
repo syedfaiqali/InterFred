@@ -68,7 +68,7 @@ const ServicesSection: React.FC = () => {
                     {/* Right: Secondary Image */}
                     <div className={`lg:col-span-6 relative transition-all duration-1000 delay-500 ${isVisible1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
                         {/* Decorative Blue Square - Connecting sections */}
-                        <div className="absolute -top-32 -right-32 w-32 h-32 bg-[#07119B] z-20 hidden lg:block"></div>
+                        <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#07119B] hidden lg:block"></div>
 
                         <div className="rounded-lg overflow-hidden shadow-xl border border-gray-100 relative z-10">
                             <img
