@@ -20,11 +20,16 @@ const ValueCard: React.FC<ValueCardProps> = ({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`${bg} relative overflow-hidden h-[50vh] w-full transition-all duration-500 ${className}`}
-    >
+ <div
+  onMouseEnter={() => setHovered(true)}
+  onMouseLeave={() => setHovered(false)}
+  className={`
+    ${bg} relative overflow-hidden 
+    h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh] 
+    w-full transition-all duration-500 ${className}
+  `}
+>
+
      <div
   className="absolute inset-0 px-10 py-12 flex flex-col justify-end transition-transform duration-500 ease-out"
   style={{
