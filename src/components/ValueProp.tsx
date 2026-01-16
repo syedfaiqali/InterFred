@@ -3,6 +3,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ShipSVG from "../Assets/Helighted Ship.svg";
 import ShipMainSVG from "../Assets/ShipMain.svg";
+import Cap1 from "../Assets/capablities1.svg";
+import Cap2 from "../Assets/capablities2.svg";
+import Cap3 from "../Assets/capablities3.svg";
+import Cap4 from "../Assets/capablities4.svg";
+import Cap5 from "../Assets/capablities5.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,14 +156,17 @@ const ValueProp: React.FC = () => {
               <div className="flex justify-center">
                 <div
                   ref={card1Ref}
-                  className="bg-[#1E1E1E] p-6 md:p-10 flex flex-col w-full sm:w-[60%] md:w-[40%] lg:w-[25%] min-h-[180px] md:h-[200px]"
+                  className="bg-[#1E1E1E] p-6 md:p-10 flex flex-col w-full sm:w-[60%] md:w-[40%] lg:w-[25%] min-h-[180px] md:h-[200px] relative"
                 >
-                  <h3 className="text-white text-xl font-semibold mb-2">
-                    Global Reach
-                  </h3>
-                  <p className="text-white/70 text-sm">
-                    Network covering 250+ destinations.
-                  </p>
+                  <img src={Cap2} alt="Global Reach" className="absolute top-6 right-6 w-12 h-12" />
+                  <div className="mt-auto">
+                    <h3 className="text-white text-xl font-semibold mb-2">
+                      Global Reach
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      Network covering 250+ destinations.
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -168,41 +176,50 @@ const ValueProp: React.FC = () => {
               >
                 <div
                   ref={card2Ref}
-                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px]"
+                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
                 >
-                  <h3 className="text-white text-lg font-semibold mb-2">
-                    Safety Standard
-                  </h3>
-                  <p className="text-white/70 text-xs">
-                    The only Pakistani forwarder handling DGR explosives /
-                    radioactive material.
-                  </p>
+                  <img src={Cap1} alt="Safety Standard" className="absolute top-6 right-6 w-10 h-10" />
+                  <div className="mt-auto">
+                    <h3 className="text-white text-lg font-semibold mb-2">
+                      Safety Standard
+                    </h3>
+                    <p className="text-white/70 text-xs">
+                      The only Pakistani forwarder handling DGR explosives /
+                      radioactive material.
+                    </p>
+                  </div>
                 </div>
 
                 <div
                   ref={card3Ref}
-                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px]"
+                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
                 >
-                  <h3 className="text-white text-lg font-semibold mb-2">
-                    Fleet
-                  </h3>
-                  <p className="text-white/70 text-xs">
-                    Own fleet of low-bed and semi-low-bed trailers.
-                  </p>
+                  <img src={Cap3} alt="Fleet" className="absolute top-6 right-6 w-12 h-12" />
+                  <div className="mt-auto">
+                    <h3 className="text-white text-lg font-semibold mb-2">
+                      Fleet
+                    </h3>
+                    <p className="text-white/70 text-xs">
+                      Own fleet of low-bed and semi-low-bed trailers.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div className="flex justify-center">
                 <div
                   ref={card4Ref}
-                  className="w-full sm:w-[60%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-10 min-h-[180px] md:h-[200px]"
+                  className="w-full sm:w-[60%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-10 min-h-[180px] md:h-[200px] relative flex flex-col"
                 >
-                  <h3 className="text-white text-xl font-semibold mb-2">
-                    Warehousing
-                  </h3>
-                  <p className="text-white/70 text-sm">
-                    Secure Karachi facility with 24/7 staff availability.
-                  </p>
+                  <img src={Cap4} alt="Warehousing" className="absolute top-6 right-6 w-10 h-10" />
+                  <div className="mt-auto">
+                    <h3 className="text-white text-xl font-semibold mb-2">
+                      Warehousing
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      Secure Karachi facility with 24/7 staff availability.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,15 +235,17 @@ const ValueProp: React.FC = () => {
             <div className="w-full lg:w-[75%] flex flex-col sm:flex-row gap-4 justify-around">
               <div
                 ref={card5Ref}
-                className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px]"
+                className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
               >
-                <h3 className="text-white text-lg font-semibold mb-2">
-                  Safety Standard
-                </h3>
-                <p className="text-white/70 text-xs">
-                  The only Pakistani forwarder handling DGR explosives /
-                  radioactive material.
-                </p>
+                <img src={Cap5} alt="Capacity" className="absolute top-6 right-6 w-12 h-12" />
+                <div className="mt-auto">
+                  <h3 className="text-white text-lg font-semibold mb-2">
+                    Capacity
+                  </h3>
+                  <p className="text-white/70 text-xs">
+                    We offer extensive capacity options to meet all your logistics needs.
+                  </p>
+                </div>
               </div>
 
               <div
