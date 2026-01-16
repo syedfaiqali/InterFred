@@ -92,7 +92,7 @@
 
 .main-text span {
   transition: color 0.25s ease-out;
-   display: inline;
+  display: inline-block;
   white-space: normal;
 }
 

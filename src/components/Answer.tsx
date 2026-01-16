@@ -26,30 +26,69 @@ const words = [
 const Answer: React.FC = () => {
   const textSectionRef = useRef<HTMLDivElement>(null);
   const wordRefs = useRef<HTMLSpanElement[]>([]);
+  const planeRef = useRef<HTMLDivElement>(null);
+  const infoBoxRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     if (!textSectionRef.current) return;
 
-    wordRefs.current = wordRefs.current.slice(0, words.length);
+    const ctx = gsap.context(() => {
+      wordRefs.current = wordRefs.current.slice(0, words.length);
 
-    gsap.set(wordRefs.current, { color: '#666666' });
+      // Initial states
+      gsap.set(wordRefs.current, { y: -30, opacity: 0, color: '#666666' });
+      if (planeRef.current) gsap.set(planeRef.current, { y: 100, opacity: 0 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: textSectionRef.current,
-        start: 'top 80%',
-        end: 'top 30%',
-        scrub: true,
-      },
-    });
+      // Text Animation (Float from up to down)
+      gsap.to(wordRefs.current, {
+        scrollTrigger: {
+          trigger: textSectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        color: '#1a1a1a',
+        duration: 0.8,
+        stagger: 0.05,
+        ease: 'power2.out',
+      });
 
-    wordRefs.current.forEach((word) => {
-      tl.to(word, { color: '#1a1a1a', duration: 1 }, '+=0.15');
-    });
+      // Plane Animation (Coming from down to up)
+      if (planeRef.current) {
+        gsap.to(planeRef.current, {
+          scrollTrigger: {
+            trigger: planeRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power2.out',
+        });
+      }
 
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-    };
+      // Info Boxes Animation (Float from up to down)
+      // We set initial state here for safety, though CSS or GSAP set() works.
+      gsap.set(infoBoxRefs.current, { y: -30, opacity: 0 });
+
+      gsap.to(infoBoxRefs.current, {
+        scrollTrigger: {
+          trigger: planeRef.current, // Use plane as trigger so they animate with/after it
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
+        delay: 0.3, // Slight delay so plane starts first
+      });
+    }, textSectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -91,7 +130,10 @@ const Answer: React.FC = () => {
         {/* PLANE + INFO BOXES */}
         <div className="plane-section">
           {/* Top Left */}
-          <div className="info-box info-box-top-left text-right">
+          <div
+            className="info-box info-box-top-left text-right"
+            ref={el => (infoBoxRefs.current[0] = el!)}
+          >
             <h3>Dangerous<br />Goods Specialists</h3>
             <p>
               We are the only freight forwarder in Pakistan with DGAC (USA)
@@ -101,7 +143,10 @@ const Answer: React.FC = () => {
           </div>
 
           {/* Top Right */}
-          <div className="info-box info-box-top-right">
+          <div
+            className="info-box info-box-top-right"
+            ref={el => (infoBoxRefs.current[1] = el!)}
+          >
             <div className="info-header">
               <span className="logo-text">Aviation &<br />Ground Services</span>
             </div>
@@ -113,12 +158,15 @@ const Answer: React.FC = () => {
           </div>
 
           {/* Plane */}
-          <div className="plane-wrapper">
+          <div className="plane-wrapper" ref={planeRef}>
             <img src={PlaneImg} alt="Plane" className="plane-img" />
           </div>
 
           {/* Bottom Left */}
-          <div className="info-box info-box-bottom-left text-right">
+          <div
+            className="info-box info-box-bottom-left text-right"
+            ref={el => (infoBoxRefs.current[2] = el!)}
+          >
             <h3>Project Cargo<br />Expertise</h3>
             <p>
               We specialize in large, heavy, and oversized shipments. We are the
@@ -128,7 +176,10 @@ const Answer: React.FC = () => {
           </div>
 
           {/* Bottom Right */}
-          <div className="info-box info-box-bottom-right">
+          <div
+            className="info-box info-box-bottom-right"
+            ref={el => (infoBoxRefs.current[3] = el!)}
+          >
             <h3>End-to-End<br />Supply Chain</h3>
             <p>
               Seamless door-to-door delivery, warehousing with modern inventory
