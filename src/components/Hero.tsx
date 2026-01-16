@@ -17,23 +17,20 @@ const Hero: React.FC = () => {
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/40" />
-
-
-
-      <div className="relative items-center mx-auto px-6 flex-1 flex items-start w-full pt-32 md:pt-40 lg:pt-12">
+      <div className="relative items-center lg:items-end mx-auto px-6 flex-1 flex items-start w-full pt-32 md:pt-40 lg:pt-0 lg:pb-6">
         <div className="w-full">
           <div className="text-white mb-8 md:mb-12">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-6 md:mb-8 max-w-[80%]">
-              Global Logistics<br className="hidden sm:block" /> & <br className="sm:hidden" />Industrial Solutions
+            <h1 className="!leading-tight text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-medium mb-8 md:mb-12 max-w-[80%]">
+              Global<br />Logistics &<br />Industrial Solutions
             </h1>
             <div className="flex items-center gap-3">
-              <img src={svglogos} alt="InterFret Certifications" className="h-12 md:h-16 object-contain brightness-0 invert" />
+              <img src={svglogos} alt="InterFret Certifications" className="h-8 md:h-12 object-contain brightness-0 invert" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="relative lg:absolute lg:bottom-12 lg:right-6 lg:left-auto lg:max-w-md w-full max-w-sm text-white/90 pb-12 lg:pb-0">
+      <div className="relative lg:absolute lg:bottom-6 lg:right-6 lg:left-auto lg:max-w-80 w-full max-w-sm text-white/90 pb-12">
         <div className="px-6">
           <h4 className="font-semibold mb-4 leading-relaxed text-sm md:text-base">We are a leader in <span style={{ color: '#75C3FF' }}>professional logistics, evolving from an airfreight forwarder to a top-tier global network covering over</span> <span className="text-white font-bold">250 destinations.</span></h4>
           <div className="overflow-hidden mt-2 flex">

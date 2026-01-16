@@ -57,7 +57,7 @@ const Header: React.FC = () => {
   return (
     <>
       {/* Original Header - Hidden on scroll */}
-      <div className={`w-full shadow-lg transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`w-full transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-4 cursor-pointer group">
             <img src={stickyLogo} alt="InterFret"
@@ -75,11 +75,11 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/about') ? 'text-[#5EAFEA] font-bold' : 'font-medium'}`}>About us</Link>
-              <Link to="/service" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/service') ? 'text-[#5EAFEA] font-bold' : 'font-medium'}`}>Services</Link>
-              <Link to="/achievements" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/achievements') ? 'text-[#5EAFEA] font-bold' : 'font-medium'}`}>Achievements</Link>
-              <Link to="/network" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/network') ? 'text-[#5EAFEA] font-bold' : 'font-medium'}`}>Network</Link>
-              <Link to="/tracking" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/tracking') ? 'text-[#5EAFEA] font-bold' : 'font-medium'}`}>Tracking</Link>
+              <Link to="/about" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/about') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>About us</Link>
+              <Link to="/service" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/service') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Services</Link>
+              <Link to="/achievements" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/achievements') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Achievements</Link>
+              <Link to="/network" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/network') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Network</Link>
+              <Link to="/tracking" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/tracking') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Tracking</Link>
             </div>
             <button
               onClick={() => setIsContactModalOpen(true)}
