@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import { useLocation } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ValueCardProps {
     title: React.ReactNode;
@@ -10,14 +14,14 @@ interface ValueCardProps {
     className?: string;
 }
 
-const ValueCard: React.FC<ValueCardProps> = ({
+const ValueCard = forwardRef<HTMLDivElement, ValueCardProps>(({
     title,
     text,
     bg,
     titleColor,
     textColor,
     className = "",
-}) => {
+}, ref) => {
     const [hovered, setHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -34,6 +38,7 @@ const ValueCard: React.FC<ValueCardProps> = ({
 
     return (
         <div
+            ref={ref}
             onMouseEnter={() => !isMobile && setHovered(true)}
             onMouseLeave={() => !isMobile && setHovered(false)}
             onFocus={() => !isMobile && setHovered(true)}
@@ -64,11 +69,14 @@ const ValueCard: React.FC<ValueCardProps> = ({
             </div>
         </div>
     );
-};
+});
+
+ValueCard.displayName = "ValueCard";
 
 const ValueProposition: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
+    const cardRefs = useRef<HTMLDivElement[]>([]);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
@@ -87,7 +95,32 @@ const ValueProposition: React.FC = () => {
             observer.observe(sectionRef.current);
         }
 
-        return () => observer.disconnect();
+        // GSAP Animation for Cards
+        const cards = cardRefs.current.filter(Boolean); // Filter out nulls
+
+        if (cards.length > 0) {
+            gsap.set(cards, { y: 100, opacity: 0 });
+
+            ScrollTrigger.batch(cards, {
+                onEnter: (batch) => {
+                    gsap.to(batch, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.2,
+                        ease: "power3.out",
+                        overwrite: true,
+                    });
+                },
+                start: "top 85%",
+                // toggleActions: "play none none reverse", // Optional: to reverse on scroll up
+            });
+        }
+
+        return () => {
+            observer.disconnect();
+            ScrollTrigger.getAll().forEach(t => t.kill());
+        };
     }, []);
 
     return (
@@ -123,6 +156,7 @@ const ValueProposition: React.FC = () => {
                         </div>
 
                         <ValueCard
+                            ref={el => (cardRefs.current[0] = el!)}
                             bg="bg-[#E9EEF2]"
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
@@ -135,6 +169,7 @@ const ValueProposition: React.FC = () => {
                     <div className="relative flex justify-center md:justify-end items-center">
                         <div className="w-full md:max-w-[380px] lg:max-w-[420px] xl:max-w-[480px] md:-mt-24">
                             <ValueCard
+                                ref={el => (cardRefs.current[1] = el!)}
                                 className="shadow-2xl mt-0 md:mt-24"
                                 bg="bg-[#07119B]"
                                 titleColor="text-white"
@@ -148,6 +183,7 @@ const ValueProposition: React.FC = () => {
                     {/* RIGHT COLUMN */}
                     <div className="flex flex-col gap-8 sm:gap-0">
                         <ValueCard
+                            ref={el => (cardRefs.current[2] = el!)}
                             bg="bg-[#E9EEF2]"
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
@@ -164,6 +200,7 @@ const ValueProposition: React.FC = () => {
                         />
 
                         <ValueCard
+                            ref={el => (cardRefs.current[3] = el!)}
                             bg="bg-[#E9EEF2]"
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
