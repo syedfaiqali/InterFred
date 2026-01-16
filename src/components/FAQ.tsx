@@ -93,9 +93,14 @@ const FAQ: React.FC = () => {
           {/* Right Side: FAQ Accordion */}
           <div className={`lg:col-span-6 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
             }`}>
-            <div className="border-t border-gray-100">
+            <div className="border-b border-gray-100">
               {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-100">
+                <div key={index} className="relative group/faq">
+                  {/* Animated Border Top */}
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gray-100 overflow-hidden">
+                    <div className="w-full h-full bg-[#07119B] -translate-x-full group-hover/faq:translate-x-0 transition-transform duration-500 ease-out"></div>
+                  </div>
+
                   <button
                     onClick={() => toggleFAQ(index)}
                     className="w-full py-8 flex justify-between items-center text-left group focus:outline-none"
@@ -103,7 +108,7 @@ const FAQ: React.FC = () => {
                     <span className="text-xl font-bold text-gray-900 group-hover:text-blue-900 transition-colors">
                       {faq.question}
                     </span>
-                    <div className="relative flex items-center justify-center w-6 h-6 ml-4">
+                    <div className="relative flex items-center justify-center w-5 h-5 ml-4">
                       {/* Horizontal line (always visible) */}
                       <span className="absolute block w-full h-[2px] bg-gray-900"></span>
                       {/* Vertical line (rotates/hides when open) */}
