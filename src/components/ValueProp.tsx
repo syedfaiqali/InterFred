@@ -135,7 +135,7 @@ const ValueProp: React.FC = () => {
             <div className="w-full lg:w-[25%] flex flex-col justify-start mb-8 lg:mb-0">
               <div
                 ref={highlightRef}
-                className="bg-[#07119B] p-6 md:p-10 lg:absolute lg:w-[25%] lg:top-[-7.6%] lg:left-[10.7%]"
+                className="bg-[#07119B] p-6 md:p-10 lg:absolute lg:w-[28%] lg:min-h-[400px] lg:top-[-10.9%] lg:left-[7%]"
               >
                 <p className="text-white/80 text-sm mb-4">
                   Capabilities & Specs
