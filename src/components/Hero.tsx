@@ -1,13 +1,39 @@
 import * as React from 'react'
-
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import svglogos from '../assets/Group 124.svg';
 import backgroundImage from '../assets/1.svg';
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const scrollingTexts = [
     "Scroll down to discover how it works",
     "Scroll down to discover how it works",
   ];
+  const heroRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!heroRef.current) return;
+
+    gsap.fromTo(
+      heroRef.current,
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+      },
+      {
+        clipPath: "inset(0% 0% 120% 0%)", // hide from bottom
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "+=120%",
+          scrub: true,
+          pin: true,
+          pinSpacing: false, // ✅ FIXES WHITE SPACE
+        },
+      }
+    );
+  }, []);
 
   return (
     <section
@@ -15,6 +41,7 @@ const Hero: React.FC = () => {
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
+      ref={heroRef}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/40" />
       <div className="relative items-center lg:items-end mx-auto px-6 flex-1 flex items-start w-full pt-32 md:pt-40 lg:pt-0 lg:pb-6">
