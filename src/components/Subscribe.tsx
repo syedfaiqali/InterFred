@@ -65,7 +65,7 @@ const Subscribe: FC = () => {
                   item === 'Services.' ? '/service' :
                     item === 'Achievements.' ? '/achievements' :
                       item === 'Network.' ? '/network' :
-                        item === 'Tracking.' ? '/tracking' : '#';
+                        item === 'Tracking.' ? '/tracking' : '/';
 
                 const className = `text-lg md:text-xl font-medium transition-colors ${location.pathname === href ? 'text-[#0000A3]' : 'text-gray-600'} hover:text-[#0000A3]`;
 
