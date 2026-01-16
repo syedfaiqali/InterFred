@@ -75,11 +75,11 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/about') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>About us</Link>
-              <Link to="/service" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/service') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Services</Link>
-              <Link to="/achievements" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/achievements') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Achievements</Link>
-              <Link to="/network" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/network') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Network</Link>
-              <Link to="/tracking" className={`transition-all duration-300 hover:text-[#5EAFEA] ${isActive('/tracking') ? 'text-[#5EAFEA] font-bold' : 'font-medium text-gray-400'}`}>Tracking</Link>
+              <Link to="/about" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/about') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>About us</Link>
+              <Link to="/service" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/service') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Services</Link>
+              <Link to="/achievements" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/achievements') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Achievements</Link>
+              <Link to="/network" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/network') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Network</Link>
+              <Link to="/tracking" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/tracking') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Tracking</Link>
             </div>
             <button
               onClick={() => setIsContactModalOpen(true)}
@@ -123,11 +123,11 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/about') ? 'text-[#5EAFEA] font-bold' : 'text-gray-800 font-medium'}`}>About us</Link>
-              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/service') ? 'text-[#5EAFEA] font-bold' : 'text-gray-800 font-medium'}`}>Services</Link>
-              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-[#5EAFEA] font-bold' : 'text-gray-800 font-medium'}`}>Achievements</Link>
-              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/network') ? 'text-[#5EAFEA] font-bold' : 'text-gray-800 font-medium'}`}>Network</Link>
-              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#5EAFEA] text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-[#5EAFEA] font-bold' : 'text-gray-800 font-medium'}`}>Tracking</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/about') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>About us</Link>
+              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/service') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Services</Link>
+              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Achievements</Link>
+              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/network') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Network</Link>
+              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Tracking</Link>
             </div>
 
             {/* Custom Burger Button - Desktop Only */}
@@ -168,27 +168,27 @@ const Header: React.FC = () => {
         <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
           {/* About Us */}
           <Link to="/about" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/about') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/about') ? 'text-[#5EAFEA] font-bold' : 'text-white'}`}>About us.</span>
+            <span className={`text-lg font-bold ${isActive('/about') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>About us.</span>
           </Link>
 
           {/* Services */}
           <Link to="/service" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/service') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/service') ? 'text-[#5EAFEA] font-bold' : 'text-white'}`}>Services.</span>
+            <span className={`text-lg font-bold ${isActive('/service') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Services.</span>
           </Link>
 
           {/* Achievements */}
           <Link to="/achievements" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/achievements') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/achievements') ? 'text-[#5EAFEA] font-bold' : 'text-white'}`}>Achievements.</span>
+            <span className={`text-lg font-bold ${isActive('/achievements') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Achievements.</span>
           </Link>
 
           {/* Network */}
           <Link to="/network" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/network') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/network') ? 'text-[#5EAFEA] font-bold' : 'text-white'}`}>Network.</span>
+            <span className={`text-lg font-bold ${isActive('/network') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Network.</span>
           </Link>
 
           {/* Tracking */}
           <Link to="/tracking" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/tracking') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/tracking') ? 'text-[#5EAFEA] font-bold' : 'text-white'}`}>Tracking.</span>
+            <span className={`text-lg font-bold ${isActive('/tracking') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Tracking.</span>
           </Link>
 
           <button

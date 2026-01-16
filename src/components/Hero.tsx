@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useLocation } from 'react-router-dom';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,28 +13,32 @@ const Hero: React.FC = () => {
     "Scroll down to discover how it works",
   ];
   const heroRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    if (!heroRef.current) return;
+  const location = useLocation();
 
-    gsap.fromTo(
-      heroRef.current,
-      {
-        clipPath: "inset(0% 0% 0% 0%)",
-      },
-      {
-        clipPath: "inset(0% 0% 120% 0%)", // hide from bottom
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "+=120%",
-          scrub: true,
-          pin: true,
-          pinSpacing: false, // ✅ FIXES WHITE SPACE
-        },
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   // Only run animation on Home Page to avoid navigation conflicts
+  //   if (location.pathname !== '/' || !heroRef.current) return;
+
+  //   const ctx = gsap.context(() => {
+  //     ScrollTrigger.create({
+  //       trigger: heroRef.current,
+  //       start: "top top",
+  //       end: "+=120%",
+  //       scrub: true,
+  //       pin: true,
+  //       pinSpacing: false,
+  //       onUpdate: (self) => {
+  //         if (heroRef.current) {
+  //           // Apply clip-path manually for cleaner control
+  //           const progress = self.progress * 130; // slightly accelerated
+  //           heroRef.current.style.clipPath = `inset(0% 0% ${progress}% 0%)`;
+  //         }
+  //       },
+  //     });
+  //   }, heroRef);
+
+  //   return () => ctx.revert();
+  // }, [location.pathname]);
 
   return (
     <section
