@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
           if (heroRef.current) {
             // Smooth reveal effect using clip-path
             // As user scrolls, the hero is masked from the bottom up
-            const progress = self.progress * 100;
+            const progress = self.progress * 10;
             heroRef.current.style.clipPath = `inset(0% 0% ${progress}% 0%)`;
 
             // Subtle parallax for the inner content
