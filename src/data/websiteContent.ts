@@ -580,5 +580,224 @@ export const websiteContent = {
             title: 'Where Inter-Fret Meets Connection.',
             label: 'Network'
         }
+    },
+    serviceDetails: {
+        CoreFreightLogistics: {
+            id: 1,
+            title: "Core Freight & Logistics",
+            subtitle: "Moving your cargo globally via Air, Sea, and Land.",
+            sections: [
+                {
+                    title: "Air Cargo Services",
+                    description: "We handle domestic and international air shipments ranging from small packages to large, heavy cargo.",
+                    points: [
+                        "Consolidation Services: Cost-effective solutions for smaller shipments.",
+                        "Sea-Air & Air-Sea: Multimodal transport for optimized cost and speed.",
+                        "Chartering: Full aircraft chartering for large or urgent bulk shipments.",
+                        "Expedited Services: For time-critical deliveries."
+                    ]
+                },
+                {
+                    title: "Ocean Freight Services",
+                    description: "As an NVOCC since 1990, we offer global shipping solutions with strong carrier partnerships.",
+                    points: [
+                        "FCL (Full Container Load): Exclusive container use for bulk goods.",
+                        "LCL (Less-than-Container Load): Economical consolidation for smaller volumes.",
+                        "Bulk & Breakbulk: Fully equipped to handle breakbulk cargo of any size (e.g., contracts with U.S. Armed Forces & UN)."
+                    ]
+                },
+                {
+                    title: "Overland & Trucking Services",
+                    description: "We operate our own fleet of trucks and trailers for inland transportation and cross-border logistics.",
+                    points: [
+                        "Fleet Capabilities: Low-bed, semi-low-bed, and normal road feeders.",
+                        "Regional Reach: Specialized cross-border shipments to neighboring countries, including Afghanistan."
+                    ]
+                },
+                {
+                    title: "Door-to-Door Delivery",
+                    description: "A seamless end-to-end service picking up from the sender's location and delivering directly to the recipient's door, managing all intermediate steps."
+                }
+            ]
+        },
+        SpecializedCargoDG: {
+            id: 2,
+            title: "Specialized Project Cargo & Dangerous Goods",
+            subtitle: "We are the specialists for hazardous, oversized, and high-value cargo.",
+            sections: [
+                {
+                    title: "Dangerous Goods (DGR) Handling",
+                    description: "We are the only freight forwarder in Pakistan with DGAC (USA) membership, ensuring strict compliance with IATA DGR and IMO guidelines.",
+                    points: [
+                        "Explosives: Inbound and outbound movement of explosives essential for oil rigs and multinational companies.",
+                        "Radioactive Materials: Licensed personnel providing solutions for transporting radioactive materials by air and sea (often refused by other carriers).",
+                        "Specialized Packing: Crating and packing specifically for DGR items."
+                    ]
+                },
+                {
+                    title: "Oversized & Project Cargo",
+                    description: "We provide tailored solutions for complex, heavy, or oversized moves.",
+                    points: [
+                        "Oil Well Drilling Equipment: Practical experience transporting 15-20 ft oversized equipment by air via passenger aircraft.",
+                        "Rig Equipment: Specialized movement of rig equipment using our own low-bed fleet.",
+                        "Heavy Machinery: Relocation of industrial machinery and construction equipment."
+                    ]
+                }
+            ]
+        },
+        SpecializedLogistics: {
+            id: 3,
+            title: "Specialized Logistics",
+            subtitle: "Handling sensitive and perishable commodities with care.",
+            sections: [
+                {
+                    title: "Human Remains Repatriation (HUM)",
+                    description: "We provide dignified and professional assistance for the transportation of human remains.",
+                    points: [
+                        "Global Repatriation: Coordinating with airlines and embassies to return loved ones home.",
+                        "Documentation: Handling all necessary health, customs, and airline clearances.",
+                        "24/7 Support: Compassionate service available round-the-clock for urgent requirements."
+                    ]
+                },
+                {
+                    title: "Agriculture & Perishables",
+                    description: "Reliable cold-chain and logistics solutions for the agricultural sector.",
+                    points: [
+                        "Fresh Produce: Temperature-controlled transport for fruits, vegetables, and seeds.",
+                        "Live Plants: Handling phytosanitary certificates and swift transit times.",
+                        "Farm Equipment: Import/export of agricultural machinery and fertilizers."
+                    ]
+                }
+            ]
+        },
+        AviationServices: {
+            id: 4,
+            title: "Aviation Services",
+            subtitle: "Complete ground and flight support for airlines and private operators.",
+            sections: [
+                {
+                    title: "Ground & Cargo Handling",
+                    description: "",
+                    points: [
+                        "Ramp Services: Export/import handling and palletization.",
+                        "Cargo Operations: Acceptance, loading to aircraft, load sheet preparation, and manifest preparation.",
+                        "Import Handling: De-consolidation, customs processing, and deposition."
+                    ]
+                },
+                {
+                    title: "Flight Support",
+                    description: "",
+                    points: [
+                        "Traffic Rights: Securing over-flying permissions, landing rights, and re-fueling arrangements.",
+                        "Crew Handling: Briefing, pick & drop services, and hotel reservations."
+                    ]
+                },
+                {
+                    title: "Passenger Services",
+                    description: "",
+                    points: [
+                        "Passenger check-in, boarding, and disembarking.",
+                        "Baggage handling services."
+                    ]
+                }
+            ]
+        },
+        OutsourcingMaintenance: {
+            id: 5,
+            title: "Industrial Outsourcing & Maintenance",
+            subtitle: "Specialized engineering services for your industrial assets.",
+            sections: [
+                {
+                    title: "Services Include",
+                    description: "",
+                    points: [
+                        "Pipeline Pigging",
+                        "Surveys and Inspections",
+                        "Repairs and Routine Maintenance",
+                        "Machinery Relocation Services"
+                    ]
+                },
+                {
+                    title: "Machinery We Service",
+                    description: "",
+                    points: [
+                        "Turbines & Compressors",
+                        "Motors & Pumps",
+                        "Burners & Boilers",
+                        "Vessels & Valves",
+                        "Bearings"
+                    ]
+                }
+            ]
+        },
+        TradingEquipmentSupply: {
+            id: 6,
+            title: "Trading & Equipment Supply",
+            subtitle: "Sourcing and supplying essential logistics hardware.",
+            sections: [
+                {
+                    title: "Container Trading",
+                    description: "We engage in the buying, selling, and leasing of freight containers:",
+                    points: [
+                        "Open-top containers",
+                        "Reefers (Refrigerated)",
+                        "Insulated boxes",
+                        "Flat racks"
+                    ]
+                },
+                {
+                    title: "Heavy Equipment Trading",
+                    description: "",
+                    points: [
+                        "Heavy-duty handling units",
+                        "Forklifts",
+                        "Top lifters"
+                    ]
+                }
+            ]
+        },
+        ValueAddedServices: {
+            id: 7,
+            title: "Value-Added Services",
+            subtitle: "Supporting your supply chain with compliance, storage, and specialized care.",
+            sections: [
+                {
+                    title: "Customs & Compliance",
+                    description: "",
+                    points: [
+                        "Custom Clearance / Brokerage: Handling all documentation, tariff classification, and regulatory compliance.",
+                        "Custom Consultancy: Advisory on import/export regulations, taxation, and trade laws.",
+                        "Clearing & Forwarding: Expert facilitation of cross-border movement."
+                    ]
+                },
+                {
+                    title: "Warehousing & Storage",
+                    description: "",
+                    points: [
+                        "Facilities: Owned warehouse in Shershah (near Karachi port).",
+                        "Management: Modern inventory systems with 24/7 staff availability to prevent demurrage.",
+                        "Storage Options: Short-term and long-term storage."
+                    ]
+                },
+                {
+                    title: "Additional Specialized Logistics",
+                    description: "",
+                    points: [
+                        "Bio-Medical Logistics: Temperature and humidity-controlled transport for pharmaceuticals, vaccines, and medical devices.",
+                        "Pet Transportation: Safe travel arrangements, health compliance, and documentation for animals.",
+                        "Cargo Insurance: Protection against damage, loss, or theft during transit."
+                    ]
+                },
+                {
+                    title: "Support Services",
+                    description: "",
+                    points: [
+                        "Packing, Crating & Removal: Professional packing to minimize damage; removal services for relocating large items.",
+                        "Procurement / Sourcing: Global product sourcing, supplier identification, negotiation, and logistics management.",
+                        "Supply Chain Management: End-to-end solutions integrating procurement, transport, and distribution."
+                    ]
+                }
+            ]
+        }
     }
 };
