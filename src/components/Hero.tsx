@@ -75,23 +75,10 @@ const Hero: React.FC = () => {
         className="hero-content relative z-10 flex flex-col justify-between h-full"
       >
         {/* ================= HEADING ================= */}
-        <div className="flex-1 flex items-start lg:items-end px-6 pt-28 md:pt-36 lg:pt-0 lg:pb-8 relative top-[-10%]">
+        <div className="flex-1 flex items-start lg:items-end px-6 pt-28 md:pt-36 lg:pt-0 relative top-[-10%]">
           <div className="text-white max-w-[90%]">
-            <h1
-              className="
-              leading-[1.3]
-                font-medium leading-[1.05]
-                text-[clamp(2rem,5vw,4rem)]
-                md:text-[clamp(2.5rem,6vw,5rem)]
-                lg:text-[clamp(3rem,6vw,5rem)]
-                mb-6 md:mb-10
-              "
-            >
-              Global
-              <br />
-              Logistics &
-              <br />
-              Industrial Solutions
+            <h1 className="!leading-tight text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-medium mb-8 md:mb-12">
+              Global<br />Logistics &<br />Industrial Solutions
             </h1>
 
             <img
