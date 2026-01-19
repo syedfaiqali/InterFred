@@ -49,16 +49,18 @@ const About: React.FC = () => {
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
                   {(() => {
                     const target = "Pakistan worldwide.";
-                    return content.whatWeDo.title.split(target).map((part: string, i: number) => (
-                      <React.Fragment key={i}>
-                        {part.split(',').map((subpart, j) => (
+                    const parts = content.whatWeDo.title.split(target);
+                    return (
+                      <React.Fragment>
+                        {parts[0].split(',').map((sub, j) => (
                           <React.Fragment key={j}>
-                            {subpart}{j === 0 && <>,<br /></>}
+                            {sub}{j === 0 && <>,<br /></>}
                           </React.Fragment>
                         ))}
-                        {i === 0 && <span className="text-[#07119B] font-bold">{target}</span>}
+                        <span className="text-[#07119B] font-bold">{target}</span>
+                        {parts[1]}
                       </React.Fragment>
-                    ));
+                    );
                   })()}
                 </h2>
               </div>

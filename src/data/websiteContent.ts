@@ -317,6 +317,29 @@ export const websiteContent = {
             ],
             mainText: 'IFCL offers comprehensive services in the field of Supply Chain Management & logistics and always meet the expectations of its customers round the clock with an easy . Located in the heart of Karachi and 15 minutes drive from Karachi International Airport and Karachi Port makes IFCL very accessible to its clients round the clock. Not only in Karachi but too in upper Pakistan IFCL offices are located near by Airport.',
             image: howWeDoItImg
+        },
+        history: {
+            title: 'Our History',
+            phases: [
+                {
+                    label: 'Our History',
+                    line1: 'The',
+                    line2: 'Foundation &',
+                    line3: 'Early Expansion'
+                },
+                {
+                    label: 'Global Reach',
+                    line1: 'Global',
+                    line2: 'Standards &',
+                    line3: 'Authority'
+                },
+                {
+                    label: 'Excellence',
+                    line1: 'Excellence &',
+                    line2: 'Integrated',
+                    line3: 'Safety'
+                }
+            ]
         }
     },
     milestones: [
