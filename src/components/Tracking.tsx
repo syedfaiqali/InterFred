@@ -149,7 +149,7 @@ const Tracking: React.FC = () => {
                                                 <div className="text-center md:text-right flex-1">
                                                     <p className="text-white/50 text-xs mb-1 font-bold">DESTINATION</p>
                                                     <h4 className="text-2xl font-bold">Port of Rotterdam</h4>
-                                                    <p className="text-sm text-white/70 font-medium">NL RTM</p>
+                                                    <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">NL RTM</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -175,9 +175,9 @@ const Tracking: React.FC = () => {
                                                     <div>
                                                         <div className="flex gap-4 items-baseline">
                                                             <h5 className="font-bold text-gray-900">{item.task}</h5>
-                                                            <span className="text-xs text-gray-400 font-medium">{item.date} • {item.time}</span>
+                                                            <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">{item.date} • {item.time}</span>
                                                         </div>
-                                                        <p className="text-sm text-gray-500 mt-1 max-w-lg">{item.desc}</p>
+                                                        <p className="text-sm text-gray-500 mt-1 max-w-lg font-medium">{item.desc}</p>
                                                     </div>
                                                 </div>
                                             ))}
@@ -212,13 +212,6 @@ const Tracking: React.FC = () => {
                                         </div>
                                     </div>
 
-                                    <div className="bg-white rounded-3xl p-8 border border-blue-50 relative overflow-hidden group/ad shadow-lg shadow-blue-900/5 animate-item">
-                                        <h4 className="text-lg font-bold text-[#07119B] mb-2">Need Help?</h4>
-                                        <p className="text-sm text-gray-500 mb-6">Contact your dedicated operations manager.</p>
-                                        <button className="w-full bg-[#07119B] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 group-hover/ad:bg-[#050D8A] transition-all">
-                                            Contact Support
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
