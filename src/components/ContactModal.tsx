@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
+import { Toast } from './Toast';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -8,7 +9,10 @@ interface ContactModalProps {
 }
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+    const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
+    const [message, setMessage] = React.useState('');
+    const [toast, setToast] = React.useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
     const validateEmail = (email: string) => {
         return String(email)
@@ -20,17 +24,41 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
     const handleSend = (e: React.MouseEvent) => {
         e.preventDefault();
+
+        // Step 1: Check if name is provided
+        if (!name.trim()) {
+            setToast({ message: 'Please enter your name', type: 'error' });
+            return;
+        }
+
+        // Step 2: Check if email is provided
         if (!email.trim()) {
-            alert("Required field 'email' is missing");
+            setToast({ message: 'Please enter your email address', type: 'error' });
             return;
         }
+
+        // Step 3: Validate email pattern
         if (!validateEmail(email)) {
-            alert("Please enter a valid email address");
+            setToast({ message: 'Please enter a valid email address', type: 'error' });
             return;
         }
-        // If valid, close the modal (or handle form submission)
-        onClose();
-        setEmail(''); // Reset for next time
+
+        // Step 4: Check if message is provided
+        if (!message.trim()) {
+            setToast({ message: 'Please enter a message', type: 'error' });
+            return;
+        }
+
+        // Step 5: Success - Show thank you message
+        setToast({ message: 'Message sent successfully! We\'ll get back to you soon. 🎉', type: 'success' });
+
+        // Reset form and close modal after a delay
+        setTimeout(() => {
+            setName('');
+            setEmail('');
+            setMessage('');
+            onClose();
+        }, 2000);
     };
 
     // Prevent background scrolling when modal is open
@@ -52,6 +80,15 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     className="fixed inset-0 z-[200] flex justify-center items-center p-4 md:p-8 lg:p-12 bg-black/60 backdrop-blur-sm"
                     onClick={onClose}
                 >
+                    {/* Toast Notifications */}
+                    {toast && (
+                        <Toast
+                            message={toast.message}
+                            type={toast.type}
+                            onClose={() => setToast(null)}
+                        />
+                    )}
+
                     {/* Modal Content - Checkerboard 2x2 Layout */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98, y: 10 }}
@@ -103,6 +140,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                                     <label className="text-white/70 text-[10px] md:text-xs font-bold block uppercase tracking-wider">Your name</label>
                                     <input
                                         type="text"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
                                         className="w-full bg-transparent border-b border-white/30 py-1 text-white text-base md:text-lg outline-none focus:border-white transition-all"
                                     />
                                 </div>
@@ -119,6 +158,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                                     <label className="text-white/70 text-[10px] md:text-xs font-bold block uppercase tracking-wider">Message</label>
                                     <textarea
                                         rows={1}
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
                                         className="w-full bg-transparent border-b border-white/30 py-1 text-white text-base md:text-lg outline-none focus:border-white transition-all resize-none"
                                     />
                                 </div>
