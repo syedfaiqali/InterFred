@@ -11,16 +11,17 @@ import Cap5 from "../Assets/capablities5.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { websiteContent } from '../data/websiteContent';
+
+gsap.registerPlugin(ScrollTrigger);
+
 const ValueProp: React.FC = () => {
+  const content = websiteContent.valueProp;
   const contentRef = useRef<HTMLDivElement>(null);
 
   const highlightRef = useRef<HTMLDivElement>(null);
 
-  const card1Ref = useRef<HTMLDivElement>(null);
-  const card2Ref = useRef<HTMLDivElement>(null);
-  const card3Ref = useRef<HTMLDivElement>(null);
-  const card4Ref = useRef<HTMLDivElement>(null);
-  const card5Ref = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const shipSectionRef = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLImageElement>(null);
 
@@ -47,14 +48,7 @@ const ValueProp: React.FC = () => {
     }
 
     /* ================= CARDS ================= */
-    const cards = [
-      card1Ref.current,
-      card2Ref.current,
-      card3Ref.current,
-      card4Ref.current,
-    ].filter(Boolean);
-
-    cards.forEach((card, index) => {
+    cardRefs.current.forEach((card, index) => {
       if (card) {
         gsap.set(card, {
           opacity: 0,
@@ -126,7 +120,7 @@ const ValueProp: React.FC = () => {
       {/* ================= FIRST SHIP (FULL SECTION) ================= */}
       <div className="relative w-full h-[100vh] bg-black overflow-hidden">
         <img
-          src={ShipMainSVG}
+          src={content.mainShipImg}
           alt="Ship"
           className="w-full h-full object-cover"
         />
@@ -143,10 +137,10 @@ const ValueProp: React.FC = () => {
                 className="bg-[#07119B] p-6 md:p-10 lg:absolute lg:w-[28%] lg:min-h-[400px] lg:top-[-10.9%] lg:left-[7%]"
               >
                 <p className="text-white/80 text-sm mb-4">
-                  Capabilities & Specs
+                  {content.highlight.label}
                 </p>
                 <h2 className="text-white text-4xl font-bold leading-tight">
-                  Highlights of our operational capacity
+                  {content.highlight.title}
                 </h2>
               </div>
             </div>
@@ -155,16 +149,16 @@ const ValueProp: React.FC = () => {
             <div className="w-full lg:w-[75%] flex flex-col gap-4 sm:gap-0 lg:mt-12">
               <div className="flex justify-center">
                 <div
-                  ref={card1Ref}
+                  ref={el => (cardRefs.current[0] = el)}
                   className="bg-[#1E1E1E] p-6 md:p-10 flex flex-col w-full sm:w-[60%] md:w-[40%] lg:w-[25%] min-h-[180px] md:h-[200px] relative"
                 >
-                  <img src={Cap2} alt="Global Reach" className="absolute top-6 right-6 w-12 h-12" />
+                  <img src={content.cards[0].icon} alt={content.cards[0].title} className="absolute top-6 right-6 w-12 h-12" />
                   <div className="mt-auto">
                     <h3 className="text-white text-xl font-semibold mb-2">
-                      Global Reach
+                      {content.cards[0].title}
                     </h3>
                     <p className="text-white/70 text-sm">
-                      Network covering 250+ destinations.
+                      {content.cards[0].description}
                     </p>
                   </div>
                 </div>
@@ -174,50 +168,37 @@ const ValueProp: React.FC = () => {
                 className="flex flex-col sm:flex-row gap-0 gap-4 sm:gap-0"
                 style={{ justifyContent: "space-around" }}
               >
-                <div
-                  ref={card2Ref}
-                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
-                >
-                  <img src={Cap1} alt="Safety Standard" className="absolute top-6 right-6 w-10 h-10" />
-                  <div className="mt-auto">
-                    <h3 className="text-white text-lg font-semibold mb-2">
-                      Safety Standard
-                    </h3>
-                    <p className="text-white/70 text-xs">
-                      The only Pakistani forwarder handling DGR explosives /
-                      radioactive material.
-                    </p>
+                {[1, 2].map((idx) => (
+                  <div
+                    key={idx}
+                    ref={el => (cardRefs.current[idx] = el)}
+                    className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
+                  >
+                    <img src={content.cards[idx].icon} alt={content.cards[idx].title} className="absolute top-6 right-6 w-10 h-10" />
+                    <div className="mt-auto">
+                      <h3 className="text-white text-lg font-semibold mb-2">
+                        {content.cards[idx].title}
+                      </h3>
+                      <p className="text-white/70 text-xs">
+                        {content.cards[idx].description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-                <div
-                  ref={card3Ref}
-                  className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
-                >
-                  <img src={Cap3} alt="Fleet" className="absolute top-6 right-6 w-12 h-12" />
-                  <div className="mt-auto">
-                    <h3 className="text-white text-lg font-semibold mb-2">
-                      Fleet
-                    </h3>
-                    <p className="text-white/70 text-xs">
-                      Own fleet of low-bed and semi-low-bed trailers.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
 
               <div className="flex justify-center">
                 <div
-                  ref={card4Ref}
+                  ref={el => (cardRefs.current[3] = el)}
                   className="w-full sm:w-[60%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-10 min-h-[180px] md:h-[200px] relative flex flex-col"
                 >
-                  <img src={Cap4} alt="Warehousing" className="absolute top-6 right-6 w-10 h-10" />
+                  <img src={content.cards[3].icon} alt={content.cards[3].title} className="absolute top-6 right-6 w-10 h-10" />
                   <div className="mt-auto">
                     <h3 className="text-white text-xl font-semibold mb-2">
-                      Warehousing
+                      {content.cards[3].title}
                     </h3>
                     <p className="text-white/70 text-sm">
-                      Secure Karachi facility with 24/7 staff availability.
+                      {content.cards[3].description}
                     </p>
                   </div>
                 </div>
@@ -234,26 +215,23 @@ const ValueProp: React.FC = () => {
             {/* Cards */}
             <div className="w-full lg:w-[75%] flex flex-col sm:flex-row gap-4 justify-around">
               <div
-                ref={card5Ref}
+                ref={el => (cardRefs.current[4] = el)}
                 className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
               >
-                <img src={Cap5} alt="Capacity" className="absolute top-6 right-6 w-12 h-12" />
+                <img src={content.cards[4].icon} alt={content.cards[4].title} className="absolute top-6 right-6 w-12 h-12" />
                 <div className="mt-auto">
                   <h3 className="text-white text-lg font-semibold mb-2">
-                    Capacity
+                    {content.cards[4].title}
                   </h3>
                   <p className="text-white/70 text-xs">
-                    We offer extensive capacity options to meet all your logistics needs.
+                    {content.cards[4].description}
                   </p>
                 </div>
               </div>
 
               <div
-                // ref={card6Ref}
                 className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] p-6 md:p-8 min-h-[1px] md:h-[1px]"
               >
-                {/* <h3 className="text-white text-lg font-semibold mb-2">
-              </h3> */}
               </div>
             </div>
 
@@ -275,7 +253,7 @@ const ValueProp: React.FC = () => {
             >
               <img
                 ref={shipRef}
-                src={ShipSVG}
+                src={content.highlightedShipImg}
                 alt="Highlighted Ship"
                 className="absolute top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]"
               />

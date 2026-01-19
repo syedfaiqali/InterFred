@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-// import servicesHero from '../assets/services_hero_combo_1768219477140.png';
+import React, { useEffect, useRef, useState } from 'react';
 import shipGlobal from '../assets/ServicePlane.svg';
 import servicesShip from '../assets/connectionship.svg';
+import { websiteContent } from '../data/websiteContent';
 
 const ServicesSection: React.FC = () => {
+    const content = websiteContent.services;
     const [isVisible1, setIsVisible1] = useState(false);
     const [isVisible2, setIsVisible2] = useState(false);
 
@@ -56,11 +56,14 @@ const ServicesSection: React.FC = () => {
                     <div className="lg:col-span-1 hidden lg:block"></div>
                     <div className={`lg:col-span-4 space-y-8 transition-all duration-700 delay-300 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <div className="space-y-4">
-                            <span className="text-gray-400 font-medium tracking-widest text-sm block">Service</span>
+                            <span className="text-gray-400 font-medium tracking-widest text-sm block">{content.hero.label}</span>
                             <h2 className="text-4xl lg:text-6xl font-medium leading-[1.1] text-[#1A1A1A]">
-                                Connecting<br />
-                                Businesses with<br />
-                                <span className="text-[#07119B] font-bold">Global Cargo<br />Networks</span>
+                                {content.hero.title.split('Global Cargo Networks').map((part: string, i: number) => (
+                                    <React.Fragment key={i}>
+                                        {part}
+                                        {i === 0 && <span className="text-[#07119B] font-bold">Global Cargo<br />Networks</span>}
+                                    </React.Fragment>
+                                ))}
                             </h2>
                         </div>
                     </div>
@@ -84,13 +87,15 @@ const ServicesSection: React.FC = () => {
                 {/* Comprehensive Solutions Section */}
                 <div className="mt-32 lg:mt-40 max-w-4xl mx-auto text-center space-y-10" ref={section2Ref}>
                     <h3 className={`text-3xl lg:text-5xl font-medium leading-tight text-[#1A1A1A] transition-all duration-700 delay-100 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        Comprehensive <span className="text-[#07119B] font-bold">Global Logistics, Aviation, and Industrial Solutions</span>
+                        {content.solutions.title.split('Global Logistics, Aviation, and Industrial Solutions').map((part: string, i: number) => (
+                            <React.Fragment key={i}>
+                                {part}
+                                {i === 0 && <span className="text-[#07119B] font-bold">Global Logistics, Aviation, and Industrial Solutions</span>}
+                            </React.Fragment>
+                        ))}
                     </h3>
                     <p className={`text-lg lg:text-xl text-gray-600 leading-relaxed font-meduim px-4 transition-all duration-700 delay-300 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        At Inter-Fret Consolidators (Pvt) Ltd, we go beyond traditional freight forwarding.
-                        We offer a fully integrated supply chain solution, ranging from specialized
-                        aviation support to industrial engineering. As Pakistan's only DGAC member and
-                        an IATA-approved agent, we handle the complex challenges others cannot.
+                        {content.solutions.description}
                     </p>
                 </div>
             </div>

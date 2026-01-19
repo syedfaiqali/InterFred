@@ -3,8 +3,10 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import stickyLogo from '../assets/Vector.svg'
 import ContactModal from './ContactModal'
+import { websiteContent } from '../data/websiteContent'
 
 const Header: React.FC = () => {
+  const content = websiteContent.header;
   const [scrolled, setScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -65,21 +67,25 @@ const Header: React.FC = () => {
             />
             <div className={`flex flex-col transition-all duration-300 origin-left ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : '-translate-x-8 opacity-0 scale-95'}`}>
               <h1 className={`text-xl md:text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
-                INTER-FRET
+                {content.logoText}
               </h1>
               <p className={`text-[0.55rem] md:text-[0.65rem] font-bold tracking-[0.15em] leading-tight ${isHomePage ? 'text-gray-200' : 'text-gray-600'}`}>
-                CONSOLIDATORS (PVT) LTD
+                {content.logoSubtext}
               </p>
             </div>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
-              <Link to="/about" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/about') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>About us</Link>
-              <Link to="/service" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/service') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Services</Link>
-              <Link to="/achievements" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/achievements') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Achievements</Link>
-              <Link to="/network" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/network') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Network</Link>
-              <Link to="/tracking" className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/tracking') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}>Tracking</Link>
+              {content.navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`transition-all duration-300 ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive(item.href) ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
             <button
               onClick={() => setIsContactModalOpen(true)}
@@ -123,11 +129,16 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/about') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>About us</Link>
-              <Link to="/service" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/service') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Services</Link>
-              <Link to="/achievements" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/achievements') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Achievements</Link>
-              <Link to="/network" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/network') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Network</Link>
-              <Link to="/tracking" onClick={() => setIsMenuOpen(false)} className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive('/tracking') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}>Tracking</Link>
+              {content.navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`transition-all duration-300 hover:text-[#000] text-sm whitespace-nowrap ${isActive(item.href) ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
 
             {/* Custom Burger Button - Desktop Only */}
@@ -166,30 +177,18 @@ const Header: React.FC = () => {
         <button onClick={() => setMobileMenuOpen(false)} className="absolute top-4 right-6 text-white text-4xl z-50 font-light">✕</button>
 
         <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
-          {/* About Us */}
-          <Link to="/about" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/about') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/about') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>About us.</span>
-          </Link>
-
-          {/* Services */}
-          <Link to="/service" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/service') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/service') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Services.</span>
-          </Link>
-
-          {/* Achievements */}
-          <Link to="/achievements" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/achievements') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/achievements') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Achievements.</span>
-          </Link>
-
-          {/* Network */}
-          <Link to="/network" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/network') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/network') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Network.</span>
-          </Link>
-
-          {/* Tracking */}
-          <Link to="/tracking" onClick={() => setMobileMenuOpen(false)} className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/tracking') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}>
-            <span className={`text-lg font-bold ${isActive('/tracking') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>Tracking.</span>
-          </Link>
+          {content.navItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive(item.href) ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}
+            >
+              <span className={`text-lg font-bold ${isActive(item.href) ? 'text-white' : 'text-gray-400 hover:text-white'}`}>
+                {item.label}.
+              </span>
+            </Link>
+          ))}
 
           <button
             onClick={() => {

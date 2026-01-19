@@ -1,16 +1,5 @@
-import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import planeSide from '../assets/specializationplane.svg';
-import airFreightImg from '../assets/specialization1.svg';
-import movementOfRadioactiveMaterial from '../assets/specialization2.svg';
-import oilAndEnergySectorLogistics from '../assets/specialization3.svg';
-import oilfieldHeavyCargoTransportation from '../assets/specialization4.svg';
-import transportationOfProjectEquipment from '../assets/specialization5.svg';
-import bulkBreakBulkCargo from '../assets/specialization6.svg';
-import customBrokerageWarehousing from '../assets/specialization7.svg';
-import movementOfExplosives from '../assets/specialization8.svg';
-import seamelessClearance from '../assets/specialization9.svg';
-import whiteTruck from '../assets/service container.svg';
+import React, { useEffect, useRef, useState } from 'react';
+import { websiteContent } from '../data/websiteContent';
 
 interface SpecializationItem {
     id: number;
@@ -19,62 +8,7 @@ interface SpecializationItem {
     image: string;
 }
 
-const items: SpecializationItem[] = [
-    {
-        id: 1,
-        title: "Air Freight Specialists",
-        description: "Priority handling for time-sensitive global cargo.",
-        image: airFreightImg
-    },
-    {
-        id: 2,
-        title: "Movement of Explosives",
-        description: "Secure, compliant transport for seismic and industrial applications.",
-        image: movementOfExplosives
-    },
-    {
-        id: 3,
-        title: "Movement of Radioactive Material",
-        description: "Licensed handling for medical and industrial isotopes.",
-        image: movementOfRadioactiveMaterial
-    },
-    {
-        id: 4,
-        title: "Dangerous Goods (DGR) Handling",
-        description: "Unmatched expertise in hazardous materials, ensuring full compliance with IATA/IMO regulations.",
-        image: oilAndEnergySectorLogistics
-    },
-    {
-        id: 5,
-        title: "Oil & Energy Sector Logistics",
-        description: "Tailored support for oil companies, including the movement of rigs and oversized drilling equipment.",
-        image: oilfieldHeavyCargoTransportation
-    },
-    {
-        id: 6,
-        title: "Oilfield Heavy Cargo Transportation",
-        description: "Transporting massive infrastructure via specialized air and road solutions.",
-        image: transportationOfProjectEquipment
-    },
-    {
-        id: 7,
-        title: "Transportation of Project Equipment",
-        description: "End-to-end logistics for large-scale industrial projects.",
-        image: bulkBreakBulkCargo
-    },
-    {
-        id: 8,
-        title: "Bulk & Break Bulk Cargo",
-        description: "Managing non-containerized, heavy-lift shipments.",
-        image: customBrokerageWarehousing
-    },
-    {
-        id: 9,
-        title: "Custom Brokerage & Warehousing",
-        description: "Seamless clearance and secure storage solutions near Karachi port.",
-        image: seamelessClearance
-    },
-];
+const items: SpecializationItem[] = websiteContent.services.specializations.items;
 
 const AnimatedRow: React.FC<{ item: SpecializationItem; index: number }> = ({ item, index }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -128,6 +62,7 @@ const AnimatedRow: React.FC<{ item: SpecializationItem; index: number }> = ({ it
 };
 
 const ServiceSpecialization: React.FC = () => {
+    const config = websiteContent.services.specializations;
     const [headerVisible, setHeaderVisible] = useState(false);
     const [truckVisible, setTruckVisible] = useState(false);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -167,18 +102,22 @@ const ServiceSpecialization: React.FC = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             <div className={`space-y-6 transition-all duration-1000 delay-100 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                                 <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
-                                    Areas of<br />
-                                    <span className="text-[#5EAFEA] font-bold">Specialization</span>
+                                    {config.header.title.split(' ').map((word: string, i: number) => (
+                                        <React.Fragment key={i}>
+                                            {i === 2 ? <span className="text-[#5EAFEA] font-bold">{word}</span> : word}{' '}
+                                            {i === 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
                                 </h2>
                                 <p className="text-gray-400 text-lg max-w-md leading-relaxed">
-                                    We pride ourselves on serving niche industries where precision and safety are paramount. Our core competencies include:
+                                    {config.header.description}
                                 </p>
                             </div>
 
                             {/* Floating Plane Image */}
                             <div className={`relative h-64 lg:h-96 w-full flex items-center justify-end transition-all duration-1000 delay-300 ${headerVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
                                 <img
-                                    src={planeSide}
+                                    src={config.planeImage}
                                     alt="Logistics Aircraft"
                                     className="absolute right-[-10%] lg:right-[-15%] w-[120%] max-w-none object-contain drop-shadow-2xl pointer-events-none -translate-y-8 lg:-translate-y-16"
                                 />
@@ -210,11 +149,11 @@ const ServiceSpecialization: React.FC = () => {
                 {/* Truck Image Container */}
                 <div className="relative max-w-[1400px] mx-auto z-10 flex justify-center lg:block h-[500px]">
                     <img
-                        src={whiteTruck}
+                        src={config.truckImage}
                         alt="Logistics Truck"
                         className={`relative w-[90%] lg:w-[60%] max-w-4xl mx-auto lg:mx-0 lg:ml-[20%] drop-shadow-2xl transition-all duration-[1500ms] ease-out delay-500 ${truckVisible
-                                ? 'opacity-100 translate-x-0 translate-y-[-10%]'
-                                : 'opacity-0 -translate-x-full translate-y-[10%]'
+                            ? 'opacity-100 translate-x-0 translate-y-[-10%]'
+                            : 'opacity-0 -translate-x-full translate-y-[10%]'
                             }`}
                     />
                 </div>

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShipSVG from '../Assets/Ship.svg';
 import TruckSVG from '../Assets/Truck.svg';
+import { websiteContent } from '../data/websiteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +12,7 @@ interface SlideGalleryProps {
 }
 
 const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
+  const content = websiteContent.slideGallery;
   const containerRef = useRef<HTMLDivElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLDivElement>(null);
@@ -97,10 +99,15 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            Shifting the paradigm <span className="text-blue-600">from</span>
+            {content.slides[0].title.split('from').map((part, i) => (
+              <React.Fragment key={i}>
+                {part}
+                {i === 0 && <span className="text-blue-600">from</span>}
+              </React.Fragment>
+            ))}
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-gray-600">
-            Traditional, rigid logistics models
+            {content.slides[0].description}
           </p>
         </div>
       </div>
@@ -135,10 +142,15 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            <span className="text-blue-600">to</span> agile, technology-driven
+            {content.slides[1].title.split('to').map((part, i) => (
+              <React.Fragment key={i}>
+                {i === 0 && <span className="text-blue-600">to</span>}
+                {part}
+              </React.Fragment>
+            ))}
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-blue-600 font-bold">
-            sustainable transport solutions
+            {content.slides[1].description}
           </p>
         </div>
       </div>
@@ -177,10 +189,15 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            Powered by <span className="text-blue-600">AI & ML</span>
+            {content.slides[2].title.split('AI & ML').map((part, i) => (
+              <React.Fragment key={i}>
+                {part}
+                {i === 0 && <span className="text-blue-600">AI & ML</span>}
+              </React.Fragment>
+            ))}
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-gray-600">
-            Secure & sustainable transport solutions
+            {content.slides[2].description}
           </p>
         </div>
       </div>

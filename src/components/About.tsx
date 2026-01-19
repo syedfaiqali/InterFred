@@ -2,8 +2,10 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import cargoPlane from '../assets/AboutUsPlane.svg';
 import howWeDoItImage from '../assets/how we do it.svg';
+import { websiteContent } from '../data/websiteContent';
 
 const About: React.FC = () => {
+  const content = websiteContent.about;
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
 
@@ -43,26 +45,25 @@ const About: React.FC = () => {
             {/* Left Column */}
             <div className="space-y-12">
               <div className={`transition-all duration-700 delay-100 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <span className="text-gray-400 font-medium tracking-wide text-sm block mb-6">What we do</span>
+                <span className="text-gray-400 font-medium tracking-wide text-sm block mb-6">{content.whatWeDo.label}</span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
-                  Top IATA-rated<br />
-                  freight partner,<br />
-                  connecting <br />
-                  <span className="text-[#07119B]">Pakistan<br />worldwide.</span>
+                  {content.whatWeDo.title.split(',').map((part: string, i: number) => (
+                    <React.Fragment key={i}>
+                      {part}
+                      {i === 0 && <br />}
+                    </React.Fragment>
+                  ))}
                 </h2>
               </div>
 
               {/* Stats Boxes */}
               <div className={`flex flex-col items-center lg:items-start gap-4 lg:gap-0 transition-all duration-700 delay-300 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <div className="bg-[#D9D9D9] w-40 h-40 lg:w-48 lg:h-48 p-6 lg:p-8 flex flex-col justify-between shadow-lg">
-                  <span className="text-5xl lg:text-6xl font-bold text-[#333333] leading-none">4</span>
-                  <span className="text-[#333333] font-bold text-sm lg:text-base leading-tight">Office Location</span>
-                </div>
-
-                <div className="bg-[#D9D9D9] w-40 h-40 lg:w-48 lg:h-48 p-6 lg:p-8 lg:ml-48 flex flex-col justify-between shadow-lg mt-[-20px] lg:mt-0 relative z-10 transition-transform hover:scale-105 duration-300">
-                  <span className="text-5xl lg:text-6xl font-bold text-[#333333] leading-none">250</span>
-                  <span className="text-[#333333] font-bold text-sm lg:text-base leading-tight">Team Member</span>
-                </div>
+                {content.whatWeDo.stats.map((stat: { value: string; label: string }, i: number) => (
+                  <div key={i} className={`bg-[#D9D9D9] w-40 h-40 lg:w-48 lg:h-48 p-6 lg:p-8 flex flex-col justify-between shadow-lg ${i === 1 ? 'lg:ml-48 mt-[-20px] lg:mt-0 relative z-10 transition-transform hover:scale-105 duration-300' : ''}`}>
+                    <span className="text-5xl lg:text-6xl font-bold text-[#333333] leading-none">{stat.value}</span>
+                    <span className="text-[#333333] font-bold text-sm lg:text-base leading-tight">{stat.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -80,19 +81,12 @@ const About: React.FC = () => {
 
               <div className="space-y-8 max-w-xl">
                 <h3 className="text-3xl md:text-3xl font-medium text-gray-800 tracking-tight">
-                  We show the world it's possible.
+                  {content.whatWeDo.heading}
                 </h3>
 
                 <div className="space-y-6 text-gray-600 leading-relaxed">
                   <p>
-                    Inter-Fret Consolidators (Pvt) Ltd being among the leaders in
-                    providing professional solution of speedy transportation to its
-                    valued customers in Pakistan and beyond. Managed by some
-                    of the most experienced personnel in the aviation trade,
-                    Inter-Fret rightly claim to be the top 5th most competitive and
-                    service oriented freight forwarding organization based in
-                    Pakistan (rated by IATA). And also developed a network for
-                    more than 250 destinations world wide.
+                    {content.whatWeDo.description}
                   </p>
                 </div>
               </div>
@@ -107,35 +101,24 @@ const About: React.FC = () => {
           <div className="lg:col-start-2 lg:col-span-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left Column - Content */}
             <div className={`space-y-8 transition-all duration-700 delay-100 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h2 className="text-4xl md:text-5xl font-medium text-gray-900">How we do it</h2>
+              <h2 className="text-4xl md:text-5xl font-medium text-gray-900">{content.howWeDoIt.title}</h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p>
-                  IFCL is being the only company in Pakistan who has been accredited for IMS certification
-                  (Integrated Management System) for Quality, Environment, Health and Safety as follows:
+                  {content.howWeDoIt.description}
                 </p>
 
                 <ul className="space-y-1 font-medium text-gray-800">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-[#07119B] rounded-full"></span>
-                    Quality 19001:2000
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-[#07119B] rounded-full"></span>
-                    Environment: 14001:2004
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-[#07119B] rounded-full"></span>
-                    Health and Safety: 18001:1999
-                  </li>
+                  {content.howWeDoIt.certifications.map((cert: string, i: number) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-[#07119B] rounded-full"></span>
+                      {cert}
+                    </li>
+                  ))}
                 </ul>
 
                 <p>
-                  IFCL offers comprehensive services in the field of Supply Chain Management & logistics
-                  and always meet the expectations of its customers round the clock with an easy .
-                  Located in the heart of Karachi and 15 minutes drive from Karachi International Airport
-                  and Karachi Port makes IFCL very accessible to its clients round the clock.
-                  Not only in Karachi but too in upper Pakistan IFCL offices are located near by Airport.
+                  {content.howWeDoIt.mainText}
                 </p>
               </div>
             </div>

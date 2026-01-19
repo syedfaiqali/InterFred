@@ -4,7 +4,10 @@ import AOS1 from '../assets/AOS1.svg';
 import AOS2 from '../assets/AOS2.svg';
 import AOS3 from '../assets/AOS3.svg';
 
+import { websiteContent } from '../data/websiteContent';
+
 const Specialization: React.FC = () => {
+  const content = websiteContent.specialization;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -29,21 +32,6 @@ const Specialization: React.FC = () => {
     };
   }, []);
 
-  const services = [
-    {
-      title: 'Dangerous Goods (DGR) Handling',
-      image: AOS1,
-    },
-    {
-      title: 'Oil & Energy Sector Logistics',
-      image: AOS2,
-    },
-    {
-      title: 'Human Remains Repatriation (HUM)',
-      image: AOS3,
-    },
-  ];
-
   return (
     <section className="bg-[#07119B] py-20 px-6" ref={sectionRef}>
       <div className="max-w-7xl mx-auto text-center px-4 md:px-10 lg:px-16">
@@ -52,7 +40,7 @@ const Specialization: React.FC = () => {
           className={`text-gray-400 text-sm md:text-lg font-medium tracking-wide mb-4 block transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
         >
-          Our Services
+          {content.label}
         </span>
 
         {/* Main Title */}
@@ -60,12 +48,12 @@ const Specialization: React.FC = () => {
           className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 md:mb-16 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
         >
-          Areas of Specialization
+          {content.title}
         </h2>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-left">
-          {services.map((service, index) => (
+          {content.services.map((service, index) => (
             <div
               key={index}
               className={`flex flex-col rounded-[2.5rem] overflow-hidden bg-[#E5E5E5] transition-all duration-700 shadow-2xl hover:scale-[1.02] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'

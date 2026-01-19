@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import networkHero from '../assets/Network1.svg';
 import networkMap from '../assets/Network2.svg';
 import NetworkLocations from './NetworkLocations';
+import { websiteContent } from '../data/websiteContent';
 
 const Network: React.FC = () => {
+    const content = websiteContent.network;
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -52,9 +53,14 @@ const Network: React.FC = () => {
                         <div className={`lg:col-span-4 space-y-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                             }`}>
                             <div className="space-y-6">
-                                <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4">Network</span>
+                                <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4">{content.hero.label}</span>
                                 <h2 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight">
-                                    Where <span className="text-[#07119B] font-bold">Inter-Fret</span><br />Meets<br />Connection.
+                                    {content.hero.title.split('Inter-Fret').map((part: string, i: number) => (
+                                        <React.Fragment key={i}>
+                                            {part}
+                                            {i === 0 && <span className="text-[#07119B] font-bold">Inter-Fret</span>}
+                                        </React.Fragment>
+                                    ))}
                                 </h2>
                             </div>
                         </div>

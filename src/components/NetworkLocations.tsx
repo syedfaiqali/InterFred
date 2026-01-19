@@ -1,69 +1,14 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
+import { websiteContent } from '../data/websiteContent';
+
 interface Country {
     name: string;
     code: string;
 }
 
-const countries: Country[] = [
-    { name: "Albania", code: "AL" },
-    { name: "Angola", code: "AO" },
-    { name: "Argentina", code: "AR" },
-    { name: "Australia", code: "AU" },
-    { name: "Austria", code: "AT" },
-    { name: "Bangladesh", code: "BD" },
-    { name: "Belgium", code: "BE" },
-    { name: "Benin", code: "BJ" },
-    { name: "Bulgaria", code: "BG" },
-    { name: "Cambodia", code: "KH" },
-    { name: "Canada", code: "CA" },
-    { name: "Chad", code: "TD" },
-    { name: "China", code: "CN" },
-    { name: "Congo", code: "CG" },
-    { name: "Croatia", code: "HR" },
-    { name: "Cyprus", code: "CY" },
-    { name: "Czech Republic", code: "CZ" },
-    { name: "Denmark", code: "DK" },
-    { name: "Equatorial Guinea", code: "GQ" },
-    { name: "France", code: "FR" },
-    { name: "French Polynesia", code: "PF" },
-    { name: "Germany", code: "DE" },
-    { name: "Greece", code: "GR" },
-    { name: "Guadeloupe", code: "GP" },
-    { name: "Guinea", code: "GN" },
-    { name: "Hong Kong", code: "HK" },
-    { name: "Hungary", code: "HU" },
-    { name: "India", code: "IN" },
-    { name: "Italy", code: "IT" },
-    { name: "Korea", code: "KR" },
-    { name: "Lebanon", code: "LB" },
-    { name: "Luxembourg", code: "LU" },
-    { name: "Madagascar", code: "MG" },
-    { name: "Malaysia", code: "MY" },
-    { name: "Martinique", code: "MQ" },
-    { name: "Mayotte", code: "YT" },
-    { name: "Morocco", code: "MA" },
-    { name: "Netherlands", code: "NL" },
-    { name: "New Caledonia", code: "NC" },
-    { name: "New Zealand", code: "NZ" },
-    { name: "Norway", code: "NO" },
-    { name: "Poland", code: "PL" },
-    { name: "Reunion", code: "RE" },
-    { name: "Senegal", code: "SN" },
-    { name: "Serbia", code: "RS" },
-    { name: "Seychelles", code: "SC" },
-    { name: "Singapore", code: "SG" },
-    { name: "Slovenia", code: "SI" },
-    { name: "Spain", code: "ES" },
-    { name: "Sri Lanka", code: "LK" },
-    { name: "Sweden", code: "SE" },
-    { name: "Thailand", code: "TH" },
-    { name: "Togo", code: "TG" },
-    { name: "Turkey", code: "TR" },
-    { name: "Ukraine", code: "UA" },
-    { name: "United Arab Emirates", code: "AE" }
-];
+const countries: Country[] = websiteContent.countries;
 
 const NetworkLocations: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);

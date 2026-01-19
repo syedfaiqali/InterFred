@@ -13,96 +13,15 @@ import milestone2006 from '../assets/Foundation3.svg';
 import milestone2008 from '../assets/Foundation2.svg';
 import milestone2018 from '../assets/Foundation1.svg';
 
+import { websiteContent } from '../data/websiteContent';
+
 interface Milestone {
     year: string;
-    description: React.ReactNode;
+    description: string;
     image: string;
 }
 
-const milestones: Milestone[] = [
-    {
-        year: '1987',
-        description: 'Inter-Fret Consolidators (Pvt) Ltd is established in Karachi, starting operations primarily as an Airfreight Forwarder.',
-        image: milestone1987
-    },
-    {
-        year: '1990',
-        description: 'Expansion into Ocean Freight. The company diversifies into Sea Cargo, establishing itself as a Non-Vessel Operating Common Carrier (NVOCC).',
-        image: milestone1990
-    },
-    {
-        year: '1991-93',
-        description: 'National Network Growth Domestic presence is expanded by opening strategic branch offices in key industrial hubs: Lahore and Sialkot.',
-        image: milestone1991
-    },
-    {
-        year: '1995',
-        description: 'Industry Accreditation Officially became members of the Pakistan International Freight Forwarders Association (PIFFA) and the Karachi Chamber of Commerce & Industry (KCCI).',
-        image: milestone1995
-    },
-    {
-        year: '1996',
-        description: 'Launch of Customs Brokerage Introduced Customs Clearance services, offering clients a complete "one-window" solution for import and export documentation.',
-        image: milestone1996
-    },
-    {
-        year: '1998',
-        description: 'Pivot to Niche Logistics Made a strategic shift to specialize in high-stakes logistics, specifically Project Cargo and the Transportation of Dangerous Goods, setting the stage for future market leadership.',
-        image: milestone1998
-    },
-    {
-        year: '2000',
-        description: 'IATA Certification Achieved status as an IATA Approved Agent (International Air Transport Association), validating adherence to global aviation standards.',
-        image: milestone2000
-    },
-    {
-        year: '2002',
-        description: 'Global Compliance Milestone Recognized as a Top Agent and achieved membership with the Dangerous Goods Advisory Council (DGAC) in Washington, USA. Note: Inter-Fret became the only freight forwarder in Pakistan to hold this membership.',
-        image: milestone2002
-    },
-    {
-        year: '2005',
-        description: 'Market Dominance Recorded substantial growth in Sea Cargo market share, solidifying position as a top-tier logistics provider for ocean freight.',
-        image: milestone2005
-    },
-    {
-        year: '2006-07',
-        description: (
-            <div className="space-y-2">
-                <p>
-                    HSE Certification Triad – Formalized commitment to quality and safety by
-                    achieving a comprehensive suite of international certifications:
-                </p>
-                <ul className="pl-4 space-y-1 list-disc">
-                    <li>ISO 9001 – Quality Management</li>
-                    <li>ISO 14001 – Environmental Management</li>
-                    <li>OHSAS 18001 – Occupational Health & Safety</li>
-                </ul>
-            </div>
-        ),
-        image: milestone2006
-    },
-    {
-        year: '2008 - Present',
-        description: 'Innovation & Global Expansion Continued expansion of the global network to over 250 destinations and securing contracts with the U.S. Armed Forces and UN for Afghanistan logistics.',
-        image: milestone2008
-    },
-    {
-        year: '2018-19',
-        description: (
-            <div className="space-y-2">
-                <p>Carrier Recognition Awards:</p>
-                <ul className="pl-4 space-y-1 list-disc">
-                    <li>Emirates SkyCargo – "Contribution to Success" Award</li>
-                    <li>Qatar Airways Cargo – "Outstanding Support Recognition"</li>
-                    <li>Lufthansa Cargo – "Best Performance Award" (2019)</li>
-                    <li>Turkish Cargo – "Award of Appreciation" (2019)</li>
-                </ul>
-            </div>
-        ),
-        image: milestone2018
-    }
-];
+const milestones: Milestone[] = websiteContent.milestones;
 
 const AboutFoundation: React.FC = () => {
     const [scrollProgress, setScrollProgress] = React.useState(0);

@@ -4,7 +4,13 @@ import regularatoryImage from '../assets/Rectangle 58.svg'
 import Lis from '../assets/Rectangle 59.svg'
 import UC from '../assets/Rectangle 60.svg'
 
-const ChallengeGrid: React.FC = () => {
+interface Challenge {
+    title: string;
+    description: string;
+    image: string;
+}
+
+const ChallengeGrid: React.FC<{ challenges?: Challenge[] }> = ({ challenges }) => {
     const [isSec2Visible, setIsSec2Visible] = useState(false)
     const [isSec4Visible, setIsSec4Visible] = useState(false)
     const [isSecLackVisible, setIsSecLackVisible] = useState(false)
@@ -48,6 +54,8 @@ const ChallengeGrid: React.FC = () => {
         style: { transitionDelay: isVisible ? delay : '0ms' }
     })
 
+    if (!challenges || challenges.length < 4) return null;
+
     return (
         <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -58,11 +66,10 @@ const ChallengeGrid: React.FC = () => {
                     <div className="flex flex-col">
                         <div className="flex-shrink-0 mb-6">
                             <img
-                                src={cargoImage}
-                                alt="Complex Oversized Cargo"
+                                src={challenges[0].image}
+                                alt={challenges[0].title}
                                 className={`w-full object-cover rounded-lg shadow-sm transition-all duration-500 ${isSec2Visible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
                                 style={{
-                                    transitionDelay: isSec2Visible ? '0ms' : '0ms',
                                     clipPath: isSec2Visible ? 'circle(100% at 50% 50%)' : 'circle(0% at 50% 50%)',
                                     transitionProperty: 'opacity, transform, clip-path'
                                 }}
@@ -70,15 +77,15 @@ const ChallengeGrid: React.FC = () => {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                                <span {...textTransition(isSec2Visible, '100ms')}>Complex&nbsp;</span>
-                                <span {...textTransition(isSec2Visible, '200ms')}>Oversized&nbsp;</span>
-                                <span {...textTransition(isSec2Visible, '300ms')}>Cargo</span>
+                                {challenges[0].title.split(' ').map((word, i) => (
+                                    <span key={i} {...textTransition(isSec2Visible, `${(i + 1) * 100}ms`)}>{word}&nbsp;</span>
+                                ))}
                             </h3>
                             <p
                                 className={`text-sm text-gray-500 leading-relaxed font-medium transition-all duration-500 ${isSec2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
                                 style={{ transitionDelay: isSec2Visible ? '400ms' : '0ms' }}
                             >
-                                Incorporating industrial machinery like 25-foot tall structures or wide cargo equipment is logistically complex. Our expertise results in costly delays.
+                                {challenges[0].description}
                             </p>
                         </div>
                     </div>
@@ -90,11 +97,10 @@ const ChallengeGrid: React.FC = () => {
                     <div className="flex flex-col">
                         <div className="flex-shrink-0 mb-6">
                             <img
-                                src={regularatoryImage}
-                                alt="Regulatory Bottlenecks"
+                                src={challenges[1].image}
+                                alt={challenges[1].title}
                                 className={`w-full object-cover rounded-lg shadow-sm transition-all duration-500 ${isSec4Visible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
                                 style={{
-                                    transitionDelay: isSec4Visible ? '0ms' : '0ms',
                                     clipPath: isSec4Visible ? 'circle(100% at 50% 50%)' : 'circle(0% at 50% 50%)',
                                     transitionProperty: 'opacity, transform, clip-path'
                                 }}
@@ -102,14 +108,15 @@ const ChallengeGrid: React.FC = () => {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                                <span {...textTransition(isSec4Visible, '100ms')}>Regulatory&nbsp;</span>
-                                <span {...textTransition(isSec4Visible, '200ms')}>Bottlenecks</span>
+                                {challenges[1].title.split(' ').map((word, i) => (
+                                    <span key={i} {...textTransition(isSec4Visible, `${(i + 1) * 100}ms`)}>{word}&nbsp;</span>
+                                ))}
                             </h3>
                             <p
                                 className={`text-sm text-gray-500 leading-relaxed font-medium transition-all duration-500 ${isSec4Visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
                                 style={{ transitionDelay: isSec4Visible ? '400ms' : '0ms' }}
                             >
-                                Navigating customs, tariff classifications, and international trade laws without expert guidance can derail shipments and disrupt supply chains.
+                                {challenges[1].description}
                             </p>
                         </div>
                     </div>
@@ -117,16 +124,14 @@ const ChallengeGrid: React.FC = () => {
                 <div className="hidden lg:block lg:col-span-1"></div>
 
                 {/* Section 6: Lack of Integrated Support */}
-                {/* <div className="hidden lg:block ml-4"></div> */}
                 <div className="lg:col-span-3 lg:col-start-1 lg:ml-8 ml-0" ref={secLackRef}>
                     <div className="flex flex-col">
                         <div className="flex-shrink-0 mb-6">
                             <img
-                                src={Lis}
-                                alt="Lack of Integrated Support"
+                                src={challenges[2].image}
+                                alt={challenges[2].title}
                                 className={`w-full object-cover rounded-lg shadow-sm transition-all duration-500 ${isSecLackVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
                                 style={{
-                                    transitionDelay: isSecLackVisible ? '0ms' : '0ms',
                                     clipPath: isSecLackVisible ? 'circle(100% at 50% 50%)' : 'circle(0% at 50% 50%)',
                                     transitionProperty: 'opacity, transform, clip-path'
                                 }}
@@ -134,16 +139,15 @@ const ChallengeGrid: React.FC = () => {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                                <span {...textTransition(isSecLackVisible, '100ms')}>Lack&nbsp;</span>
-                                <span {...textTransition(isSecLackVisible, '200ms')}>of&nbsp;</span>
-                                <span {...textTransition(isSecLackVisible, '300ms')}>Integrated&nbsp;</span>
-                                <span {...textTransition(isSecLackVisible, '400ms')}>Support</span>
+                                {challenges[2].title.split(' ').map((word, i) => (
+                                    <span key={i} {...textTransition(isSecLackVisible, `${(i + 1) * 100}ms`)}>{word}&nbsp;</span>
+                                ))}
                             </h3>
                             <p
                                 className={`text-sm text-gray-500 leading-relaxed font-medium transition-all duration-500 ${isSecLackVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
                                 style={{ transitionDelay: isSecLackVisible ? '500ms' : '0ms' }}
                             >
-                                Clients often have to juggle multiple vendors for warehousing, and transportation, leading to a fragmented and obsolete supply chain.
+                                {challenges[2].description}
                             </p>
                         </div>
                     </div>
@@ -155,11 +159,10 @@ const ChallengeGrid: React.FC = () => {
                     <div className="flex flex-col">
                         <div className="flex-shrink-0 mb-6">
                             <img
-                                src={UC}
-                                alt="Unequipped for Every City"
+                                src={challenges[3].image}
+                                alt={challenges[3].title}
                                 className={`w-full object-cover rounded-lg shadow-sm transition-all duration-500 ${isSecCityVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
                                 style={{
-                                    transitionDelay: isSecCityVisible ? '0ms' : '0ms',
                                     clipPath: isSecCityVisible ? 'circle(100% at 50% 50%)' : 'circle(0% at 50% 50%)',
                                     transitionProperty: 'opacity, transform, clip-path'
                                 }}
@@ -167,16 +170,15 @@ const ChallengeGrid: React.FC = () => {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                                <span {...textTransition(isSecCityVisible, '100ms')}>Unequipped&nbsp;</span>
-                                <span {...textTransition(isSecCityVisible, '200ms')}>for&nbsp;</span>
-                                <span {...textTransition(isSecCityVisible, '300ms')}>Every&nbsp;</span>
-                                <span {...textTransition(isSecCityVisible, '400ms')}>City</span>
+                                {challenges[3].title.split(' ').map((word, i) => (
+                                    <span key={i} {...textTransition(isSecCityVisible, `${(i + 1) * 100}ms`)}>{word}&nbsp;</span>
+                                ))}
                             </h3>
                             <p
                                 className={`text-sm text-gray-500 leading-relaxed font-medium transition-all duration-500 ${isSecCityVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
                                 style={{ transitionDelay: isSecCityVisible ? '500ms' : '0ms' }}
                             >
-                                Finding logistics partners for every destination (especially far-flung locations) is difficult in a volatile market.
+                                {challenges[3].description}
                             </p>
                         </div>
                     </div>

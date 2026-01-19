@@ -1,12 +1,13 @@
-import * as React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { websiteContent } from '../data/websiteContent';
 
 const Tracking: React.FC = () => {
+    const content = websiteContent.tracking;
     const [trackingId, setTrackingId] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'found' | 'error'>('idle');
     const resultRef = useRef<HTMLDivElement>(null);
-    const VALID_ID = 'IF-123456';
+    const VALID_ID = content.mockData.validId;
 
     const handleTrack = () => {
         if (!trackingId) return;
@@ -57,13 +58,17 @@ const Tracking: React.FC = () => {
             <div className="max-w-7xl mx-auto px-6 w-full">
                 {/* Header Section */}
                 <div className={`text-center transition-all duration-700 ease-in-out ${status === 'found' ? 'opacity-0 h-0 -translate-y-10 pointer-events-none mb-0' : 'opacity-100 mb-12'}`}>
-                    <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4 uppercase">Visibility</span>
+                    <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4 uppercase">{content.header.label}</span>
                     <h1 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight mb-8">
-                        Real-time <span className="text-[#07119B] font-bold">Tracking</span>
+                        {content.header.title.split(' ').map((word: string, i: number) => (
+                            <React.Fragment key={i}>
+                                {i === 1 ? <span className="text-[#07119B] font-bold">{word}</span> : word}{' '}
+                            </React.Fragment>
+                        ))}
                     </h1>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-12">
-                        Enter your tracking number below to see the current status of your shipment. <br />
-                        <span className="text-xs text-gray-400">(Try: <span className="font-bold select-all underline text-[#07119B]">IF-123456</span>)</span>
+                        {content.header.description} <br />
+                        <span className="text-xs text-gray-400">(Try: <span className="font-bold select-all underline text-[#07119B]">{content.header.validIdNote}</span>)</span>
                     </p>
 
                     <div className="max-w-xl mx-auto relative group">
@@ -72,7 +77,7 @@ const Tracking: React.FC = () => {
                             value={trackingId}
                             onChange={(e) => setTrackingId(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleTrack()}
-                            placeholder="Enter Tracking ID (e.g. IF-123456)"
+                            placeholder={content.placeholder}
                             className={`w-full px-8 py-5 bg-white border-2 rounded-2xl outline-none transition-all pr-40 text-lg shadow-sm ${status === 'error' ? 'border-red-500' : 'border-gray-100 focus:border-[#07119B]'
                                 }`}
                         />
@@ -83,12 +88,12 @@ const Tracking: React.FC = () => {
                         >
                             {status === 'loading' ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                            ) : 'Track'}
+                            ) : content.buttonText}
                         </button>
                     </div>
 
                     {status === 'error' && (
-                        <p className="text-red-500 mt-4 font-medium animate-shake">Tracking ID not found. Please try IF-123456.</p>
+                        <p className="text-red-500 mt-4 font-medium animate-shake">{content.errorMessage}</p>
                     )}
                 </div>
 
@@ -116,7 +121,7 @@ const Tracking: React.FC = () => {
                                 </div>
                                 <div className="bg-green-50 text-green-600 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2">
                                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                    In Transit
+                                    {content.mockData.status}
                                 </div>
                             </div>
 
@@ -127,14 +132,14 @@ const Tracking: React.FC = () => {
                                     {/* Ship Header */}
                                     <div className="bg-[#07119B] rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl animate-item">
                                         <div className="relative z-10">
-                                            <h3 className="text-2xl font-bold mb-2">Ocean Freight Bulk</h3>
+                                            <h3 className="text-2xl font-bold mb-2">{content.mockData.cargoType}</h3>
                                             <p className="text-white/60 text-sm mb-8 uppercase tracking-widest font-bold">Master Bill of Lading: {Math.random().toString(36).substring(7).toUpperCase()}</p>
 
                                             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                                                 <div className="text-center md:text-left flex-1">
                                                     <p className="text-white/50 text-xs mb-1 font-bold">ORIGIN</p>
-                                                    <h4 className="text-2xl font-bold">Port of Karachi</h4>
-                                                    <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">PK KHI</p>
+                                                    <h4 className="text-2xl font-bold">{content.mockData.origin.name}</h4>
+                                                    <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">{content.mockData.origin.code}</p>
                                                 </div>
                                                 <div className="flex-1 flex flex-col items-center">
                                                     <div className="w-full h-[2px] bg-white/20 relative">
@@ -144,12 +149,12 @@ const Tracking: React.FC = () => {
                                                             <path d="M12 6v6l4 2" />
                                                         </svg>
                                                     </div>
-                                                    <p className="mt-4 text-[10px] text-white/40 tracking-tighter font-bold uppercase">EST. 3 DAYS REMAINING</p>
+                                                    <p className="mt-4 text-[10px] text-white/40 tracking-tighter font-bold uppercase">{content.mockData.estimatedRemaining}</p>
                                                 </div>
                                                 <div className="text-center md:text-right flex-1">
                                                     <p className="text-white/50 text-xs mb-1 font-bold">DESTINATION</p>
-                                                    <h4 className="text-2xl font-bold">Port of Rotterdam</h4>
-                                                    <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">NL RTM</p>
+                                                    <h4 className="text-2xl font-bold">{content.mockData.destination.name}</h4>
+                                                    <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">{content.mockData.destination.code}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,14 +168,9 @@ const Tracking: React.FC = () => {
                                     <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm animate-item">
                                         <h4 className="text-xl font-bold mb-8">Shipment Timeline</h4>
                                         <div className="space-y-10">
-                                            {[
-                                                { date: 'Jan 19, 2024', time: '14:20', task: 'Vessel Departed PK KHI', status: 'completed', desc: 'Sailing started towards Singapore transshipment point.' },
-                                                { date: 'Jan 18, 2024', time: '09:15', task: 'Container Loaded', status: 'completed', desc: 'Securely loaded onto Vessel: Maersk Ganges.' },
-                                                { date: 'Jan 16, 2024', time: '16:45', task: 'Customs Clearance PK', status: 'completed', desc: 'Export clearance completed successfully.' },
-                                                { date: 'Jan 15, 2024', time: '11:00', task: 'Shipment Created', status: 'completed', desc: 'Booking confirmed and container assigned.' },
-                                            ].map((item, idx) => (
+                                            {content.mockData.timeline.map((item: { task: string; date: string; time: string; desc: string }, idx: number) => (
                                                 <div key={idx} className="flex gap-6 relative group/item timeline-item">
-                                                    {idx !== 3 && <div className="absolute left-[11px] top-6 w-[2px] h-[calc(100%+20px)] bg-gray-50 group-hover/item:bg-blue-100 transition-colors"></div>}
+                                                    {idx !== content.mockData.timeline.length - 1 && <div className="absolute left-[11px] top-6 w-[2px] h-[calc(100%+20px)] bg-gray-50 group-hover/item:bg-blue-100 transition-colors"></div>}
                                                     <div className="relative z-10 w-6 h-6 rounded-full bg-white border-4 border-[#07119B] flex-shrink-0"></div>
                                                     <div>
                                                         <div className="flex gap-4 items-baseline">
@@ -192,15 +192,15 @@ const Tracking: React.FC = () => {
                                         <div className="space-y-6">
                                             <div>
                                                 <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Container Number</p>
-                                                <p className="font-bold text-gray-800">MRKU-9284-1</p>
+                                                <p className="font-bold text-gray-800">{content.mockData.cargoInfo.containerNumber}</p>
                                             </div>
                                             <div>
                                                 <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Type & Size</p>
-                                                <p className="font-bold text-gray-800">40' High Cube</p>
+                                                <p className="font-bold text-gray-800">{content.mockData.cargoInfo.typeSize}</p>
                                             </div>
                                             <div>
                                                 <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Weight / Volume</p>
-                                                <p className="font-bold text-gray-800">22,450 KG / 67.3 CBM</p>
+                                                <p className="font-bold text-gray-800">{content.mockData.cargoInfo.weightVolume}</p>
                                             </div>
                                             <div className="pt-6 border-t border-gray-200">
                                                 <h5 className="text-sm font-bold mb-4">Certified Safe</h5>
@@ -221,7 +221,7 @@ const Tracking: React.FC = () => {
                 {/* Footer section (only if idle) */}
                 {status === 'idle' && (
                     <div className="mt-20 py-10 border-t border-gray-100 text-gray-400 text-sm text-center">
-                        <p>Supported carriers: Air, Sea, and Ground Freight.</p>
+                        <p>{content.footerNotes}</p>
                     </div>
                 )}
             </div>

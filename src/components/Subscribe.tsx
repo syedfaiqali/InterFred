@@ -1,7 +1,10 @@
-import type { FC } from 'react';
+import React, { type FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { websiteContent } from '../data/websiteContent';
+
 const Subscribe: FC = () => {
+  const content = websiteContent.subscribe;
   const location = useLocation();
   return (
     <footer className="pt-12 pb-10">
@@ -11,29 +14,23 @@ const Subscribe: FC = () => {
           {/* Left Column - Subscription Box */}
           <div className="lg:w-2/5 lg:ml-12 bg-[#0000A3] p-8 md:p-12 lg:p-14 text-white rounded-[1rem] lg:-mt-32 shadow-2xl relative z-20">
             <div className="mb-10">
-              <svg
-                width="60"
-                height="60"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-white"
-              >
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
+              <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
               </svg>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Subscribe to <br />Newsletters
+              {content.title.split('to').map((part, i) => (
+                <React.Fragment key={i}>
+                  {part}
+                  {i === 0 && <>to<br /></>}
+                </React.Fragment>
+              ))}
             </h2>
 
             <p className="text-lg text-blue-100 mb-10 leading-relaxed">
-              Want to stay up to date? <br />
-              Sign up for InterFret's biannual update.
+              {content.subtitle}
             </p>
 
             <form className="space-y-4 mb-6">
@@ -69,19 +66,10 @@ const Subscribe: FC = () => {
 
                 const className = `text-lg md:text-xl font-medium transition-colors ${location.pathname === href ? 'text-[#0000A3]' : 'text-gray-600'} hover:text-[#0000A3]`;
 
-                // Use Link for existing routes, a tag for others (placeholders for now)
-                if (href.startsWith('/')) {
-                  return (
-                    <Link key={item} to={href} className={className}>
-                      {item}
-                    </Link>
-                  );
-                }
-
                 return (
-                  <a key={item} href={href} className={className}>
+                  <Link key={item} to={href} className={className}>
                     {item}
-                  </a>
+                  </Link>
                 );
               })}
             </nav>
@@ -93,43 +81,43 @@ const Subscribe: FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 mb-10">
                 {/* Left Side: Offices */}
                 <div className="space-y-12">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Head Office</h3>
-                    <address className="not-italic text-gray-600 leading-relaxed max-w-[320px]">
-                      Suite 814, 815, Park Avenue, PECHS Block 6,<br />
-                      Shahra-e-Faisal, Karachi,<br />
-                      Pakistan.
-                    </address>
-                  </div>
-
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Branch Office</h3>
-                    <div className="space-y-3 text-base text-gray-600 font-medium">
-                      <p><span className="text-gray-900 font-bold">Lahore:</span> Cavalry Ground (+92 42 3662-0837-9)</p>
-                      <p><span className="text-gray-900 font-bold">Rawalpindi:</span> New Gulzar-E-Quaid (+92 51 3570-7924-5)</p>
-                      <p><span className="text-gray-900 font-bold">Sialkot:</span> Ugoki Road (+92 52 3355-4468)</p>
+                  {content.offices.map((office, idx) => (
+                    <div key={idx}>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{office.title}</h3>
+                      {office.address && (
+                        <address className="not-italic text-gray-600 leading-relaxed max-w-[320px]">
+                          {office.address}
+                        </address>
+                      )}
+                      {office.branches && (
+                        <div className="space-y-3 text-base text-gray-600 font-medium">
+                          {office.branches.map((branch, bIdx) => (
+                            <p key={bIdx}><span className="text-gray-900 font-bold">{branch.name}:</span> {branch.info}</p>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Right Side: Contact */}
                 <div className="flex flex-col gap-8 md:pt-20">
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Email</span>
-                    <a href="mailto:info@interfret.com" className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
-                      info@interfret.com
+                    <a href={`mailto:${content.contact.email}`} className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
+                      {content.contact.email}
                     </a>
                   </div>
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Phone</span>
-                    <a href="tel:+9233154989455" className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
-                      +9233154989455
+                    <a href={`tel:${content.contact.phone}`} className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
+                      {content.contact.phone}
                     </a>
                   </div>
                 </div>
               </div>
 
-              {/* Copyright Row - Now inside the right column block */}
+              {/* Copyright Row */}
               <div className="mt-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
                 <p className="text-sm md:text-base text-gray-500 font-medium md:whitespace-nowrap">
                   © {new Date().getFullYear()}, Inter-Fret Consolidators (Pvt) Ltd. All Rights Reserved.

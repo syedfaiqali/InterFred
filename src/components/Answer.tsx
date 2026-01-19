@@ -8,22 +8,14 @@ import PlaneImg from '../assets/PLANE.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const words = [
-  'Solution',
-  'Our',
-  'Answer',
-  'is',
-  'a',
-  'fully',
-  'integrated,',
-  'certified,',
-  'and',
-  'specialized',
-  'logistics',
-  'network.'
-];
+import { websiteContent } from '../data/websiteContent';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Answer: React.FC = () => {
+  const content = websiteContent.answer;
+  const words = [content.heading, ...content.mainText.split(' ')];
+
   const textSectionRef = useRef<HTMLDivElement>(null);
   const wordRefs = useRef<HTMLSpanElement[]>([]);
   const planeRef = useRef<HTMLDivElement>(null);
@@ -68,7 +60,6 @@ const Answer: React.FC = () => {
       }
 
       // Info Boxes Animation (Float from up to down)
-      // We set initial state here for safety, though CSS or GSAP set() works.
       gsap.set(infoBoxRefs.current, { y: -30, opacity: 0 });
 
       gsap.to(infoBoxRefs.current, {
@@ -87,7 +78,7 @@ const Answer: React.FC = () => {
     }, textSectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [words.length]);
 
   return (
     <div className="answer-wrapper">
@@ -95,7 +86,7 @@ const Answer: React.FC = () => {
       <div className="white-section">
         <div className="container-section">
           <img
-            src={ContainerImg}
+            src={content.containerImg}
             alt="Container"
             className="container-img"
             decoding="async"
@@ -112,12 +103,12 @@ const Answer: React.FC = () => {
               ref={el => (wordRefs.current[0] = el!)}
               className="word"
             >
-              {words[0]}
+              {content.heading}
             </span>
           </h2>
 
           <p className="main-text">
-            {words.slice(1).map((word, i) => (
+            {content.mainText.split(' ').map((word, i) => (
               <span
                 key={i}
                 ref={el => (wordRefs.current[i + 1] = el!)}
@@ -132,64 +123,38 @@ const Answer: React.FC = () => {
 
         {/* PLANE + INFO BOXES */}
         <div className="plane-section">
-          {/* Top Left */}
-          <div
-            className="info-box info-box-top-left text-right"
-            ref={el => (infoBoxRefs.current[0] = el!)}
-          >
-            <h3>Dangerous<br />Goods Specialists</h3>
-            <p>
-              We are the only freight forwarder in Pakistan with DGAC (USA)
-              membership. We safely manage explosives and radioactive materials
-              compliant with IATA DGR and IMO guidelines.
-            </p>
-          </div>
-
-          {/* Top Right */}
-          <div
-            className="info-box info-box-top-right"
-            ref={el => (infoBoxRefs.current[1] = el!)}
-          >
-            <div className="info-header">
-              <span className="logo-text">Aviation &<br />Ground Services</span>
+          {content.infoBoxes.slice(0, 2).map((box, idx) => (
+            <div
+              key={idx}
+              className={`info-box ${idx === 0 ? 'info-box-top-left text-right' : 'info-box-top-right'}`}
+              ref={el => (infoBoxRefs.current[idx] = el!)}
+            >
+              {idx === 1 ? (
+                <div className="info-header">
+                  <span className="logo-text">{box.title}</span>
+                </div>
+              ) : (
+                <h3>{box.title}</h3>
+              )}
+              <p>{box.content}</p>
             </div>
-            <p>
-              From crew handling and flight support to ramp services and customs
-              formalities, we offer a complete range of ground and flight support
-              services.
-            </p>
-          </div>
+          ))}
 
           {/* Plane */}
           <div className="plane-wrapper" ref={planeRef}>
-            <img src={PlaneImg} alt="Plane" className="plane-img" />
+            <img src={content.planeImg} alt="Plane" className="plane-img" />
           </div>
 
-          {/* Bottom Left */}
-          <div
-            className="info-box info-box-bottom-left text-right"
-            ref={el => (infoBoxRefs.current[2] = el!)}
-          >
-            <h3>Project Cargo<br />Expertise</h3>
-            <p>
-              We specialize in large, heavy, and oversized shipments. We are the
-              only company in Pakistan with practical experience transporting
-              15–20ft oil drilling equipment by air via passenger aircraft.
-            </p>
-          </div>
-
-          {/* Bottom Right */}
-          <div
-            className="info-box info-box-bottom-right"
-            ref={el => (infoBoxRefs.current[3] = el!)}
-          >
-            <h3>End-to-End<br />Supply Chain</h3>
-            <p>
-              Seamless door-to-door delivery, warehousing with modern inventory
-              systems, and expert customs brokerage to ensure uninterrupted
-              logistics.
-            </p>
-          </div>
+          {content.infoBoxes.slice(2, 4).map((box, idx) => (
+            <div
+              key={idx + 2}
+              className={`info-box ${idx === 0 ? 'info-box-bottom-left text-right' : 'info-box-bottom-right'}`}
+              ref={el => (infoBoxRefs.current[idx + 2] = el!)}
+            >
+              <h3>{box.title}</h3>
+              <p>{box.content}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
