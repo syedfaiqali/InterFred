@@ -75,22 +75,24 @@ const Hero: React.FC = () => {
         className="hero-content relative z-10 flex flex-col justify-between h-full"
       >
         {/* ================= HEADING ================= */}
-        <div className="flex-1 flex items-start lg:items-end px-6 pt-28 md:pt-36 lg:pt-0 relative top-[-10%]">
-          <div className="text-white max-w-[90%]">
-            <h1 className="!leading-tight text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-medium mb-8 md:mb-12">
+        <div className="flex-1 flex items-start lg:items-end px-6 pt-32 md:pt-36 lg:pt-0 relative lg:top-[-10%]">
+          <div className="text-white w-full lg:max-w-[90%]">
+            <h1 className="!leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12">
               Global<br />Logistics &<br />Industrial Solutions
             </h1>
 
-            <img
-              src={svglogos}
-              alt="InterFret Certifications"
-              className="h-8 md:h-12 brightness-0 invert"
-            />
+            <div className="flex flex-wrap gap-4 items-center">
+              <img
+                src={svglogos}
+                alt="InterFret Certifications"
+                className="h-8 md:h-12 brightness-0 invert object-contain"
+              />
+            </div>
           </div>
         </div>
 
         {/* ================= DESCRIPTION ================= */}
-        <div className="lg:absolute lg:bottom-6 lg:right-6 max-w-sm text-white/90 px-6 pb-10">
+        <div className="lg:absolute lg:bottom-6 lg:right-6 max-w-sm text-white/90 px-6 pb-20 lg:pb-10">
           <h4
             className="
               font-semibold leading-relaxed

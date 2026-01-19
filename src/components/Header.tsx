@@ -58,16 +58,16 @@ const Header: React.FC = () => {
     <>
       {/* Original Header - Hidden on scroll */}
       <div className={`w-full transition-all duration-300 ${scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <div className="ml-4 mr-4 mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-4 cursor-pointer group">
+        <div className="mx-4 px-4 py-3 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 cursor-pointer group">
             <img src={stickyLogo} alt="InterFret"
-              className={`h-14 w-auto object-contain group-hover:scale-105 transition-all duration-300`}
+              className={`h-10 md:h-14 w-auto object-contain group-hover:scale-105 transition-all duration-300`}
             />
             <div className={`flex flex-col transition-all duration-300 origin-left ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : '-translate-x-8 opacity-0 scale-95'}`}>
-              <h1 className={`text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
+              <h1 className={`text-xl md:text-2xl font-black tracking-wide leading-none ${isHomePage ? 'text-white' : 'text-[#1A1A1A]'}`}>
                 INTER-FRET
               </h1>
-              <p className={`text-[0.65rem] font-bold tracking-[0.15em] leading-tight ${isHomePage ? 'text-gray-200' : 'text-gray-600'}`}>
+              <p className={`text-[0.55rem] md:text-[0.65rem] font-bold tracking-[0.15em] leading-tight ${isHomePage ? 'text-gray-200' : 'text-gray-600'}`}>
                 CONSOLIDATORS (PVT) LTD
               </p>
             </div>
