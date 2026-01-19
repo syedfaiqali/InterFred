@@ -1,13 +1,51 @@
 import React, { type FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Toast } from './Toast';
 
 import { websiteContent } from '../data/websiteContent';
 
 const Subscribe: FC = () => {
   const content = websiteContent.subscribe;
   const location = useLocation();
+
+  const [email, setEmail] = React.useState('');
+  const [toast, setToast] = React.useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const validateEmail = (email: string): boolean => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Step 1: Check if email is provided
+    if (!email.trim()) {
+      setToast({ message: 'Please enter your email address', type: 'error' });
+      return;
+    }
+
+    // Step 2: Validate email pattern
+    if (!validateEmail(email)) {
+      setToast({ message: 'Please enter a valid email address', type: 'error' });
+      return;
+    }
+
+    // Step 3: Success - Show thank you message
+    setToast({ message: 'Thanks for subscribing! 🎉', type: 'success' });
+    setEmail(''); // Clear the input
+  };
+
   return (
     <footer className="pt-12 pb-10">
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
@@ -33,9 +71,11 @@ const Subscribe: FC = () => {
               {content.subtitle}
             </p>
 
-            <form className="space-y-4 mb-6">
+            <form onSubmit={handleSubmit} className="space-y-4 mb-6">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="w-full bg-white/5 border border-white/20 rounded-sm py-4 px-5 text-white placeholder-blue-300 outline-none focus:border-white focus:bg-white/10 transition-all font-medium"
                 aria-label="Email address"
@@ -104,13 +144,13 @@ const Subscribe: FC = () => {
                 <div className="flex flex-col gap-8 md:pt-20">
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Email</span>
-                    <a href={`mailto:${content.contact.email}`} className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
+                    <a href={`mailto:${content.contact.email}`} className="text-xl font-medium text-gray-900 hover:text-[#0000A3] transition-colors">
                       {content.contact.email}
                     </a>
                   </div>
                   <div>
                     <span className="block text-sm font-medium text-gray-500 mb-2">Phone</span>
-                    <a href={`tel:${content.contact.phone}`} className="text-xl font-medium text-gray-900 hover:text-[#5EAFEA] transition-colors">
+                    <a href={`tel:${content.contact.phone}`} className="text-xl font-medium text-gray-900 hover:text-[#0000A3] transition-colors">
                       {content.contact.phone}
                     </a>
                   </div>
