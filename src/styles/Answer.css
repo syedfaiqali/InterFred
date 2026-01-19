@@ -3,12 +3,14 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  scroll-behavior: smooth;
 }
+
 .word {
   display: inline-block;
   color: #666666;
   will-change: color;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* White Background Section */
@@ -44,7 +46,6 @@
 }
 
 .solution-heading span {
-  transition: color 0.25s ease-out;
   display: inline-block;
 }
 
@@ -63,7 +64,10 @@
   max-width: 60%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  /* Performance optimizations for large SVGs */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Main Text */
@@ -91,7 +95,6 @@
 }
 
 .main-text span {
-  transition: color 0.25s ease-out;
   display: inline-block;
   white-space: normal;
 }

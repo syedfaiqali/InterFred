@@ -94,7 +94,12 @@ const Answer: React.FC = () => {
       {/* White section */}
       <div className="white-section">
         <div className="container-section">
-          <img src={ContainerImg} alt="Container" className="container-img" />
+          <img
+            src={ContainerImg}
+            alt="Container"
+            className="container-img"
+            decoding="async"
+          />
         </div>
       </div>
 
