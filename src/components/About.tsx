@@ -47,12 +47,19 @@ const About: React.FC = () => {
               <div className={`transition-all duration-700 delay-100 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <span className="text-gray-400 font-medium tracking-wide text-sm block mb-6">{content.whatWeDo.label}</span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
-                  {content.whatWeDo.title.split(',').map((part: string, i: number) => (
-                    <React.Fragment key={i}>
-                      {part}
-                      {i === 0 && <br />}
-                    </React.Fragment>
-                  ))}
+                  {(() => {
+                    const target = "Pakistan worldwide.";
+                    return content.whatWeDo.title.split(target).map((part: string, i: number) => (
+                      <React.Fragment key={i}>
+                        {part.split(',').map((subpart, j) => (
+                          <React.Fragment key={j}>
+                            {subpart}{j === 0 && <>,<br /></>}
+                          </React.Fragment>
+                        ))}
+                        {i === 0 && <span className="text-[#07119B] font-bold">{target}</span>}
+                      </React.Fragment>
+                    ));
+                  })()}
                 </h2>
               </div>
 

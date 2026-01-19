@@ -8,18 +8,30 @@ const Highlights: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isIndustryVisible, setIsIndustryVisible] = useState(false);
 
+  const welcomeTarget = "Inter-Fret Consolidators,";
+  const industryTarget = "Inter-Fret solves";
+
   const welcomeSectionData = {
     ...content.welcomeSection,
     title: (
       <>
-        {content.welcomeSection.title.split(',').map((part, i) => (
-          <span
-            key={i}
-            className={`inline-block ${i === 1 ? 'text-[#07119B]' : ''} transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-            style={{ transitionDelay: `${(i + 1) * 100}ms` }}
-          >
-            {part}{i === 0 && ','}
-          </span>
+        {content.welcomeSection.title.split(welcomeTarget).map((part, i) => (
+          <React.Fragment key={i}>
+            <span
+              className={`inline-block transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
+              style={{ transitionDelay: `${(i + 1) * 100}ms` }}
+            >
+              {part}
+            </span>
+            {i === 0 && (
+              <span
+                className={`inline-block text-[#07119B] font-bold transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
+                style={{ transitionDelay: `${150}ms` }}
+              >
+                {welcomeTarget}
+              </span>
+            )}
+          </React.Fragment>
         ))}
       </>
     )
@@ -29,7 +41,7 @@ const Highlights: React.FC = () => {
     ...content.industrySection,
     title: (
       <>
-        {content.industrySection.title.split('Inter-Fret').map((part, i) => (
+        {content.industrySection.title.split(industryTarget).map((part, i) => (
           <React.Fragment key={i}>
             <span
               className={`inline-block transition-all duration-500 ${isIndustryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
@@ -37,7 +49,14 @@ const Highlights: React.FC = () => {
             >
               {part}
             </span>
-            {i === 0 && <span className="text-blue-900">Inter-Fret</span>}
+            {i === 0 && (
+              <span
+                className={`inline-block text-[#07119B] font-bold transition-all duration-500 ${isIndustryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
+                style={{ transitionDelay: `${150}ms` }}
+              >
+                {industryTarget}
+              </span>
+            )}
           </React.Fragment>
         ))}
       </>

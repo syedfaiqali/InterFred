@@ -55,12 +55,19 @@ const Network: React.FC = () => {
                             <div className="space-y-6">
                                 <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4">{content.hero.label}</span>
                                 <h2 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight">
-                                    {content.hero.title.split('Inter-Fret').map((part: string, i: number) => (
-                                        <React.Fragment key={i}>
-                                            {part}
-                                            {i === 0 && <span className="text-[#07119B] font-bold">Inter-Fret</span>}
-                                        </React.Fragment>
-                                    ))}
+                                    {(() => {
+                                        const target = "Inter-Fret";
+                                        return content.hero.title.split(target).map((part: string, i: number) => (
+                                            <React.Fragment key={i}>
+                                                {part}
+                                                {i === 0 && (
+                                                    <span className="text-[#07119B] font-bold block">
+                                                        {target}
+                                                    </span>
+                                                )}
+                                            </React.Fragment>
+                                        ));
+                                    })()}
                                 </h2>
                             </div>
                         </div>

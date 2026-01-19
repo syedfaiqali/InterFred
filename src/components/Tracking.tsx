@@ -60,11 +60,15 @@ const Tracking: React.FC = () => {
                 <div className={`text-center transition-all duration-700 ease-in-out ${status === 'found' ? 'opacity-0 h-0 -translate-y-10 pointer-events-none mb-0' : 'opacity-100 mb-12'}`}>
                     <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4 uppercase">{content.header.label}</span>
                     <h1 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight mb-8">
-                        {content.header.title.split(' ').map((word: string, i: number) => (
-                            <React.Fragment key={i}>
-                                {i === 1 ? <span className="text-[#07119B] font-bold">{word}</span> : word}{' '}
-                            </React.Fragment>
-                        ))}
+                        {(() => {
+                            const target = "Tracking";
+                            return content.header.title.split(target).map((part: string, i: number) => (
+                                <React.Fragment key={i}>
+                                    {part}
+                                    {i === 0 && <span className="text-[#07119B] font-bold">{target}</span>}
+                                </React.Fragment>
+                            ));
+                        })()}
                     </h1>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-12">
                         {content.header.description} <br />
