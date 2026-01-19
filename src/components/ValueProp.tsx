@@ -86,7 +86,7 @@ const ValueProp: React.FC = () => {
           trigger: shipSectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 0.8,
+          scrub: 1.2, // Increased inertia for a "heavier" industrial feel
         },
       });
 

@@ -5,11 +5,12 @@ interface HomeSectionProps {
     label: string
     title: React.ReactNode
     image: string
-    firstText: string
+    firstText: string | React.ReactNode
     secondText: string
     moreLinkVisible?: boolean
     bgColor?: string
   }
+  setIsVisible: (visible: boolean) => void
 }
 
 const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {

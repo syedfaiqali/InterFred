@@ -48,8 +48,8 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: () => `+=${window.innerHeight * 8}`, // Increased scroll distance for stability
-          scrub: true,
+          end: () => `+=${window.innerHeight * 5}`, // Optimized scroll distance for better responsiveness
+          scrub: 1.2, // Added inertia for smooth "move forward" effect
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
@@ -58,30 +58,27 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       });
 
       // ---- PHASE 1: TEXT 1 -> SHIP ----
-      tl.to(text1Ref.current, { opacity: 0, duration: 1.5 }, "+=0.5")
+      tl.to(text1Ref.current, { opacity: 0, duration: 1 }, "+=0.2")
 
         // Ship and Water reveal
-        .to([shipRef.current, waterRef.current], { opacity: 1, duration: 1 }, "-=0.5")
-        .to(shipImgRef.current, { xPercent: -220, duration: 6, ease: 'none' }, "<")
+        .to([shipRef.current, waterRef.current], { opacity: 1, duration: 1 }, "-=0.2")
+        .to(shipImgRef.current, { xPercent: -220, duration: 8, ease: 'power1.inOut' }, "<")
 
         // ---- PHASE 2: SHIP -> TEXT 2 ----
-        // Start revealing Text 2 as the ship's main body clears the center
-        .to(text2Ref.current, { opacity: 1, duration: 1.5 }, "-=2.5")
-        // Fade out ship quickly as text 2 becomes the focus
-        .to([shipRef.current, waterRef.current], { opacity: 0, duration: 0.8 }, "-=1.5")
+        .to(text2Ref.current, { opacity: 1, duration: 1.5 }, "-=3.5")
+        .to([shipRef.current, waterRef.current], { opacity: 0, duration: 0.8 }, "-=2.5")
 
         // ---- PHASE 3: TEXT 2 -> TRUCK ----
-        .to(text2Ref.current, { opacity: 0, duration: 1.5 }, "+=1.5")
-        .to([truckRef.current, roadRef.current], { opacity: 1, duration: 1 }, "-=0.5")
-        .to(truckImgRef.current, { xPercent: -220, duration: 6, ease: 'none' }, "<")
+        .to(text2Ref.current, { opacity: 0, duration: 1 }, "+=0.5")
+        .to([truckRef.current, roadRef.current], { opacity: 1, duration: 1 }, "-=0.2")
+        .to(truckImgRef.current, { xPercent: -220, duration: 8, ease: 'power1.inOut' }, "<")
 
         // ---- PHASE 4: TRUCK -> TEXT 3 ----
-        // Start final text as truck clears
-        .to(text3Ref.current, { opacity: 1, duration: 1.5 }, "-=2.5")
-        .to([truckRef.current, roadRef.current], { opacity: 0, duration: 0.8 }, "-=1.5")
+        .to(text3Ref.current, { opacity: 1, duration: 1.5 }, "-=3.5")
+        .to([truckRef.current, roadRef.current], { opacity: 0, duration: 0.8 }, "-=2.5")
 
         // FINAL HOLD
-        .to(text3Ref.current, { opacity: 1, duration: 3 });
+        .to(text3Ref.current, { opacity: 1, duration: 2 });
     }, containerRef);
 
     return () => ctx.revert();
