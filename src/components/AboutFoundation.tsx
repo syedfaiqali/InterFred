@@ -24,34 +24,17 @@ interface Milestone {
 const milestones: Milestone[] = websiteContent.milestones;
 
 const AboutFoundation: React.FC = () => {
+    const historyContent = websiteContent.about.history;
     const [scrollProgress, setScrollProgress] = React.useState(0);
     const [isVisible, setIsVisible] = React.useState(false);
     const milestoneRef = React.useRef<HTMLDivElement>(null);
 
     // Determine the heading content based on scroll progress
     const getHeadingContent = () => {
-        if (scrollProgress < 0.28) {
-            return {
-                label: "Our History",
-                line1: "The",
-                line2: "Foundation &",
-                line3: "Early Expansion"
-            };
-        } else if (scrollProgress < 0.72) {
-            return {
-                label: "Global Reach",
-                line1: "Global",
-                line2: "Standards &",
-                line3: "Authority"
-            };
-        } else {
-            return {
-                label: "Excellence",
-                line1: "Excellence &",
-                line2: "Integrated",
-                line3: "Safety"
-            };
-        }
+        const phases = historyContent.phases;
+        if (scrollProgress < 0.28) return phases[0];
+        if (scrollProgress < 0.72) return phases[1];
+        return phases[2];
     };
 
     const currentHeading = getHeadingContent();
@@ -126,11 +109,12 @@ const AboutFoundation: React.FC = () => {
 
                     {/* Dynamic Heading */}
                     <div className="col-span-3 lg:col-span-3 lg:col-start-2 lg:row-start-1 sticky top-0 lg:top-[15vh] z-30 self-start pt-12 lg:pt-8 pb-12 bg-[#1A1A1A] lg:bg-transparent overflow-visible">
-                        <div key={currentHeading.line1} className={`space-y-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                            <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block">
+                        {/* Wrapper with key for smooth transitions */}
+                        <div key={currentHeading.label} className={`space-y-3 transition-all duration-700 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                            <span className="text-gray-400 lg:text-gray-500 font-medium tracking-widest text-xs lg:text-sm uppercase block transition-all duration-500">
                                 {currentHeading.label}
                             </span>
-                            <h2 className="text-2xl lg:text-4xl xl:text-5xl font-bold leading-[1.1]">
+                            <h2 className="text-2xl lg:text-4xl xl:text-5xl font-bold leading-[1.1] transition-all duration-500">
                                 {currentHeading.line1}<br />
                                 <span className="text-[#5EAFEA] block md:inline">{currentHeading.line2}</span><br className="hidden md:block" />
                                 <span className="text-[#5EAFEA] block md:inline">{currentHeading.line3}</span>

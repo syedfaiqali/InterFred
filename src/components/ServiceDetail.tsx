@@ -335,10 +335,30 @@ const serviceDetails: Record<string, ServiceDetailData> = {
 const ServiceDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const data = (id && serviceDetails[id]) ? serviceDetails[id] : serviceDetails["default"];
+    const [visibleSections, setVisibleSections] = React.useState<Set<number>>(new Set());
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.getAttribute('data-index') || '0');
+                        setVisibleSections(prev => new Set(prev).add(index));
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+        );
+
+        const sections = document.querySelectorAll('.service-section');
+        sections.forEach(section => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, [data]);
 
     return (
         <div className="bg-white min-h-screen pt-24 pb-12">
@@ -361,7 +381,7 @@ const ServiceDetail: React.FC = () => {
                 <div className="col-span-12 lg:col-span-10">
 
                     {/* Main Heading */}
-                    <div className="mb-12 lg:mb-16">
+                    <div className="mb-12 lg:mb-16 transition-all duration-700 opacity-100 translate-y-0">
                         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-[#07119B] mb-4">
                             {data.title}
                         </h1>
@@ -373,7 +393,14 @@ const ServiceDetail: React.FC = () => {
                     {/* Content Sections */}
                     <div className="space-y-24 lg:space-y-32">
                         {data.sections.map((section, index) => (
-                            <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                            <div
+                                key={index}
+                                data-index={index}
+                                className={`service-section grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center transition-all duration-1000 ${visibleSections.has(index)
+                                        ? 'opacity-100 translate-y-0'
+                                        : 'opacity-0 translate-y-20'
+                                    }`}
+                            >
 
                                 {/* Text Content */}
                                 <div className="space-y-6">
@@ -416,7 +443,7 @@ const ServiceDetail: React.FC = () => {
                         <Link
                             to="/service"
                             state={{ fromDetail: true }}
-                            className="text-[#07119B] font-semibold hover:underline flex items-center gap-2"
+                            className="text-[#07119B] font-semibold hover:underline flex items-center gap-2 transition-all duration-300 hover:gap-3"
                         >
                             &larr; Back to Services
                         </Link>
