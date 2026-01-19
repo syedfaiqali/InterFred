@@ -35,23 +35,21 @@ const Answer: React.FC = () => {
     const ctx = gsap.context(() => {
       wordRefs.current = wordRefs.current.slice(0, words.length);
 
-      // Initial states
-      gsap.set(wordRefs.current, { y: -30, opacity: 0, color: '#666666' });
+      // Initial states - Text is visible but light grey
+      gsap.set(wordRefs.current, { y: 0, opacity: 1, color: '#d1d5db' });
       if (planeRef.current) gsap.set(planeRef.current, { y: 100, opacity: 0 });
 
-      // Text Animation (Float from up to down)
+      // Text Animation (Scroll-triggered color reveal)
       gsap.to(wordRefs.current, {
         scrollTrigger: {
           trigger: textSectionRef.current,
           start: 'top 80%',
-          toggleActions: 'play none none reverse',
+          end: 'bottom 40%',
+          scrub: 0.5, // Smoothly follows scroll
         },
-        y: 0,
-        opacity: 1,
-        color: '#1a1a1a',
-        duration: 0.8,
-        stagger: 0.05,
-        ease: 'power2.out',
+        color: '#1a1a1a', // Changes to black
+        stagger: 0.1, // Sequentially reveals words
+        ease: 'power1.inOut',
       });
 
       // Plane Animation (Coming from down to up)
