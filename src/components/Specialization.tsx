@@ -1,9 +1,5 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import AOS1 from '../assets/AOS1.svg';
-import AOS2 from '../assets/AOS2.svg';
-import AOS3 from '../assets/AOS3.svg';
-
 import { websiteContent } from '../data/websiteContent';
 
 const Specialization: React.FC = () => {

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-
 import { websiteContent } from '../data/websiteContent';
 
 interface Country {

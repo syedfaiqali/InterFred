@@ -1,17 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
-import logo1 from '../Assets/partner1.svg';
-import logo2 from '../Assets/partner2.svg';
-import logo3 from '../Assets/partner3.svg';
-import logo4 from '../Assets/partner4.svg';
-import logo5 from '../Assets/partner5.svg';
-import logo6 from '../Assets/partner6.svg';
-import award1 from '../Assets/award1.svg';
-import award2 from '../Assets/award2.svg';
-import award3 from '../Assets/award3.svg';
-import award4 from '../Assets/award4.svg';
-import award5 from '../Assets/award5.svg';
-
 import { websiteContent } from '../data/websiteContent';
 
 const Partners: React.FC = () => {

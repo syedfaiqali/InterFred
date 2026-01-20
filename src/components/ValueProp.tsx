@@ -1,13 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ShipSVG from "../Assets/Helighted Ship.svg";
-import ShipMainSVG from "../Assets/ShipMain.svg";
-import Cap1 from "../Assets/capablities1.svg";
-import Cap2 from "../Assets/capablities2.svg";
-import Cap3 from "../Assets/capablities3.svg";
-import Cap4 from "../Assets/capablities4.svg";
-import Cap5 from "../Assets/capablities5.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 

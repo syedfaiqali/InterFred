@@ -15,7 +15,7 @@ const CookieConsent: React.FC = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-4 right-4 z-50 w-full max-w-md bg-white shadow-2xl rounded-sm p-6 transform transition-all duration-500 ease-out translate-y-0 opacity-100 animate-slide-up">
+        <div className="fixed bottom-0 left-0 right-0 sm:bottom-4 sm:right-4 sm:left-auto z-50 w-full sm:max-w-md bg-white shadow-2xl rounded-sm p-6 transform transition-all duration-500 ease-out translate-y-0 opacity-100 animate-slide-up">
             <div className="flex justify-between items-start mb-4">
                 <h2 className="text-2xl font-semibold text-gray-900">Cookies consent</h2>
                 <button

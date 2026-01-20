@@ -1,7 +1,6 @@
 import React, { type FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Toast } from './Toast';
-
 import { websiteContent } from '../data/websiteContent';
 
 const Subscribe: FC = () => {

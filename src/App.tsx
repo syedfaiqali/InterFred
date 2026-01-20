@@ -1,12 +1,7 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import type { RootState } from './store'
-import { increment, decrement } from './features/counter/counterSlice'
-
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Home from './components/Home'
 import Answer from './components/Answer'
 import ScrollToTop from './components/ScrollToTop'
 import Loader from './components/Loader'

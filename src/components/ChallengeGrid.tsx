@@ -1,8 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import cargoImage from '../assets/Rectangle 57.svg'
-import regularatoryImage from '../assets/Rectangle 58.svg'
-import Lis from '../assets/Rectangle 59.svg'
-import UC from '../assets/Rectangle 60.svg'
 
 interface Challenge {
     title: string;

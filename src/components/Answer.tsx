@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 import '../styles/Answer.css';
-import ContainerImg from '../assets/Container.svg';
-import PlaneImg from '../assets/PLANE.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 

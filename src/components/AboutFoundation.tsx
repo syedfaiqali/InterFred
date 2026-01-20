@@ -1,17 +1,5 @@
 ﻿import * as React from 'react';
 import centerShip from '../assets/FoundationShip.svg';
-import milestone1987 from '../assets/Foundation12.svg';
-import milestone1990 from '../assets/Foundation11.svg';
-import milestone1991 from '../assets/Foundation10.svg';
-import milestone1995 from '../assets/Foundation9.svg';
-import milestone1996 from '../assets/Foundation8.svg';
-import milestone1998 from '../assets/Foundation7.svg';
-import milestone2000 from '../assets/Foundation6.svg';
-import milestone2002 from '../assets/Foundation5.svg';
-import milestone2005 from '../assets/Foundation4.svg';
-import milestone2006 from '../assets/Foundation3.svg';
-import milestone2008 from '../assets/Foundation2.svg';
-import milestone2018 from '../assets/Foundation1.svg';
 
 import { websiteContent } from '../data/websiteContent';
 

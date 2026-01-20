@@ -85,8 +85,7 @@ export const websiteContent = {
         },
         scrollingTexts: [
             'Scroll down to discover how it works',
-            'Global Supply Chain Excellence',
-            'Reliable Industrial Solutions'
+            'Scroll down to discover how it works',
         ],
         bgImage: bannerImage,
         certLogos: certLogos

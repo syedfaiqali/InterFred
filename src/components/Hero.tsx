@@ -3,8 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import svglogos from '../assets/Group 124.svg';
-import backgroundImage from '../assets/1.svg';
 
 import { websiteContent } from '../data/websiteContent';
 

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
-
 import { websiteContent } from '../data/websiteContent'
 
 interface FAQItem {
