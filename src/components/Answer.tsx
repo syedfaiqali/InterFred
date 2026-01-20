@@ -7,8 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { websiteContent } from '../data/websiteContent';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Answer: React.FC = () => {
   const content = websiteContent.answer;
   const words = [content.heading, ...content.mainText.split(' ')];
@@ -24,11 +22,17 @@ const Answer: React.FC = () => {
     // Preload images
     const containerImgLoader = new Image();
     containerImgLoader.src = content.containerImg;
-    containerImgLoader.onload = () => setIsContainerLoaded(true);
+    containerImgLoader.onload = () => {
+      setIsContainerLoaded(true);
+      ScrollTrigger.refresh();
+    };
 
     const planeImgLoader = new Image();
     planeImgLoader.src = content.planeImg;
-    planeImgLoader.onload = () => setIsPlaneLoaded(true);
+    planeImgLoader.onload = () => {
+      setIsPlaneLoaded(true);
+      ScrollTrigger.refresh();
+    };
 
     if (!textSectionRef.current) return;
 

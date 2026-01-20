@@ -18,10 +18,17 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
 
   const backgroundColor = sectionData.bgColor || '#ffffff'
   const [isContentVisible, setIsContentVisible] = useState(false)
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
   const headingRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (sectionData.image) {
+      const img = new Image();
+      img.src = sectionData.image;
+      img.onload = () => setIsImageLoaded(true);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -77,21 +84,24 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
           {(sectionData.image || sectionData.firstText) && (
             <div className="lg:col-span-4 flex flex-col gap-8 lg:pl-8" ref={contentRef}>
               {sectionData.image && (
-                <img
-                  src={sectionData.image}
-                  alt="Port Operations"
-                  className={`w-full rounded-lg shadow-sm transition-all duration-500 ${isContentVisible
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-90'
-                    }`}
-                  style={{
-                    transitionDelay: isContentVisible ? '0ms' : '0ms',
-                    clipPath: isContentVisible
-                      ? 'circle(100% at 50% 50%)'
-                      : 'circle(0% at 50% 50%)',
-                    transitionProperty: 'opacity, transform, clip-path'
-                  }}
-                />
+                <div className="bg-gray-50 rounded-lg overflow-hidden">
+                  <img
+                    src={sectionData.image}
+                    alt="Port Operations"
+                    onLoad={() => setIsImageLoaded(true)}
+                    className={`w-full rounded-lg shadow-sm transition-all duration-700 ${isContentVisible && isImageLoaded
+                      ? 'opacity-100 scale-100'
+                      : 'opacity-0 scale-95'
+                      }`}
+                    style={{
+                      transitionDelay: '0ms',
+                      clipPath: isContentVisible && isImageLoaded
+                        ? 'circle(100% at 50% 50%)'
+                        : 'circle(0% at 50% 50%)',
+                      transitionProperty: 'opacity, transform, clip-path'
+                    }}
+                  />
+                </div>
               )}
 
               <div className="space-y-6">

@@ -7,9 +7,20 @@ import { websiteContent } from '../data/websiteContent';
 const Network: React.FC = () => {
     const content = websiteContent.network;
     const [isVisible, setIsVisible] = useState(false);
+    const [isHeroLoaded, setIsHeroLoaded] = useState(false);
+    const [isMapLoaded, setIsMapLoaded] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        // Preload images
+        const hImg = new Image();
+        hImg.src = networkHero;
+        hImg.onload = () => setIsHeroLoaded(true);
+
+        const mImg = new Image();
+        mImg.src = networkMap;
+        mImg.onload = () => setIsMapLoaded(true);
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -38,11 +49,12 @@ const Network: React.FC = () => {
                     {/* Hero Section */}
                     <div className={`relative mb-16 pt-24 md:pt-32 lg:pt-0 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                         }`}>
-                        <div className="relative w-full aspect-[21/9] lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10">
+                        <div className="relative w-full aspect-[21/9] lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10 bg-gray-50">
                             <img
                                 src={networkHero}
                                 alt="Interfret Global Network"
-                                className="w-full h-full object-cover"
+                                className={`w-full h-full object-cover transition-opacity duration-1000 ${isHeroLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                onLoad={() => setIsHeroLoaded(true)}
                             />
                         </div>
                     </div>
@@ -79,7 +91,8 @@ const Network: React.FC = () => {
                                 <img
                                     src={networkMap}
                                     alt="Global Coverage Map"
-                                    className="w-full h-auto object-contain scale-105"
+                                    className={`w-full h-auto object-contain scale-105 transition-opacity duration-1000 ${isMapLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    onLoad={() => setIsMapLoaded(true)}
                                 />
                             </div>
                         </div>

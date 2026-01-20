@@ -2,11 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 import { websiteContent } from '../data/websiteContent';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const ValueProp: React.FC = () => {
   const content = websiteContent.valueProp;
@@ -24,11 +20,17 @@ const ValueProp: React.FC = () => {
     // Preload ships
     const mainImg = new Image();
     mainImg.src = content.mainShipImg;
-    mainImg.onload = () => setIsMainShipLoaded(true);
+    mainImg.onload = () => {
+      setIsMainShipLoaded(true);
+      ScrollTrigger.refresh();
+    };
 
     const highImg = new Image();
     highImg.src = content.highlightedShipImg;
-    highImg.onload = () => setIsHighShipLoaded(true);
+    highImg.onload = () => {
+      setIsHighShipLoaded(true);
+      ScrollTrigger.refresh();
+    };
 
     /* ================= HIGHLIGHT CARD ================= */
     if (highlightRef.current) {

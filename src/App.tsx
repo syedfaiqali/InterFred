@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import Answer from './components/Answer'
 import ScrollToTop from './components/ScrollToTop'
 import Loader from './components/Loader'
+import { websiteContent } from './data/websiteContent'
 const About = React.lazy(() => import('./components/About'))
 const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
@@ -28,6 +29,66 @@ const CookieConsent = React.lazy(() => import('./components/CookieConsent'))
 const App: React.FC = () => {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
+  const [isAssetsLoaded, setIsAssetsLoaded] = React.useState(false)
+
+  React.useEffect(() => {
+    // Only preload on first land or landing on home
+    if (location.pathname !== '/' && isAssetsLoaded) return;
+
+    const criticalImages = [
+      websiteContent.hero.bgImage,
+      websiteContent.valueProp.mainShipImg,
+      websiteContent.valueProp.highlightedShipImg,
+      websiteContent.answer.containerImg,
+      websiteContent.answer.planeImg
+    ];
+
+    let loadedCount = 0;
+
+    // Safety timeout: don't keep users waiting longer than 6 seconds
+    const timeout = setTimeout(() => {
+      setIsAssetsLoaded(true);
+    }, 6000);
+
+    const handleAssetLoad = () => {
+      loadedCount++;
+      if (loadedCount === criticalImages.length) {
+        clearTimeout(timeout);
+        setIsAssetsLoaded(true);
+        // Refresh ScrollTrigger after lazy components have had time to mount
+        // 1500ms is a safe window for React to resolve Suspense and render children
+        setTimeout(() => {
+          import('gsap').then(({ default: gsap }) => {
+            import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+              gsap.registerPlugin(ScrollTrigger);
+              ScrollTrigger.refresh(true);
+            });
+          });
+        }, 1500);
+      }
+    };
+
+    // If not on home page, and assets are not yet loaded,
+    // we still want to set isAssetsLoaded to true immediately
+    // to avoid showing the loader on non-home pages.
+    // The image loading will still happen in the background.
+    if (location.pathname !== '/' && !isAssetsLoaded) {
+      setIsAssetsLoaded(true);
+    }
+
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.onload = handleAssetLoad;
+      img.onerror = handleAssetLoad;
+    });
+
+    return () => clearTimeout(timeout);
+  }, [location.pathname, isAssetsLoaded]); // Added isAssetsLoaded to dependencies for the new logic
+
+  if (!isAssetsLoaded && isHomePage) {
+    return <Loader />
+  }
 
   return (
     <div className="min-h-screen text-gray-800 overflow-x-hidden">
