@@ -16,7 +16,10 @@ export const Toast: FC<ToastProps> = ({ message, type = 'success', onClose }) =>
     }, [onClose]);
 
     return (
-        <div className="fixed top-24 right-6 z-50 animate-slide-in-right">
+        <div
+            className="fixed top-24 right-6 z-50 animate-slide-in-right"
+            onClick={(e) => e.stopPropagation()}
+        >
             <div
                 className={`${type === 'success'
                     ? 'bg-gradient-to-r from-[#0000A3] to-[#5EAFEA]'
