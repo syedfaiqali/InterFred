@@ -8,11 +8,22 @@ const About: React.FC = () => {
   const content = websiteContent.about;
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
+  const [isPlaneLoaded, setIsPlaneLoaded] = useState(false);
+  const [isHowLoaded, setIsHowLoaded] = useState(false);
 
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Preload heavy assets
+    const img1 = new Image();
+    img1.src = cargoPlane;
+    img1.onload = () => setIsPlaneLoaded(true);
+
+    const img2 = new Image();
+    img2.src = howWeDoItImage;
+    img2.onload = () => setIsHowLoaded(true);
+
     const observer1 = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible1(true);
@@ -79,12 +90,13 @@ const About: React.FC = () => {
             {/* Right Column */}
             <div className={`space-y-12 relative lg:pt-12 transition-all duration-1000 delay-400 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
               {/* Image Container with Blue accent */}
-              <div className="relative group">
-                <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#07119B] hidden lg:block transition-transform group-hover:scale-110 duration-500"></div>
+              <div className="relative group bg-gray-100 rounded-sm overflow-hidden">
+                <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#07119B] hidden lg:block transition-transform group-hover:scale-110 duration-500 z-10"></div>
                 <img
                   src={cargoPlane}
                   alt="Cargo Plane"
-                  className="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500 shadow-xl rounded-sm"
+                  className={`w-full h-auto grayscale-0 transition-all duration-1000 shadow-xl ${isPlaneLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  onLoad={() => setIsPlaneLoaded(true)}
                 />
               </div>
 
@@ -133,12 +145,13 @@ const About: React.FC = () => {
             </div>
 
             {/* Right Column - Image */}
-            <div className={`relative group lg:w-[70%] lg:ml-auto transition-all duration-1000 delay-300 ${isVisible2 ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-20 scale-95'}`}>
+            <div className={`relative group lg:w-[70%] lg:ml-auto transition-all duration-1000 delay-300 bg-gray-50 rounded-lg overflow-hidden ${isVisible2 ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-20 scale-95'}`}>
               <div className="absolute -inset-4 rounded-xl scale-95 transition-transform duration-500 bg-gray-50/50"></div>
               <img
                 src={howWeDoItImage}
                 alt="Logistics Operations"
-                className="relative w-full h-[500px] object-cover rounded-lg shadow-2xl transition-transform group-hover:scale-[1.02] duration-500"
+                className={`relative w-full h-[500px] object-cover transition-all duration-1000 group-hover:scale-[1.02] ${isHowLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setIsHowLoaded(true)}
               />
             </div>
           </div>

@@ -10,11 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const [content] = useState(websiteContent.hero);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
+    // Preload the large background image
+    const img = new Image();
+    img.src = content.bgImage;
+    img.onload = () => setIsImageLoaded(true);
+
     if (location.pathname !== '/' || !heroRef.current || !contentRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -57,8 +63,8 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="h-screen sticky top-0 bg-cover bg-center relative overflow-hidden"
-      style={{ backgroundImage: `url(${content.bgImage})` }}
+      className={`h-screen sticky top-0 bg-cover bg-center relative overflow-hidden bg-[#0a0a0a] transition-opacity duration-1000 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+      style={{ backgroundImage: isImageLoaded ? `url(${content.bgImage})` : 'none' }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/50" />
 

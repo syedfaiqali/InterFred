@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ValueProp: React.FC = () => {
   const content = websiteContent.valueProp;
+  const [isMainShipLoaded, setIsMainShipLoaded] = React.useState(false);
+  const [isHighShipLoaded, setIsHighShipLoaded] = React.useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const highlightRef = useRef<HTMLDivElement>(null);
@@ -19,6 +21,15 @@ const ValueProp: React.FC = () => {
   const shipRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // Preload ships
+    const mainImg = new Image();
+    mainImg.src = content.mainShipImg;
+    mainImg.onload = () => setIsMainShipLoaded(true);
+
+    const highImg = new Image();
+    highImg.src = content.highlightedShipImg;
+    highImg.onload = () => setIsHighShipLoaded(true);
+
     /* ================= HIGHLIGHT CARD ================= */
     if (highlightRef.current) {
       gsap.set(highlightRef.current, {
@@ -111,11 +122,12 @@ const ValueProp: React.FC = () => {
   return (
     <>
       {/* ================= FIRST SHIP (FULL SECTION) ================= */}
-      <div className="relative w-full h-[100vh] bg-black overflow-hidden">
+      <div className="relative w-full h-[100vh] bg-[#0a0a0a] overflow-hidden">
         <img
           src={content.mainShipImg}
           alt="Ship"
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-opacity duration-1000 ${isMainShipLoaded ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={() => setIsMainShipLoaded(true)}
         />
       </div>
 
@@ -248,7 +260,8 @@ const ValueProp: React.FC = () => {
                 ref={shipRef}
                 src={content.highlightedShipImg}
                 alt="Highlighted Ship"
-                className="absolute top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]"
+                className={`absolute top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[700px] md:max-w-[900px] lg:max-w-[1000px] transition-opacity duration-1000 ${isHighShipLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setIsHighShipLoaded(true)}
               />
             </div>
           </div>

@@ -12,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Answer: React.FC = () => {
   const content = websiteContent.answer;
   const words = [content.heading, ...content.mainText.split(' ')];
+  const [isContainerLoaded, setIsContainerLoaded] = React.useState(false);
+  const [isPlaneLoaded, setIsPlaneLoaded] = React.useState(false);
 
   const textSectionRef = useRef<HTMLDivElement>(null);
   const wordRefs = useRef<HTMLSpanElement[]>([]);
@@ -19,6 +21,15 @@ const Answer: React.FC = () => {
   const infoBoxRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
+    // Preload images
+    const containerImgLoader = new Image();
+    containerImgLoader.src = content.containerImg;
+    containerImgLoader.onload = () => setIsContainerLoaded(true);
+
+    const planeImgLoader = new Image();
+    planeImgLoader.src = content.planeImg;
+    planeImgLoader.onload = () => setIsPlaneLoaded(true);
+
     if (!textSectionRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -81,12 +92,13 @@ const Answer: React.FC = () => {
     <div className="answer-wrapper">
       {/* White section */}
       <div className="white-section">
-        <div className="container-section">
+        <div className="container-section min-h-[300px] flex items-center justify-center">
           <img
             src={content.containerImg}
             alt="Container"
-            className="container-img"
+            className={`container-img transition-opacity duration-1000 ${isContainerLoaded ? 'opacity-100' : 'opacity-0'}`}
             decoding="async"
+            onLoad={() => setIsContainerLoaded(true)}
           />
         </div>
       </div>
@@ -139,7 +151,12 @@ const Answer: React.FC = () => {
 
           {/* Plane */}
           <div className="plane-wrapper" ref={planeRef}>
-            <img src={content.planeImg} alt="Plane" className="plane-img" />
+            <img
+              src={content.planeImg}
+              alt="Plane"
+              className={`plane-img transition-opacity duration-1000 ${isPlaneLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={() => setIsPlaneLoaded(true)}
+            />
           </div>
 
           {content.infoBoxes.slice(2, 4).map((box, idx) => (

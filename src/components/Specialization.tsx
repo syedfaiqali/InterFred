@@ -5,9 +5,19 @@ import { websiteContent } from '../data/websiteContent';
 const Specialization: React.FC = () => {
   const content = websiteContent.specialization;
   const [isVisible, setIsVisible] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Preload all service images
+    content.services.forEach((service, index) => {
+      const img = new Image();
+      img.src = service.image;
+      img.onload = () => {
+        setLoadedImages(prev => new Set(prev).add(index));
+      };
+    });
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -57,11 +67,12 @@ const Specialization: React.FC = () => {
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
               {/* Image Container */}
-              <div className="h-64 md:h-72 lg:h-80 w-full overflow-hidden p-4">
+              <div className="h-64 md:h-72 lg:h-80 w-full overflow-hidden p-4 bg-[#d1d1d1]">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover rounded-[2rem]"
+                  className={`w-full h-full object-cover rounded-[2rem] transition-opacity duration-1000 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
+                  onLoad={() => setLoadedImages(prev => new Set(prev).add(index))}
                 />
               </div>
 
