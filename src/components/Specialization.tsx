@@ -1,12 +1,17 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { websiteContent } from '../data/websiteContent';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Specialization: React.FC = () => {
   const content = websiteContent.specialization;
   const [isVisible, setIsVisible] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Preload all service images
@@ -22,6 +27,7 @@ const Specialization: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.1 }
@@ -31,19 +37,39 @@ const Specialization: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
+    // GSAP Animation for Cards
+    const cards = cardRefs.current.filter(Boolean);
+
+    if (cards.length > 0) {
+      gsap.set(cards, { y: 100, opacity: 0 });
+
+      ScrollTrigger.batch(cards, {
+        onEnter: (batch) => {
+          gsap.to(batch, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        },
+        start: "top 85%",
+      });
+    }
+
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      observer.disconnect();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [content.services]);
 
   return (
     <section className="bg-[#07119B] py-20 px-6" ref={sectionRef}>
       <div className="max-w-7xl mx-auto text-center px-4 md:px-10 lg:px-16">
         {/* Subtitle */}
         <span
-          className={`text-gray-400 text-sm md:text-lg font-medium tracking-wide mb-4 block transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          className={`text-gray-400 text-sm md:text-lg font-medium tracking-wide mb-4 block transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
         >
           {content.label}
@@ -51,7 +77,7 @@ const Specialization: React.FC = () => {
 
         {/* Main Title */}
         <h2
-          className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 md:mb-16 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 md:mb-16 transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
         >
           {content.title}
@@ -62,9 +88,8 @@ const Specialization: React.FC = () => {
           {content.services.map((service, index) => (
             <div
               key={index}
-              className={`flex flex-col rounded-[2.5rem] overflow-hidden bg-[#E5E5E5] transition-all duration-700 shadow-2xl hover:scale-[1.02] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-                }`}
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
+              ref={(el) => (cardRefs.current[index] = el)}
+              className="flex flex-col rounded-[2.5rem] overflow-hidden bg-[#E5E5E5] shadow-2xl hover:scale-[1.02] transition-transform duration-300"
             >
               {/* Image Container */}
               <div className="h-64 md:h-72 lg:h-80 w-full overflow-hidden p-4 bg-[#d1d1d1]">
@@ -87,14 +112,14 @@ const Specialization: React.FC = () => {
         </div>
 
         {/* Visit More Button */}
-        <div className="flex justify-center">
-          <button
-            className={`bg-white text-[#07119B] font-bold py-4 px-10 text-lg rounded-sm hover:scale-105 hover:shadow-2xl active:scale-95 transition-all duration-700 ease-out shadow-lg ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            style={{ transitionDelay: '700ms' }}
-          >
-            Visit More
-          </button>
+        <div className="flex justify-center ">
+          <div className={`inline-block transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <button
+              className="bg-white text-[#07119B] font-bold py-4 px-10 text-lg rounded-sm transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg"
+            >
+              Visit More
+            </button>
+          </div>
         </div>
       </div>
     </section>
