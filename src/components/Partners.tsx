@@ -12,6 +12,7 @@ const Partners: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.1 }
@@ -22,19 +23,17 @@ const Partners: React.FC = () => {
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      observer.disconnect();
     };
   }, []);
 
   return (
     <section className="py-20 overflow-hidden" ref={sectionRef}>
       <div className="max-w-4xl mx-auto px-6 text-center mb-16">
-        <p className={`text-gray-400 font-medium tracking-widest text-sm uppercase mb-6 block transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <p className={`text-gray-400 font-medium tracking-widest text-sm mb-6 block transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {content.label}
         </p>
-        <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-10 tracking-tight leading-[1.1] transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-10 tracking-tight leading-[1.1] transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {content.title.split('top').map((part, i) => (
             <React.Fragment key={i}>
               {part}
@@ -42,9 +41,11 @@ const Partners: React.FC = () => {
             </React.Fragment>
           ))}
         </h2>
-        <button className={`bg-[#07119B] hover:bg-[#050D8A] text-white font-medium py-4 px-10 rounded-sm transition-all shadow-lg text-sm uppercase tracking-wider duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          Partner with us today
-        </button>
+        <div className={`inline-block transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <button className="bg-[#07119B] text-white font-medium py-4 px-10 rounded-sm hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg text-sm tracking-wider">
+            Partner with us today
+          </button>
+        </div>
       </div>
 
       {/* Partners Logo Track - Continuous Infinite Marquee */}
@@ -72,7 +73,7 @@ const Partners: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center">
-          <h3 className={`text-3xl md:text-4xl font-medium text-gray-900 mb-10 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h3 className={`text-3xl md:text-4xl font-medium text-gray-900 mb-10 transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Awards & Recognition
           </h3>
         </div>
