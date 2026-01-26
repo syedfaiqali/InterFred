@@ -67,7 +67,7 @@ export const websiteContent = {
         navItems: [
             { label: 'About us', href: '/about' },
             { label: 'Services', href: '/service' },
-            { label: 'Achievements', href: '/achievements' },
+            // { label: 'Achievements', href: '/achievements' },
             { label: 'Network', href: '/network' },
             { label: 'Tracking', href: '/tracking' },
         ],

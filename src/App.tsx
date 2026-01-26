@@ -22,7 +22,7 @@ const ServiceSpecialization = React.lazy(() => import('./components/ServiceSpeci
 const ServiceDetail = React.lazy(() => import('./components/ServiceDetail'))
 const ServiceSlider = React.lazy(() => import('./components/ServiceSlider'))
 const Network = React.lazy(() => import('./components/Network'))
-const Achievements = React.lazy(() => import('./components/Achievements'))
+// const Achievements = React.lazy(() => import('./components/Achievements'))
 const Tracking = React.lazy(() => import('./components/Tracking'))
 const CookieConsent = React.lazy(() => import('./components/CookieConsent'))
 
@@ -134,7 +134,7 @@ const App: React.FC = () => {
             } />
             <Route path="/service/:id" element={<ServiceDetail />} />
             <Route path="/network" element={<Network />} />
-            <Route path="/achievements" element={<Achievements />} />
+            {/* <Route path="/achievements" element={<Achievements />} /> */}
             <Route path="/tracking" element={<Tracking />} />
           </Routes>
           {/* Common Footer Sections for all pages as requested */}

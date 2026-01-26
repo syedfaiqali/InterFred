@@ -96,12 +96,11 @@ const Subscribe: FC = () => {
           <div className="lg:w-3/5 flex flex-col">
             {/* Top Navigation */}
             <nav className="flex flex-wrap justify-start gap-x-8 gap-y-4 mb-4">
-              {['About us.', 'Services.', 'Achievements.', 'Network.', 'Tracking.'].map((item) => {
+              {['About us.', 'Services.', 'Network.', 'Tracking.'].map((item) => {
                 const href = item === 'About us.' ? '/about' :
                   item === 'Services.' ? '/service' :
-                    item === 'Achievements.' ? '/achievements' :
-                      item === 'Network.' ? '/network' :
-                        item === 'Tracking.' ? '/tracking' : '/';
+                    item === 'Network.' ? '/network' :
+                      item === 'Tracking.' ? '/tracking' : '/';
 
                 const className = `text-lg md:text-xl font-medium transition-colors ${location.pathname === href ? 'text-[#0000A3]' : 'text-gray-600'} hover:text-[#0000A3]`;
 
