@@ -32,9 +32,7 @@ const App: React.FC = () => {
   const [isAssetsLoaded, setIsAssetsLoaded] = React.useState(false)
 
   React.useEffect(() => {
-    // Only preload on first land or landing on home
-    if (location.pathname !== '/' && isAssetsLoaded) return;
-
+    // Critical images that affect layout and initial visual impression
     const criticalImages = [
       websiteContent.hero.bgImage,
       websiteContent.valueProp.mainShipImg,
@@ -44,49 +42,46 @@ const App: React.FC = () => {
     ];
 
     let loadedCount = 0;
+    const totalImages = criticalImages.length;
 
-    // Safety timeout: don't keep users waiting longer than 6 seconds
-    const timeout = setTimeout(() => {
-      setIsAssetsLoaded(true);
-    }, 6000);
-
-    const handleAssetLoad = () => {
+    const checkAllLoaded = () => {
       loadedCount++;
-      if (loadedCount === criticalImages.length) {
-        clearTimeout(timeout);
-        setIsAssetsLoaded(true);
-        // Refresh ScrollTrigger after lazy components have had time to mount
-        // 1500ms is a safe window for React to resolve Suspense and render children
+      if (loadedCount === totalImages) {
+        // All images loaded/errored.
+        // Give a little extra buffer for React to paint, then hide loader.
         setTimeout(() => {
-          import('gsap').then(({ default: gsap }) => {
-            import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-              gsap.registerPlugin(ScrollTrigger);
-              ScrollTrigger.refresh(true);
-            });
-          });
-        }, 1500);
+          setIsAssetsLoaded(true);
+          
+          // Force a ScrollTrigger refresh after the loader lifts to ensure 
+          // all pinned sections (slide gallery, ships) calculate correctly against the final DOM.
+          // We delay this slightly to ensure the re-render from setIsAssetsLoaded(true) has completed.
+          setTimeout(() => {
+             import('gsap').then(({ default: gsap }) => {
+                import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+                   ScrollTrigger.refresh(); 
+                });
+             });
+          }, 500);
+        }, 800);
       }
     };
 
-    // If not on home page, and assets are not yet loaded,
-    // we still want to set isAssetsLoaded to true immediately
-    // to avoid showing the loader on non-home pages.
-    // The image loading will still happen in the background.
-    if (location.pathname !== '/' && !isAssetsLoaded) {
-      setIsAssetsLoaded(true);
-    }
+    // Safety timeout: forced unlock after 8 seconds in case of network issues
+    const timeout = setTimeout(() => {
+        setIsAssetsLoaded(true);
+    }, 8000);
 
     criticalImages.forEach(src => {
       const img = new Image();
       img.src = src;
-      img.onload = handleAssetLoad;
-      img.onerror = handleAssetLoad;
+      img.onload = checkAllLoaded;
+      img.onerror = checkAllLoaded;
     });
 
     return () => clearTimeout(timeout);
-  }, [location.pathname, isAssetsLoaded]); // Added isAssetsLoaded to dependencies for the new logic
+  }, []); // Run once on mount
 
-  if (!isAssetsLoaded && isHomePage) {
+  if (!isAssetsLoaded) {
     return <Loader />
   }
 

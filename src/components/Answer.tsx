@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/Answer.css';
@@ -20,7 +20,7 @@ const Answer: React.FC = () => {
   const planeRef = useRef<HTMLDivElement>(null);
   const infoBoxRefs = useRef<HTMLDivElement[]>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Preload images
     const containerImgLoader = new Image();
     containerImgLoader.src = content.containerImg;
@@ -87,6 +87,13 @@ const Answer: React.FC = () => {
 
     return () => ctx.revert();
   }, [words.length]);
+
+  // Refresh ScrollTrigger when images load to prevent layout shifts affecting downstream sections
+  useEffect(() => {
+    if (isContainerLoaded || isPlaneLoaded) {
+      ScrollTrigger.refresh();
+    }
+  }, [isContainerLoaded, isPlaneLoaded]);
 
   return (
     <div className="answer-wrapper">
