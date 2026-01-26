@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShipSVG from '../Assets/Ship.svg';
@@ -24,7 +24,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
   const roadRef = useRef<HTMLDivElement>(null);
   const text3Ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Initial states
       gsap.set(
@@ -84,6 +84,27 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
     }, containerRef);
 
     return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    // Force refresh after a short delay to ensure everything is settled, 
+    // especially important for first load if images/fonts take time
+    const handleLoad = () => {
+        ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('load', handleLoad);
+    
+    // Also trigger a refresh after a small timeout as a fallback 
+    // in case the load event already fired or is missed
+    const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+    }, 500);
+
+    return () => {
+        window.removeEventListener('load', handleLoad);
+        clearTimeout(timer);
+    };
   }, []);
 
   return (

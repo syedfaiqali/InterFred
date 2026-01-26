@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -20,104 +20,102 @@ const ValueProp: React.FC = () => {
   const shipSectionRef = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    // Preload ships
-    const mainImg = new Image();
-    mainImg.src = content.mainShipImg;
-    mainImg.onload = () => setIsMainShipLoaded(true);
-
-    const highImg = new Image();
-    highImg.src = content.highlightedShipImg;
-    highImg.onload = () => setIsHighShipLoaded(true);
-
-    /* ================= HIGHLIGHT CARD ================= */
-    if (highlightRef.current) {
-      gsap.set(highlightRef.current, {
-        opacity: 0,
-        y: 80,
-      });
-
-      gsap.to(highlightRef.current, {
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 75%",
-          end: "top 25%",
-          toggleActions: "play none none reverse",
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out",
-      });
-    }
-
-    /* ================= CARDS ================= */
-    cardRefs.current.forEach((card, index) => {
-      if (card) {
-        gsap.set(card, {
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      /* ================= HIGHLIGHT CARD ================= */
+      if (highlightRef.current) {
+        gsap.set(highlightRef.current, {
           opacity: 0,
-          y: 60,
-          scale: 0.95,
+          y: 80,
         });
 
-        gsap.to(card, {
+        gsap.to(highlightRef.current, {
           scrollTrigger: {
             trigger: contentRef.current,
-            start: "top 70%",
-            end: "top 20%",
+            start: "top 75%",
+            end: "top 25%",
             toggleActions: "play none none reverse",
           },
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 0.8,
+          duration: 0.9,
           ease: "power3.out",
-          delay: index * 0.2,
         });
       }
-    });
 
-    /* ================= SECOND SHIP (TOP-RIGHT → CENTER → BOTTOM-LEFT) ================= */
-    if (shipRef.current && shipSectionRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: shipSectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2, // Increased inertia for a "heavier" industrial feel
-        },
-      });
+      /* ================= CARDS ================= */
+      cardRefs.current.forEach((card, index) => {
+        if (card) {
+          gsap.set(card, {
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
+          });
 
-      tl.fromTo(
-        shipRef.current,
-        {
-          x: 400,
-          y: -5,
-          scale: 1,
-          opacity: 1,
-        },
-        {
-          x: 0,
-          y: 200,
-          scale: 1,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power1.out",
+          gsap.to(card, {
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: "top 70%",
+              end: "top 20%",
+              toggleActions: "play none none reverse",
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: index * 0.2,
+          });
         }
-      ).to(shipRef.current, {
-        x: -400,
-        y: 450,
-        scale: 1,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power1.in",
       });
-    }
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+      /* ================= SECOND SHIP (TOP-RIGHT → CENTER → BOTTOM-LEFT) ================= */
+      if (shipRef.current && shipSectionRef.current) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: shipSectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2, // Increased inertia for a "heavier" industrial feel
+          },
+        });
+
+        tl.fromTo(
+          shipRef.current,
+          {
+            x: 400,
+            y: -5,
+            scale: 1,
+            opacity: 1,
+          },
+          {
+            x: 0,
+            y: 200,
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.out",
+          }
+        ).to(shipRef.current, {
+          x: -400,
+          y: 450,
+          scale: 1,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power1.in",
+        });
+      }
+    }, contentRef);
+
+    return () => ctx.revert();
   }, []);
+
+  // Refresh ScrollTrigger when images are loaded to ensure correct positions
+  useEffect(() => {
+    if (isMainShipLoaded && isHighShipLoaded) {
+      ScrollTrigger.refresh();
+    }
+  }, [isMainShipLoaded, isHighShipLoaded]);
 
   return (
     <>

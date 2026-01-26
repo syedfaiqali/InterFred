@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -80,47 +80,53 @@ const ValueProposition: React.FC = () => {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        // GSAP Animation for Cards
-        const cards = cardRefs.current.filter(Boolean); // Filter out nulls
-
-        if (cards.length > 0) {
-            gsap.set(cards, { y: 100, opacity: 0 });
-
-            ScrollTrigger.batch(cards, {
-                onEnter: (batch) => {
-                    gsap.to(batch, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.2,
-                        ease: "power3.out",
-                        overwrite: true,
-                    });
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            // OBSERVER LOGIC
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                        observer.disconnect();
+                    }
                 },
-                start: "top 85%",
-                // toggleActions: "play none none reverse", // Optional: to reverse on scroll up
-            });
-        }
+                { threshold: 0.1 }
+            );
 
-        return () => {
-            observer.disconnect();
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+            if (sectionRef.current) {
+                observer.observe(sectionRef.current);
+            }
+
+            // GSAP Animation for Cards
+            const cards = cardRefs.current.filter(Boolean); // Filter out nulls
+
+            if (cards.length > 0) {
+                gsap.set(cards, { y: 100, opacity: 0 });
+
+                ScrollTrigger.batch(cards, {
+                    onEnter: (batch) => {
+                        gsap.to(batch, {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.2,
+                            ease: "power3.out",
+                            overwrite: true,
+                        });
+                    },
+                    start: "top 85%",
+                    // toggleActions: "play none none reverse", // Optional: to reverse on scroll up
+                });
+            }
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        const handleLoad = () => ScrollTrigger.refresh();
+        window.addEventListener('load', handleLoad);
+        return () => window.removeEventListener('load', handleLoad);
     }, []);
 
     return (
