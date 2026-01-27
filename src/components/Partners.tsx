@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import { websiteContent } from '../data/websiteContent';
+import ContactModal from './ContactModal';
 
 const Partners: React.FC = () => {
   const content = websiteContent.partners;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -42,7 +43,7 @@ const Partners: React.FC = () => {
           ))}
         </h2>
         <div className={`inline-block transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <button className="bg-[#07119B] text-white font-medium py-4 px-10 rounded-sm hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg text-sm tracking-wider">
+          <button className="bg-[#07119B] text-white font-medium py-4 px-10 rounded-sm hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg text-sm tracking-wider" onClick={() => setIsContactModalOpen(true)}>
             Partner with us today
           </button>
         </div>
@@ -100,6 +101,7 @@ const Partners: React.FC = () => {
           ))}
         </div>
       </div>
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </section>
   );
 };

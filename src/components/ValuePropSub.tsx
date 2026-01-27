@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, forwardRef, useLayoutEffect } from 
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ContactModal from "./ContactModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,6 +80,7 @@ const ValueProposition: React.FC = () => {
     const cardRefs = useRef<HTMLDivElement[]>([]);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -155,7 +157,7 @@ const ValueProposition: React.FC = () => {
                             </h2>
 
                             <div className={`inline-block transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                                <button className="bg-[#07119B] text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm tracking-wider font-semibold hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
+                                <button className="bg-[#07119B] text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm tracking-wider font-semibold hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95" onClick={() => setIsContactModalOpen(true)}>
                                     Let's discuss today!
                                 </button>
                             </div>
@@ -218,6 +220,7 @@ const ValueProposition: React.FC = () => {
 
                 </div>
             </div>
+        <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
         </section>
     );
 };
