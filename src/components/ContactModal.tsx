@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
+import Loader from './Loader';
 import { Toast } from './Toast';
+import emailjs from "@emailjs/browser";
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -12,6 +14,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [message, setMessage] = React.useState('');
+    const [isLoading, setIsLoading] = React.useState(false);
     const [toast, setToast] = React.useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
     const validateEmail = (email: string) => {
@@ -22,44 +25,62 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             );
     };
 
-    const handleSend = (e: React.MouseEvent) => {
-        e.preventDefault();
+const handleSend = async (e: React.MouseEvent) => {
+  e.preventDefault();
 
-        // Step 1: Check if name is provided
-        if (!name.trim()) {
-            setToast({ message: 'Please enter your name', type: 'error' });
-            return;
-        }
+  if (!name.trim()) {
+    setToast({ message: "Please enter your name", type: "error" });
+    return;
+  }
 
-        // Step 2: Check if email is provided
-        if (!email.trim()) {
-            setToast({ message: 'Please enter your email address', type: 'error' });
-            return;
-        }
+  if (!email.trim()) {
+    setToast({ message: "Please enter your email", type: "error" });
+    return;
+  }
 
-        // Step 3: Validate email pattern
-        if (!validateEmail(email)) {
-            setToast({ message: 'Please enter a valid email address', type: 'error' });
-            return;
-        }
+  if (!validateEmail(email)) {
+    setToast({ message: "Invalid email address", type: "error" });
+    return;
+  }
 
-        // Step 4: Check if message is provided
-        if (!message.trim()) {
-            setToast({ message: 'Please enter a message', type: 'error' });
-            return;
-        }
+  if (!message.trim()) {
+    setToast({ message: "Please enter a message", type: "error" });
+    return;
+  }
 
-        // Step 5: Success - Show thank you message
-        setToast({ message: 'Message sent successfully! We\'ll get back to you soon. 🎉', type: 'success' });
+  try {
+    setIsLoading(true);
+    await emailjs.send(
+      "service_20ol5yp", // Service ID
+      "template_oyjyeqn", // Template ID
+      {
+        name,
+        email,
+        message,
+      },
+      "tQPEYvigecRlgO6iN" //Public Key
+    );
 
-        // Reset form and close modal after a delay
-        setTimeout(() => {
-            setName('');
-            setEmail('');
-            setMessage('');
-            onClose();
-        }, 2000);
-    };
+    setToast({
+      message: "Message sent successfully! 🎉",
+      type: "success",
+    });
+
+    setTimeout(() => {
+      setName("");
+      setEmail("");
+      setMessage("");
+      onClose();
+    }, 2000);
+  } catch (error) {
+    setToast({
+      message: "Failed to send message. Try again.",
+      type: "error",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
     // Prevent background scrolling when modal is open
     React.useEffect(() => {
@@ -76,6 +97,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     return (
         <AnimatePresence>
             {isOpen && (
+                <>
+                {isLoading && <Loader isTransparent />}
                 <div
                     className="fixed inset-0 z-[200] flex justify-center items-center p-4 md:p-8 lg:p-12 bg-black/60 backdrop-blur-sm"
                     onClick={onClose}
@@ -197,6 +220,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         </div>
                     </motion.div>
                 </div>
+                </>
             )}
         </AnimatePresence>
     );

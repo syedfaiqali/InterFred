@@ -14,7 +14,7 @@ const ValueProp = React.lazy(() => import('./components/ValueProp'))
 const ValuePropSub = React.lazy(() => import('./components/ValuePropSub'))
 const Specialization = React.lazy(() => import('./components/Specialization'))
 const Partners = React.lazy(() => import('./components/Partners'))
-const FAQ = React.lazy(() => import('./components/FAQ'))
+// const FAQ = React.lazy(() => import('./components/FAQ'))
 const Subscribe = React.lazy(() => import('./components/Subscribe'))
 const ScrollingText = React.lazy(() => import('./components/ScrollingText'))
 const ServicesSection = React.lazy(() => import('./components/ServicesSection'))
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                   <ValuePropSub />
                   <Specialization />
                   <Partners />
-                  <FAQ />
+                  {/* <FAQ /> */}
                 </div>
               </>
             } />
@@ -124,7 +124,7 @@ const App: React.FC = () => {
                 <ServicesSection />
                 <ServiceSpecialization />
                 <ServiceSlider />
-                <FAQ />
+                {/* <FAQ /> */}
               </div>
             } />
             <Route path="/service/:id" element={<ServiceDetail />} />

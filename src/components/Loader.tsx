@@ -1,9 +1,13 @@
 import React from 'react';
 import stickyLogo from '../assets/Vector.svg';
 
-const Loader: React.FC = () => {
+interface LoaderProps {
+    isTransparent?: boolean;
+}
+
+const Loader: React.FC<LoaderProps> = ({ isTransparent = false }) => {
     return (
-        <div className="fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-white">
+        <div className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center ${isTransparent ? 'bg-white/30 backdrop-blur-sm' : 'bg-white'}`}>
             <div className="relative flex items-center justify-center">
                 {/* Outer spinning ring */}
                 <div className="w-24 h-24 border-4 border-gray-100 border-t-[#07119B] rounded-full animate-spin"></div>

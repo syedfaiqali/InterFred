@@ -10,6 +10,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@reduxjs/toolkit": "1.9.5",
     "framer-motion": "^12.26.2",
     "gsap": "^3.14.2",
