@@ -117,7 +117,6 @@ const Specialization: React.FC = () => {
           <div className={`inline-block transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <button
               className="bg-white text-[#07119B] font-bold py-4 px-10 text-lg rounded-sm transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg"
-              onClick={serviceTabOpening}
             >
               <Link to={'/service'} key={'/service'}>
                 Visit More
