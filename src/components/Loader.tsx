@@ -1,5 +1,5 @@
 import React from 'react';
-import stickyLogo from '../assets/Vector.svg';
+import stickyLogo from '../assets/Vector.webp';
 
 interface LoaderProps {
     isTransparent?: boolean;

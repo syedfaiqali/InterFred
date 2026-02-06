@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import shipGlobal from '../assets/ServicePlane.svg';
-import servicesShip from '../assets/connectionship.svg';
+import shipGlobal from '../assets/ServicePlane.webp';
+import servicesShip from '../assets/connectionship.webp';
 import { websiteContent } from '../data/websiteContent';
 
 const ServicesSection: React.FC = () => {

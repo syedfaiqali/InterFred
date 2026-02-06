@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import orangeTruck from '../assets/serviceslider1.svg';
-import specializedLogistics from '../assets/serviceslider2.svg';
-import aviationServices from '../assets/serviceslider3.svg';
-import outsourcingAndMaintenance from '../assets/serviceslider4.svg';
-import tradingAndEquipmentSupply from '../assets/serviceslider5.svg';
-import valueAddedServices from '../assets/serviceslider6.svg';
-import warehouse from '../assets/serviceslider7.svg';
+import orangeTruck from '../assets/serviceslider1.webp';
+import specializedLogistics from '../assets/serviceslider2.webp';
+import aviationServices from '../assets/serviceslider3.webp';
+import outsourcingAndMaintenance from '../assets/serviceslider4.webp';
+import tradingAndEquipmentSupply from '../assets/serviceslider5.webp';
+import valueAddedServices from '../assets/serviceslider6.webp';
+import warehouse from '../assets/serviceslider7.webp';
 
 interface ServiceSlide {
     id: number;

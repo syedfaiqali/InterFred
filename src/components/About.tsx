@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import cargoPlane from '../assets/AboutUsPlane.svg';
-import howWeDoItImage from '../assets/how we do it.svg';
+import cargoPlane from '../assets/AboutUsPlane.webp';
+import howWeDoItImage from '../assets/how we do it.webp';
 import { websiteContent } from '../data/websiteContent';
 
 const About: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import networkHero from '../assets/Network1.svg';
-import networkMap from '../assets/Network2.svg';
+import networkHero from '../assets/Network1.webp';
+import networkMap from '../assets/Network2.webp';
 import NetworkLocations from './NetworkLocations';
 import { websiteContent } from '../data/websiteContent';
 
