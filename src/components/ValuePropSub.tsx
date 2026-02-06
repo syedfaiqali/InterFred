@@ -84,51 +84,74 @@ const ValueProposition: React.FC = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // OBSERVER LOGIC
+            // OBSERVER LOGIC - This is very reliable for detecting when the section enters view
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     if (entry.isIntersecting) {
                         setIsVisible(true);
+                        // We keep the observer if we want to support re-entering, 
+                        // but for a one-time entrance animation, disconnect is fine.
                         observer.disconnect();
                     }
                 },
-                { threshold: 0.1 }
+                {
+                    threshold: 0.1,
+                    // Add rootMargin to trigger a bit earlier
+                    rootMargin: "0px 0px -100px 0px"
+                }
             );
 
             if (sectionRef.current) {
                 observer.observe(sectionRef.current);
             }
 
-            // GSAP Animation for Cards
-            const cards = cardRefs.current.filter(Boolean); // Filter out nulls
-
+            // GSAP Initial state for cards
+            const cards = cardRefs.current.filter(Boolean);
             if (cards.length > 0) {
-                gsap.set(cards, { y: 100, opacity: 0 });
-
-                ScrollTrigger.batch(cards, {
-                    onEnter: (batch) => {
-                        gsap.to(batch, {
-                            y: 0,
-                            opacity: 1,
-                            duration: 0.8,
-                            stagger: 0.2,
-                            ease: "power3.out",
-                            overwrite: true,
-                        });
-                    },
-                    start: "top 85%",
-                    // toggleActions: "play none none reverse", // Optional: to reverse on scroll up
-                });
+                gsap.set(cards, { y: 40, opacity: 0 });
             }
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [location.pathname]);
+
+    // Handle card animations when section becomes visible
+    useEffect(() => {
+        if (isVisible) {
+            const cards = cardRefs.current.filter(Boolean);
+            if (cards.length > 0) {
+                gsap.to(cards, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    overwrite: true,
+                    // Ensure the animation actually finishes by using a slight delay if needed
+                    delay: 0.1
+                });
+            }
+        }
+    }, [isVisible]);
 
     useEffect(() => {
-        const handleLoad = () => ScrollTrigger.refresh();
-        window.addEventListener('load', handleLoad);
-        return () => window.removeEventListener('load', handleLoad);
+        // Multiple refreshes to catch lazy-loaded content or image loads above
+        const refresh = () => ScrollTrigger.refresh();
+
+        window.addEventListener('load', refresh);
+        window.addEventListener('resize', refresh);
+
+        const timeouts = [
+            setTimeout(refresh, 500),
+            setTimeout(refresh, 2000),
+            setTimeout(refresh, 5000)
+        ];
+
+        return () => {
+            window.removeEventListener('load', refresh);
+            window.removeEventListener('resize', refresh);
+            timeouts.forEach(t => clearTimeout(t));
+        };
     }, []);
 
     return (
@@ -220,7 +243,7 @@ const ValueProposition: React.FC = () => {
 
                 </div>
             </div>
-        <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
+            <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
         </section>
     );
 };
