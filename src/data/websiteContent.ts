@@ -1,4 +1,4 @@
-import bannerImage from '../assets/1.svg';
+import bannerImage from '../assets/1.webp';
 import certLogos from '../assets/Group 124.svg';
 import containerImg from '../assets/Container.svg';
 import planeImg from '../assets/PLANE.svg';
