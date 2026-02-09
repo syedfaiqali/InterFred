@@ -219,11 +219,12 @@
   }
 
   .plane-img {
-    max-width: 650px;
+    max-width: 500px;
   }
 
   .plane-section {
-    min-height: 500px;
+    min-height: 600px;
+    gap: 0;
   }
 
   .text-animation-section {
@@ -236,23 +237,23 @@
   }
 
   .main-text {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .info-box {
-    padding: 16px;
+    padding: 20px;
   }
 
   .info-box-top-left,
   .info-box-bottom-left {
-    max-width: 220px;
-    margin-right: 20px;
+    max-width: 240px;
+    justify-self: end;
   }
 
   .info-box-top-right,
   .info-box-bottom-right {
-    max-width: 220px;
-    margin-left: 20px;
+    max-width: 240px;
+    justify-self: start;
   }
 }
 
