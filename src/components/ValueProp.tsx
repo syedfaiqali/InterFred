@@ -120,7 +120,7 @@ const ValueProp: React.FC = () => {
   return (
     <>
       {/* ================= FIRST SHIP (FULL SECTION) ================= */}
-      <div className="relative w-full h-[100vh] bg-[#0a0a0a] overflow-hidden">
+      <div className="relative w-full h-[60vh] md:h-[100vh] bg-[#0a0a0a] overflow-hidden">
         <img
           src={content.mainShipImg}
           alt="Ship"
