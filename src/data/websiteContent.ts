@@ -268,7 +268,7 @@ export const websiteContent = {
             },
             {
                 question: "Do you have warehousing facilities?",
-                answer: "Yes, we own a secure warehouse located in Shershah, near the Karachi port, equipped with modern inventory management systems."
+                answer: "We operate secure, modern warehouses in Pakistan and across the globe, equipped with advanced inventory management systems."
             }
         ]
     },
@@ -393,12 +393,12 @@ export const websiteContent = {
             image: f3
         },
         {
-            year: '2008 - Present',
+            year: '2008-2017',
             description: 'Innovation & Global Expansion Continued expansion of the global network to over 250 destinations and securing contracts with the U.S. Armed Forces and UN for Afghanistan logistics.',
             image: f2
         },
         {
-            year: '2018-19',
+            year: '2018-Present',
             description: 'Carrier Recognition Awards: Emirates SkyCargo, Qatar Airways Cargo, Lufthansa Cargo, Turkish Cargo.',
             image: f1
         }

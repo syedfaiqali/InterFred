@@ -137,7 +137,7 @@ const App: React.FC = () => {
             {/* <Subscribe /> */}
             <ScrollingText />
           </div>
-          <CookieConsent />
+          {/* <CookieConsent /> */}
         </React.Suspense>
       </main>
     </div>
