@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import stickyLogo from '../assets/Vector.webp'
 import ContactModal from './ContactModal'
 import { websiteContent } from '../data/websiteContent'
+import { Home } from 'lucide-react'
 
 const Header: React.FC = () => {
   const content = websiteContent.header;
@@ -77,6 +78,12 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <div className={`flex items-center gap-8 transition-all duration-300 origin-right ${!scrolled ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'} ${isHomePage ? 'text-white' : 'text-gray-800'}`}>
+              <Link
+                to="/"
+                className={`transition-all duration-300 flex items-center ${isHomePage ? 'hover:text-white' : 'hover:text-[#000]'} ${isActive('/') ? (isHomePage ? 'text-white font-bold' : 'text-[#000] font-bold') : `font-medium ${isHomePage ? 'text-gray-400' : 'text-gray-600'}`}`}
+              >
+                <Home size={18} />
+              </Link>
               {content.navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -129,6 +136,13 @@ const Header: React.FC = () => {
             <div
               className={`hidden md:flex bg-[#f6f6f6] shadow-md rounded-md px-6 py-2.5 items-center gap-6 transition-all duration-300 origin-right ${isMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute right-full mr-4'}`}
             >
+              <Link
+                to="/"
+                className={`transition-all duration-300 hover:text-[#000] flex items-center ${isActive('/') ? 'text-gray-800 font-bold' : 'text-gray-600 font-medium'}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Home size={18} />
+              </Link>
               {content.navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -177,6 +191,15 @@ const Header: React.FC = () => {
         <button onClick={() => setMobileMenuOpen(false)} className="absolute top-4 right-6 text-white text-4xl z-50 font-light">✕</button>
 
         <div className="grid grid-cols-2 w-full min-h-full content-start text-left">
+          <Link
+            to="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`aspect-square p-6 flex flex-col justify-end border border-white/5 transition-colors no-underline ${isActive('/') ? 'bg-[#252525]' : 'bg-[#1a1a1a] hover:bg-[#252525]'}`}
+          >
+            <span className={`flex items-center gap-2 text-lg font-bold ${isActive('/') ? 'text-white' : 'text-gray-400 hover:text-white'}`}>
+              <Home size={20} /> Home.
+            </span>
+          </Link>
           {content.navItems.map((item) => (
             <Link
               key={item.href}
