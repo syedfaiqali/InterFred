@@ -66,12 +66,16 @@ const FAQ: React.FC = () => {
                 href={`mailto:${content.contactEmail}`}
                 className="inline-flex items-center text-xl text-blue-800 font-bold underline transition-colors hover:text-blue-600"
               >
+                <Mail className="ml-2 mr-2 h-6 w-6 shrink-0" />
                 {content.contactEmail}
-                <Mail className="ml-2 h-5 w-5" />
               </a>
               <p className="inline-flex items-center text-lg text-gray-700 font-medium whitespace-pre-line">
+                <MapPin className="ml-2 mr-2 h-6 w-6 shrink-0 text-blue-800" />
                 {content.contactAddress}
-                <MapPin className="ml-2 h-5 w-5 text-blue-800" />
+              </p>
+              <p className="inline-flex items-center text-lg text-gray-700 font-medium whitespace-pre-line">
+                <MapPin className="ml-2 mr-2 h-6 w-6 shrink-0 text-blue-800" />
+                {content.contactAddressArabic}
               </p>
             </div>
           </div>

@@ -250,6 +250,7 @@ export const websiteContent = {
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@interfret.com',
         contactAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
+        contactAddressArabic: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
         items: [
             {
                 question: "Do you handle dangerous goods?",
