@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
+import { Mail, MapPin } from 'lucide-react'
 import { websiteContent } from '../data/websiteContent'
 
 interface FAQItem {
@@ -63,10 +64,15 @@ const FAQ: React.FC = () => {
               </p>
               <a
                 href={`mailto:${content.contactEmail}`}
-                className="text-xl text-blue-800 font-bold underline transition-colors hover:text-blue-600 block"
+                className="inline-flex items-center text-xl text-blue-800 font-bold underline transition-colors hover:text-blue-600"
               >
                 {content.contactEmail}
+                <Mail className="ml-2 h-5 w-5" />
               </a>
+              <p className="inline-flex items-center text-lg text-gray-700 font-medium whitespace-pre-line">
+                {content.contactAddress}
+                <MapPin className="ml-2 h-5 w-5 text-blue-800" />
+              </p>
             </div>
           </div>
 

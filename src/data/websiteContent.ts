@@ -249,6 +249,7 @@ export const websiteContent = {
         title: 'Quick answers to questions you may have',
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@interfret.com',
+        contactAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
         items: [
             {
                 question: "Do you handle dangerous goods?",
@@ -269,6 +270,10 @@ export const websiteContent = {
             {
                 question: "Do you have warehousing facilities?",
                 answer: "We operate secure, modern warehouses in Pakistan and across the globe, equipped with advanced inventory management systems."
+            },
+            {
+                question: "What is your office address?",
+                answer: "Address in English:\nFiras Bin Hamad Street,\nAl-Ruwais District,\nJeddah 23214,\nMakkah Region,\nSaudi Arabia"
             }
         ]
     },
