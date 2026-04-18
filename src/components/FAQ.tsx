@@ -2,6 +2,8 @@ import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Mail } from 'lucide-react'
 import { websiteContent } from '../data/websiteContent'
+import pkFlag from '../assets/pk.svg'
+import saFlag from '../assets/sa.svg'
 
 interface FAQItem {
   question: string
@@ -10,7 +12,7 @@ interface FAQItem {
 
 const PakistanFlag = () => (
   <img
-    src="https://flagcdn.com/pk.svg"
+    src={pkFlag}
     alt="Pakistan Flag"
     className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
     aria-hidden="true"
@@ -19,7 +21,7 @@ const PakistanFlag = () => (
 
 const SaudiFlag = () => (
   <img
-    src="https://flagcdn.com/sa.svg"
+    src={saFlag}
     alt="Saudi Arabia Flag"
     className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
     aria-hidden="true"

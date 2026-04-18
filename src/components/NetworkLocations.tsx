@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { websiteContent } from '../data/websiteContent';
+import pkFlag from '../assets/pk.svg';
+import saFlag from '../assets/sa.svg';
 
 interface Country {
     name: string;
@@ -55,7 +57,11 @@ const NetworkLocations: React.FC = () => {
                             {/* Flag Container */}
                             <div className="relative aspect-[4/3] rounded-t-[1.5rem] md:rounded-t-[2rem] lg:rounded-t-[2.5rem] overflow-hidden bg-gray-50 flex items-center justify-center">
                                 <img
-                                    src={`https://flagcdn.com/w320/${country.code.toLowerCase()}.png`}
+                                    src={
+                                        country.code === 'PK' ? pkFlag :
+                                        country.code === 'SA' ? saFlag :
+                                        `https://flagcdn.com/w320/${country.code.toLowerCase()}.png`
+                                    }
                                     alt={`${country.name} flag`}
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
