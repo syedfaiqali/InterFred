@@ -248,9 +248,10 @@ export const websiteContent = {
         label: 'FAQ',
         title: 'Quick answers to questions you may have',
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
-        contactEmail: 'info@interfret.com',
-        contactAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
-        contactAddressArabic: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
+        contactEmail: 'info@inter-fret.com',
+        pakistanAddress: '2nd Floor, AMIR Trade Centre, Allah Walli Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan',
+        SaudiEnglishAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
+        SaudiArabicAddress: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
         items: [
             {
                 question: "Do you handle dangerous goods?",
@@ -274,13 +275,13 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "Address in English:\nFiras Bin Hamad Street,\nAl-Ruwais District,\nJeddah 23214,\nMakkah Region,\nSaudi Arabia"
+                answer: "Firas Bin Hamad Street,\nAl-Ruwais District,\nJeddah 23214,\nMakkah Region,\nSaudi Arabia"
             }
         ]
     },
     subscribe: {
         title: 'Subscribe to Newsletters',
-        subtitle: 'Want to stay up to date? Sign up for InterFret\'s biannual update.',
+        subtitle: 'Want to stay up to date? Sign up for Inter-Fret\'s biannual update.',
         offices: [
             {
                 title: 'Head Office',
@@ -296,7 +297,7 @@ export const websiteContent = {
             }
         ],
         contact: {
-            email: 'info@interfret.com',
+            email: 'info@inter-fret.com',
             phone: '+9233154989455'
         }
     },

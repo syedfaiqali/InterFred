@@ -1,12 +1,30 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { Mail, MapPin } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { websiteContent } from '../data/websiteContent'
 
 interface FAQItem {
   question: string
   answer: string
 }
+
+const PakistanFlag = () => (
+  <img
+    src="https://flagcdn.com/pk.svg"
+    alt="Pakistan Flag"
+    className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
+    aria-hidden="true"
+  />
+)
+
+const SaudiFlag = () => (
+  <img
+    src="https://flagcdn.com/sa.svg"
+    alt="Saudi Arabia Flag"
+    className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
+    aria-hidden="true"
+  />
+)
 
 const FAQ: React.FC = () => {
   const content = websiteContent.faq;
@@ -69,14 +87,28 @@ const FAQ: React.FC = () => {
                 <Mail className="ml-2 mr-2 h-6 w-6 shrink-0" />
                 {content.contactEmail}
               </a>
-              <p className="inline-flex items-center text-lg text-gray-700 font-medium whitespace-pre-line">
-                <MapPin className="ml-2 mr-2 h-6 w-6 shrink-0 text-blue-800" />
-                {content.contactAddress}
-              </p>
-              <p className="inline-flex items-center text-lg text-gray-700 font-medium whitespace-pre-line">
-                <MapPin className="ml-2 mr-2 h-6 w-6 shrink-0 text-blue-800" />
-                {content.contactAddressArabic}
-              </p>
+              <div className="space-y-10 pt-6 border-t border-gray-100 mt-6">
+                {/* Pakistan Section - Row 1 */}
+                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
+                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
+                    <PakistanFlag />
+                  </span>
+                  <span>{content.pakistanAddress}</span>
+                </div>
+                {/* Saudi Arabia Section - Row 2 (Both start from 1st line of this row) */}
+                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
+                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
+                    <SaudiFlag />
+                  </span>
+                  <span>{content.SaudiEnglishAddress}</span>
+                </div>
+                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
+                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
+                    <SaudiFlag />
+                  </span>
+                  <span>{content.SaudiArabicAddress}</span>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -143,7 +143,7 @@ const handleSend = async (e: React.MouseEvent) => {
                                     Get in<br />touch with<br />us!
                                 </h2>
                                 <p className="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xs font-medium">
-                                    We are currently working at full speed on the development of the ship. Feel free to reach out to us if you are keen on finding out more about InterFret.
+                                    We are currently working at full speed on the development of the ship. Feel free to reach out to us if you are keen on finding out more about Inter-Fret.
                                 </p>
                             </div>
                         </div>
@@ -195,10 +195,10 @@ const handleSend = async (e: React.MouseEvent) => {
                             <div className="p-8 md:p-10 pl-0 flex flex-col justify-center overflow-y-auto">
                                 <p className="text-white/80 text-[10px] md:text-xs font-medium tracking-wider">Or just wanna say hi?</p>
                                 <a
-                                    href="mailto:info@interfret.com"
+                                    href="mailto:info@inter-fret.com"
                                     className="text-white text-lg md:text-xl lg:text-2xl underline font-medium transition-all truncate"
                                 >
-                                    info@interfret.com
+                                    info@inter-fret.com
                                 </a>
                             </div>
                         </div>
