@@ -275,7 +275,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "Pakistan Office: 2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan\n\nSaudi Arabia Office: Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
+                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
             }
         ]
     },
