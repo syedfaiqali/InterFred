@@ -147,11 +147,11 @@ const ServiceSpecialization: React.FC = () => {
                 ></div>
 
                 {/* Truck Image Container */}
-                <div className="relative max-w-[1400px] mx-auto z-10 flex justify-center lg:block h-[500px]">
+                <div className="relative max-w-[1400px] mx-auto z-10 flex justify-center lg:block h-[320px] sm:h-[420px] lg:h-[500px]">
                     <img
                         src={config.truckImage}
                         alt="Logistics Truck"
-                        className={`relative w-[90%] h-[70%] md:h-full lg:w-[60%] max-w-4xl mx-auto lg:mx-0 lg:ml-[20%] drop-shadow-2xl transition-all duration-[1500ms] ease-out delay-500 ${truckVisible
+                        className={`relative w-[90%] h-[80%] md:h-full lg:w-[60%] max-w-4xl mx-auto lg:mx-0 lg:ml-[20%] drop-shadow-2xl transition-all duration-[1500ms] ease-out delay-500 ${truckVisible
                             ? 'opacity-100 translate-x-0 translate-y-[-10%]'
                             : 'opacity-0 -translate-x-full translate-y-[10%]'
                             }`}
