@@ -249,7 +249,7 @@ export const websiteContent = {
         title: 'Quick answers to questions you may have',
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@inter-fret.com',
-        pakistanAddress: '2nd Floor, AMIR Trade Centre, Allah Walli Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan',
+        pakistanAddress: '2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan',
         SaudiEnglishAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
         SaudiArabicAddress: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
         items: [
@@ -275,7 +275,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "Firas Bin Hamad Street,\nAl-Ruwais District,\nJeddah 23214,\nMakkah Region,\nSaudi Arabia"
+                answer: "Pakistan Office: 2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan\n\nSaudi Arabia Office: Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
             }
         ]
     },

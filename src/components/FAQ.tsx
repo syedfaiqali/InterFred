@@ -142,7 +142,7 @@ const FAQ: React.FC = () => {
                   <div
                     className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 pb-8' : 'max-h-0'}`}
                   >
-                    <p className="text-gray-500 text-lg leading-relaxed max-w-[90%] font-medium">
+                    <p className="text-gray-500 text-lg leading-relaxed w-full font-medium whitespace-pre-line">
                       {faq.answer}
                     </p>
                   </div>

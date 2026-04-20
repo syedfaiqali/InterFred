@@ -41,11 +41,11 @@ const ServicesSection: React.FC = () => {
 
                 {/* Top wide hero image wrapper */}
                 <div className={`relative pt-24 md:pt-32 lg:pt-0 mb-16 lg:mb-24 transition-all duration-1000 delay-100 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <div className="relative w-full aspect-[21/9] lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10">
+                    <div className="relative w-full h-[260px] sm:h-[340px] lg:h-auto lg:aspect-[3/1] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl z-10">
                         <img
                             src={shipGlobal}
                             alt="Interfret Global Logistics"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain lg:object-cover object-center"
                         />
                     </div>
                 </div>
