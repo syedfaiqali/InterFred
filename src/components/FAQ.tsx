@@ -28,6 +28,40 @@ const SaudiFlag = () => (
   />
 )
 
+const getGoogleMapsUrl = (address: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    address.replace(/\n/g, ' ')
+  )}`
+
+const AddressBlock = ({
+  flag,
+  address,
+  linkText,
+  mapQuery,
+}: {
+  flag: React.ReactNode
+  address: string
+  linkText: string
+  mapQuery?: string
+}) => (
+  <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
+    <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
+      {flag}
+    </span>
+    <div className="flex flex-col gap-2">
+      <span>{address}</span>
+      <a
+        href={getGoogleMapsUrl(mapQuery ?? address)}
+        target="_blank"
+        rel="noreferrer"
+        className="text-sm font-semibold text-blue-800 underline underline-offset-2 transition-colors hover:text-blue-600"
+      >
+        {linkText}
+      </a>
+    </div>
+  </div>
+)
+
 const FAQ: React.FC = () => {
   const content = websiteContent.faq;
   const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -90,26 +124,22 @@ const FAQ: React.FC = () => {
                 {content.contactEmail}
               </a>
               <div className="space-y-10 pt-6 border-t border-gray-100 mt-6">
-                {/* Pakistan Section - Row 1 */}
-                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
-                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
-                    <PakistanFlag />
-                  </span>
-                  <span>{content.pakistanAddress}</span>
-                </div>
-                {/* Saudi Arabia Section - Row 2 (Both start from 1st line of this row) */}
-                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
-                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
-                    <SaudiFlag />
-                  </span>
-                  <span>{content.SaudiEnglishAddress}</span>
-                </div>
-                <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
-                  <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
-                    <SaudiFlag />
-                  </span>
-                  <span>{content.SaudiArabicAddress}</span>
-                </div>
+                <AddressBlock
+                  flag={<PakistanFlag />}
+                  address={content.pakistanAddress}
+                  linkText="Click here to view on Google Maps"
+                />
+                <AddressBlock
+                  flag={<SaudiFlag />}
+                  address={content.SaudiEnglishAddress}
+                  linkText="Click here to view on Google Maps"
+                />
+                <AddressBlock
+                  flag={<SaudiFlag />}
+                  address={content.SaudiArabicAddress}
+                  mapQuery={content.SaudiEnglishAddress}
+                  linkText="اضغط هنا لعرض الموقع على خرائط جوجل"
+                />
               </div>
             </div>
           </div>
