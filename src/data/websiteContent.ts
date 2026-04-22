@@ -249,7 +249,7 @@ export const websiteContent = {
         title: 'Quick answers to questions you may have',
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@inter-fret.com',
-        pakistanAddress: '2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan',
+        pakistanAddress: '2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan',
         SaudiEnglishAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
         SaudiArabicAddress: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
         items: [
@@ -275,7 +275,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Centre, Allahwala Chowk, Tariq Rd, Block 2 PECHS, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
+                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
             }
         ]
     },
@@ -321,7 +321,7 @@ export const websiteContent = {
                 'Environment: 14001:2004',
                 'Health and Safety: 18001:1999'
             ],
-            mainText: 'IFCL offers comprehensive services in the field of Supply Chain Management & logistics and always meet the expectations of its customers round the clock with an easy . Located in the heart of Karachi and 15 minutes drive from Karachi International Airport and Karachi Port makes IFCL very accessible to its clients round the clock. Not only in Karachi but too in upper Pakistan IFCL offices are located near by Airport.',
+            mainText: 'IFCL provides end-to-end supply chain and logistics solutions, delivering dependable support to clients 24/7. Positioned in central Karachi, only 15 minutes from both Karachi International Airport and Karachi Port, the company offers convenient access for customers. Beyond Karachi, IFCL has established additional offices in northern Pakistan near key airports to ensure seamless service across the country.',
             image: howWeDoItImg
         },
         history: {
