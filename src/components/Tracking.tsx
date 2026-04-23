@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 const Tracking: React.FC = () => {
+    const websiteContent = useWebsiteContent();
     const content = websiteContent.tracking;
+    const { isArabic } = useLanguage();
     const [trackingId, setTrackingId] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'found' | 'error'>('idle');
     const resultRef = useRef<HTMLDivElement>(null);
@@ -54,25 +57,17 @@ const Tracking: React.FC = () => {
     }, [status]);
 
     return (
-        <section className="bg-white min-h-screen flex flex-col items-center pt-32 pb-20 overflow-hidden">
+        <section className={`bg-white min-h-screen flex flex-col items-center pt-32 pb-20 overflow-hidden ${isArabic ? 'rtl-text' : ''}`}>
             <div className="max-w-7xl mx-auto px-6 w-full">
                 {/* Header Section */}
                 <div className={`text-center transition-all duration-700 ease-in-out ${status === 'found' ? 'opacity-0 h-0 -translate-y-10 pointer-events-none mb-0' : 'opacity-100 mb-12'}`}>
                     <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4 uppercase">{content.header.label}</span>
                     <h1 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight mb-8">
-                        {(() => {
-                            const target = "Tracking";
-                            return content.header.title.split(target).map((part: string, i: number) => (
-                                <React.Fragment key={i}>
-                                    {part}
-                                    {i === 0 && <span className="text-[#07119B] font-bold">{target}</span>}
-                                </React.Fragment>
-                            ));
-                        })()}
+                        <span className="text-[#07119B] font-bold">{content.header.title}</span>
                     </h1>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-12">
                         {content.header.description} <br />
-                        <span className="text-xs text-gray-400">(Try: <span className="font-bold select-all underline text-[#07119B]">{content.header.validIdNote}</span>)</span>
+                        <span className="text-xs text-gray-400">({websiteContent.ui.tracking.tryPrefix} <span className="font-bold select-all underline text-[#07119B]">{content.header.validIdNote}</span>)</span>
                     </p>
 
                     <div className="max-w-xl mx-auto relative group">
@@ -82,13 +77,13 @@ const Tracking: React.FC = () => {
                             onChange={(e) => setTrackingId(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleTrack()}
                             placeholder={content.placeholder}
-                            className={`w-full px-8 py-5 bg-white border-2 rounded-2xl outline-none transition-all pr-40 text-lg shadow-sm ${status === 'error' ? 'border-red-500' : 'border-gray-100 focus:border-[#07119B]'
+                            className={`w-full px-8 py-5 bg-white border-2 rounded-2xl outline-none transition-all ${isArabic ? 'pl-40 text-right' : 'pr-40'} text-lg shadow-sm ${status === 'error' ? 'border-red-500' : 'border-gray-100 focus:border-[#07119B]'
                                 }`}
                         />
                         <button
                             onClick={handleTrack}
                             disabled={status === 'loading'}
-                            className="absolute right-2 top-2 bottom-2 bg-[#07119B] text-white px-10 rounded-xl font-bold hover:bg-[#050D8A] transition-all flex items-center gap-2"
+                            className={`absolute top-2 bottom-2 bg-[#07119B] text-white px-10 rounded-xl font-bold hover:bg-[#050D8A] transition-all flex items-center gap-2 ${isArabic ? 'left-2' : 'right-2'}`}
                         >
                             {status === 'loading' ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -109,8 +104,8 @@ const Tracking: React.FC = () => {
                     {status === 'found' && (
                         <div className="max-w-6xl mx-auto">
                             {/* Toolbar */}
-                            <div className="flex justify-between items-center mb-10 pb-6 border-b border-gray-100 animate-item">
-                                <div className="flex items-center gap-4">
+                            <div className={`flex justify-between items-center mb-10 pb-6 border-b border-gray-100 animate-item ${isArabic ? 'rtl-row' : ''}`}>
+                                <div className={`flex items-center gap-4 ${isArabic ? 'rtl-row' : ''}`}>
                                     <button
                                         onClick={() => { setStatus('idle'); setTrackingId(''); }}
                                         className="text-gray-400 hover:text-black flex items-center gap-2 group"
@@ -118,7 +113,7 @@ const Tracking: React.FC = () => {
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:-translate-x-1 transition-transform">
                                             <path d="M19 12H5M12 19l-7-7 7-7" />
                                         </svg>
-                                        Back to Search
+                                        {websiteContent.ui.tracking.backToSearch}
                                     </button>
                                     <div className="h-4 w-[1px] bg-gray-200"></div>
                                     <span className="text-sm text-gray-500 uppercase font-bold">ID: {VALID_ID}</span>
@@ -137,11 +132,11 @@ const Tracking: React.FC = () => {
                                     <div className="bg-[#07119B] rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl animate-item">
                                         <div className="relative z-10">
                                             <h3 className="text-2xl font-bold mb-2">{content.mockData.cargoType}</h3>
-                                            <p className="text-white/60 text-sm mb-8 uppercase tracking-widest font-bold">Master Bill of Lading: {Math.random().toString(36).substring(7).toUpperCase()}</p>
+                                            <p className="text-white/60 text-sm mb-8 uppercase tracking-widest font-bold">{websiteContent.ui.tracking.masterBill}: {Math.random().toString(36).substring(7).toUpperCase()}</p>
 
                                             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                                                 <div className="text-center md:text-left flex-1">
-                                                    <p className="text-white/50 text-xs mb-1 font-bold">ORIGIN</p>
+                                                    <p className="text-white/50 text-xs mb-1 font-bold">{websiteContent.ui.tracking.origin}</p>
                                                     <h4 className="text-2xl font-bold">{content.mockData.origin.name}</h4>
                                                     <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">{content.mockData.origin.code}</p>
                                                 </div>
@@ -156,7 +151,7 @@ const Tracking: React.FC = () => {
                                                     <p className="mt-4 text-[10px] text-white/40 tracking-tighter font-bold uppercase">{content.mockData.estimatedRemaining}</p>
                                                 </div>
                                                 <div className="text-center md:text-right flex-1">
-                                                    <p className="text-white/50 text-xs mb-1 font-bold">DESTINATION</p>
+                                                    <p className="text-white/50 text-xs mb-1 font-bold">{websiteContent.ui.tracking.destination}</p>
                                                     <h4 className="text-2xl font-bold">{content.mockData.destination.name}</h4>
                                                     <p className="text-sm text-white/70 font-bold uppercase tracking-tighter">{content.mockData.destination.code}</p>
                                                 </div>
@@ -170,7 +165,7 @@ const Tracking: React.FC = () => {
 
                                     {/* Detailed Status List */}
                                     <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm animate-item">
-                                        <h4 className="text-xl font-bold mb-8">Shipment Timeline</h4>
+                                        <h4 className="text-xl font-bold mb-8">{websiteContent.ui.tracking.shipmentTimeline}</h4>
                                         <div className="space-y-10">
                                             {content.mockData.timeline.map((item: { task: string; date: string; time: string; desc: string }, idx: number) => (
                                                 <div key={idx} className="flex gap-6 relative group/item timeline-item">
@@ -192,22 +187,22 @@ const Tracking: React.FC = () => {
                                 {/* Sidebar Stats */}
                                 <div className="space-y-8">
                                     <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 animate-item">
-                                        <h4 className="text-lg font-bold mb-6">Cargo Info</h4>
+                                        <h4 className="text-lg font-bold mb-6">{websiteContent.ui.tracking.cargoInfo}</h4>
                                         <div className="space-y-6">
                                             <div>
-                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Container Number</p>
+                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">{websiteContent.ui.tracking.containerNumber}</p>
                                                 <p className="font-bold text-gray-800">{content.mockData.cargoInfo.containerNumber}</p>
                                             </div>
                                             <div>
-                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Type & Size</p>
+                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">{websiteContent.ui.tracking.typeSize}</p>
                                                 <p className="font-bold text-gray-800">{content.mockData.cargoInfo.typeSize}</p>
                                             </div>
                                             <div>
-                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">Weight / Volume</p>
+                                                <p className="text-xs text-gray-400 uppercase mb-1 font-bold">{websiteContent.ui.tracking.weightVolume}</p>
                                                 <p className="font-bold text-gray-800">{content.mockData.cargoInfo.weightVolume}</p>
                                             </div>
                                             <div className="pt-6 border-t border-gray-200">
-                                                <h5 className="text-sm font-bold mb-4">Certified Safe</h5>
+                                                <h5 className="text-sm font-bold mb-4">{websiteContent.ui.tracking.certifiedSafe}</h5>
                                                 <div className="flex gap-4">
                                                     <div className="h-6 w-12 bg-gray-200 rounded animate-pulse"></div>
                                                     <div className="h-6 w-12 bg-gray-200 rounded animate-pulse"></div>

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import shipGlobal from '../assets/ServicePlane.webp';
 import servicesShip from '../assets/connectionship.webp';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 const ServicesSection: React.FC = () => {
-    const content = websiteContent.services;
+    const content = useWebsiteContent().services;
+    const { isArabic } = useLanguage();
     const [isVisible1, setIsVisible1] = useState(false);
     const [isVisible2, setIsVisible2] = useState(false);
 
@@ -54,19 +56,11 @@ const ServicesSection: React.FC = () => {
 
                     {/* Left: Heading and Label */}
                     <div className="lg:col-span-1 hidden lg:block"></div>
-                    <div className={`lg:col-span-4 space-y-8 transition-all duration-700 delay-300 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`lg:col-span-4 space-y-8 transition-all duration-700 delay-300 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${isArabic ? 'rtl-text' : ''}`}>
                         <div className="space-y-4">
                             <span className="text-gray-400 font-medium tracking-widest text-sm block">{content.hero.label}</span>
                             <h2 className="text-4xl lg:text-6xl font-medium leading-[1.1] text-[#1A1A1A]">
-                                {(() => {
-                                    const target = "Global Cargo Networks";
-                                    return content.hero.title.split(target).map((part: string, i: number) => (
-                                        <React.Fragment key={i}>
-                                            {part}
-                                            {i === 0 && <span className="text-[#07119B] font-bold">Global Cargo<br />Networks</span>}
-                                        </React.Fragment>
-                                    ));
-                                })()}
+                                <span className="text-[#07119B] font-bold">{content.hero.title}</span>
                             </h2>
                         </div>
                     </div>
@@ -74,7 +68,7 @@ const ServicesSection: React.FC = () => {
                     {/* Right: Secondary Image */}
                     <div className={`lg:col-span-6 relative transition-all duration-1000 delay-500 ${isVisible1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
                         {/* Decorative Blue Square - Connecting sections */}
-                        <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#07119B] hidden lg:block"></div>
+                        <div className={`absolute -top-12 w-32 h-32 bg-[#07119B] hidden lg:block ${isArabic ? '-left-12' : '-right-12'}`}></div>
 
                         <div className="rounded-lg overflow-hidden shadow-xl border border-gray-100 relative z-10">
                             <img
@@ -88,22 +82,9 @@ const ServicesSection: React.FC = () => {
                 </div>
 
                 {/* Comprehensive Solutions Section */}
-                <div className="mt-32 lg:mt-40 max-w-4xl mx-auto text-center space-y-10" ref={section2Ref}>
+                <div className={`mt-32 lg:mt-40 max-w-4xl mx-auto text-center space-y-10 ${isArabic ? 'rtl-text' : ''}`} ref={section2Ref}>
                     <h3 className={`text-3xl lg:text-5xl font-medium leading-tight text-[#1A1A1A] transition-all duration-700 delay-100 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        {(() => {
-                            const target = "Global Logistics, Aviation, and Industrial Solutions";
-                            return content.solutions.title.split(target).map((part: string, i: number) => (
-                                <React.Fragment key={i}>
-                                    {part}
-                                    {i === 0 && (
-                                        <span className="text-[#07119B] font-bold">
-                                            Global Logistics,<br />
-                                            Aviation, and Industrial Solutions
-                                        </span>
-                                    )}
-                                </React.Fragment>
-                            ));
-                        })()}
+                        <span className="text-[#07119B] font-bold">{content.solutions.title}</span>
                     </h3>
                     <p className={`text-lg lg:text-xl text-gray-600 leading-relaxed font-meduim px-4 transition-all duration-700 delay-300 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {content.solutions.description}

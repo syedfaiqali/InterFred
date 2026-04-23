@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import centerShip from '../assets/FoundationShip.svg';
 
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 interface Milestone {
     year: string;
@@ -9,9 +9,9 @@ interface Milestone {
     image: string;
 }
 
-const milestones: Milestone[] = websiteContent.milestones;
-
 const AboutFoundation: React.FC = () => {
+    const websiteContent = useWebsiteContent();
+    const milestones: Milestone[] = websiteContent.milestones;
     const historyContent = websiteContent.about.history;
     const [scrollProgress, setScrollProgress] = React.useState(0);
     const [isVisible, setIsVisible] = React.useState(false);

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,4 +85,73 @@ code {
 
 .animate-slide-in-right {
   animation: slideInRight 0.3s ease-out;
+}
+
+html[lang='ar'] body,
+html[lang='ar'] button,
+html[lang='ar'] input,
+html[lang='ar'] textarea,
+html[lang='ar'] select {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif;
+}
+
+html[dir='rtl'] .animate-marquee,
+html[dir='rtl'] .animate-marquee-infinite,
+html[dir='rtl'] .animate-marquee-infinite-reverse {
+  direction: ltr;
+}
+
+html[dir='rtl'] .rtl-text {
+  text-align: right;
+}
+
+html[dir='rtl'] .rtl-row {
+  flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .rtl-row-important {
+  flex-direction: row-reverse !important;
+}
+
+html[dir='rtl'] .rtl-left-auto {
+  left: auto !important;
+}
+
+html[dir='rtl'] .rtl-right-auto {
+  right: auto !important;
+}
+
+html[dir='rtl'] .rtl-pin-right {
+  right: 7% !important;
+  left: auto !important;
+}
+
+html[dir='rtl'] .rtl-pin-left {
+  left: 1rem !important;
+  right: auto !important;
+}
+
+html[dir='rtl'] .rtl-pin-left-lg {
+  left: 2rem !important;
+  right: auto !important;
+}
+
+html[dir='rtl'] .rtl-pad-right {
+  padding-right: 2rem !important;
+  padding-left: 0 !important;
+}
+
+html[dir='rtl'] .rtl-pad-left {
+  padding-left: 2rem !important;
+  padding-right: 0 !important;
+}
+
+html[dir='rtl'] .rtl-margin-right {
+  margin-right: 0.75rem !important;
+  margin-left: 0 !important;
+}
+
+html[dir='rtl'] .rtl-margin-left {
+  margin-left: 0.75rem !important;
+  margin-right: 0 !important;
 }

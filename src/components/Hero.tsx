@@ -3,20 +3,20 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
-  const [content] = useState(websiteContent.hero);
+  const content = useWebsiteContent().hero;
+  const { isArabic } = useLanguage();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
-    // Preload the large background image
     const img = new Image();
     img.src = content.bgImage;
     img.onload = () => setIsImageLoaded(true);
@@ -24,7 +24,6 @@ const Hero: React.FC = () => {
     if (location.pathname !== '/' || !heroRef.current || !contentRef.current) return;
 
     const ctx = gsap.context(() => {
-      /* ================= HERO MASK ================= */
       gsap.to(heroRef.current, {
         clipPath: 'inset(0% 0% 10% 0%)',
         ease: 'none',
@@ -36,7 +35,6 @@ const Hero: React.FC = () => {
         },
       });
 
-      /* ================= CONTENT PARALLAX ================= */
       gsap.fromTo(
         contentRef.current,
         { y: 0, opacity: 1 },
@@ -58,7 +56,7 @@ const Hero: React.FC = () => {
       ctx.revert();
       ScrollTrigger.refresh();
     };
-  }, [location.pathname]);
+  }, [location.pathname, content.bgImage]);
 
   return (
     <section
@@ -68,43 +66,48 @@ const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/50" />
 
-      <div ref={contentRef} className="hero-content relative z-10 flex flex-col justify-between h-full">
-        {/* ================= HEADING ================= */}
-        <div className="flex-1 flex items-start lg:items-end px-6 pt-32 md:pt-36 lg:pt-0 relative lg:top-[-10%]">
-          <div className="text-white w-full lg:max-w-[90%]">
-            <h1 className="!leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12">
-              {content.heading.line1}<br />{content.heading.line2}<br />{content.heading.line3}
-            </h1>
+      <div
+        ref={contentRef}
+        className="relative z-10 h-full px-6 pt-32 pb-16 md:pt-36 md:pb-12 lg:px-8"
+      >
+        <div className="flex h-full flex-col justify-between lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end lg:gap-8">
+          <div className="flex min-h-0 flex-1 items-start lg:items-end">
+            <div className={`w-full max-w-[700px] text-white ${isArabic ? 'text-right' : 'text-left'}`}>
+              <h1 className="!leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12">
+                {content.heading.line1}
+                <br />
+                {content.heading.line2}
+                <br />
+                {content.heading.line3}
+              </h1>
 
-            <div className="flex flex-wrap gap-4 items-center">
-              <img
-                src={content.certLogos}
-                alt="Certifications"
-                className="h-8 md:h-12 brightness-0 invert object-contain"
-              />
+              <div className="flex flex-wrap gap-4 items-center">
+                <img
+                  src={content.certLogos}
+                  alt="Certifications"
+                  className="h-8 md:h-12 brightness-0 invert object-contain"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* ================= DESCRIPTION ================= */}
-        <div className="lg:absolute lg:bottom-6 lg:right-6 max-w-sm text-white/90 px-6 pb-20 lg:pb-10">
-          <h4 className="font-semibold leading-relaxed text-[clamp(0.85rem,1.5vw,1rem)] mb-4">
-            We are a leader in{' '}
-            <span className="text-[#75C3FF]">{content.description.highlight}</span>{' '}
-            <span className="text-white font-bold">{content.description.bold}</span>
-          </h4>
+          <div className={`w-full max-w-sm text-white/90 ${isArabic ? 'text-right' : 'text-left'} lg:self-end`}>
+            <h4 className="font-semibold leading-relaxed text-[clamp(0.85rem,1.5vw,1rem)] mb-4">
+              <span className="text-[#75C3FF]">{content.description.highlight}</span>{' '}
+              <span className="text-white font-bold">{content.description.bold}</span>
+            </h4>
 
-          {/* ================= MARQUEE ================= */}
-          <div className="overflow-hidden flex">
-            {[0, 1].map((i) => (
-              <div key={i} className="flex gap-4 whitespace-nowrap pr-4 animate-slide-in-left">
-                {content.scrollingTexts.map((text, index) => (
-                  <p key={`${i}-${index}`} className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-white/70">
-                    <span className="text-blue-400">•</span> {text}
-                  </p>
-                ))}
-              </div>
-            ))}
+            <div className="overflow-hidden flex">
+              {[0, 1].map((i) => (
+                <div key={i} className="flex gap-4 whitespace-nowrap pr-4 animate-slide-in-left">
+                  {content.scrollingTexts.map((text, index) => (
+                    <p key={`${i}-${index}`} className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-white/70">
+                      <span className="text-blue-400">•</span> {text}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

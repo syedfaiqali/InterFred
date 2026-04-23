@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ContactModal from "./ContactModal";
+import { useWebsiteContent } from "../hooks/useWebsiteContent";
+import { useLanguage } from "../context/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,6 +77,8 @@ const ValueCard = forwardRef<HTMLDivElement, ValueCardProps>(({
 ValueCard.displayName = "ValueCard";
 
 const ValueProposition: React.FC = () => {
+    const content = useWebsiteContent().ui.valuePropSub;
+    const { isArabic } = useLanguage();
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<HTMLDivElement[]>([]);
@@ -160,28 +164,28 @@ const ValueProposition: React.FC = () => {
             ref={sectionRef}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-10">
-                <div className="grid grid-cols-1 px-4 sm:px-10 md:grid-cols-3 gap-y-8 sm:gap-y-14 md:gap-y-0">
+                <div className={`grid grid-cols-1 px-4 sm:px-10 md:grid-cols-3 gap-y-8 sm:gap-y-14 md:gap-y-0 ${isArabic ? 'rtl-text' : ''}`}>
 
                     {/* LEFT COLUMN */}
                     <div className="flex flex-col gap-8 sm:gap-14 justify-end">
-                        <div className="relative top-0 left-0 md:top-[-10%] md:left-[-10%]">
+                        <div className={`relative top-0 left-0 md:top-[-10%] md:left-[-10%] ${isArabic ? 'md:left-0 md:right-[-10%]' : ''}`}>
                             <p className={`text-xs sm:text-sm tracking-widest text-gray-400 mb-2 sm:mb-3 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                                Why us
+                                {content.eyebrow}
                             </p>
 
                             <h2 className="text-3xl sm:text-[48px] leading-tight sm:leading-[48px] font-medium text-gray-900 mb-5 sm:mb-8">
                                 <span className={`inline-block transition-all duration-700 delay-100 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                                    Value
+                                    {content.titleLines[0]}
                                 </span>
                                 <br />
                                 <span className={`inline-block transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                                    Proposition
+                                    {content.titleLines[1]}
                                 </span>
                             </h2>
 
                             <div className={`inline-block transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                                 <button className="bg-[#07119B] text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm tracking-wider font-semibold hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95" onClick={() => setIsContactModalOpen(true)}>
-                                    Let's discuss today!
+                                    {content.cta}
                                 </button>
                             </div>
                         </div>
@@ -191,8 +195,8 @@ const ValueProposition: React.FC = () => {
                             bg="bg-[#E9EEF2]"
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
-                            title={<>Proven Track<br />Record</>}
-                            text="Since 1987, we have won contracts for the U.S. Armed Forces and the United Nations, and serve clients like Schlumberger, BASF, and Abbott Laboratories."
+                            title={<>{content.cards[0].titleLines[0]}<br />{content.cards[0].titleLines[1]}</>}
+                            text={content.cards[0].text}
                         />
                     </div>
 
@@ -205,8 +209,8 @@ const ValueProposition: React.FC = () => {
                                 bg="bg-[#07119B]"
                                 titleColor="text-white"
                                 textColor="text-blue-100"
-                                title={<>Industrial<br />Engineering</>}
-                                text="Beyond transport, we offer specialized maintenance services for industrial machinery, including lifecycle assessments, pipeline pigging, and repairs."
+                                title={<>{content.cards[1].titleLines[0]}<br />{content.cards[1].titleLines[1]}</>}
+                                text={content.cards[1].text}
                             />
                         </div>
                     </div>
@@ -218,8 +222,8 @@ const ValueProposition: React.FC = () => {
                             bg="bg-[#E9EEF2]"
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
-                            title={<>Unmatched<br />Specialization</>}
-                            text="We don't just move boxes. We move turbines, compressors, live animals, and sensitive bio-medical logistics under controlled conditions."
+                            title={<>{content.cards[2].titleLines[0]}<br />{content.cards[2].titleLines[1]}</>}
+                            text={content.cards[2].text}
                         />
                         <ValueCard
                             bg=""
@@ -236,8 +240,8 @@ const ValueProposition: React.FC = () => {
                             titleColor="text-gray-900"
                             textColor="text-gray-600"
                             className="mt-12 md:mt-0"
-                            title={<>Strategic<br />Partnerships</>}
-                            text="Exclusive relationships with Air Cargo Group, Hartrodt Group (Germany), and Target Logistics Services (USA)."
+                            title={<>{content.cards[3].titleLines[0]}<br />{content.cards[3].titleLines[1]}</>}
+                            text={content.cards[3].text}
                         />
                     </div>
 

@@ -4,12 +4,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ValueProp: React.FC = () => {
-  const content = websiteContent.valueProp;
+  const content = useWebsiteContent().valueProp;
+  const { isArabic } = useLanguage();
   const [isMainShipLoaded, setIsMainShipLoaded] = React.useState(false);
   const [isHighShipLoaded, setIsHighShipLoaded] = React.useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -132,12 +134,12 @@ const ValueProp: React.FC = () => {
       {/* ================= CONTENT ================= */}
       <div ref={contentRef} className="relative z-10 bg-black ">
         <div className="max-w-7xl mx-auto px-4 md:px-6 ">
-          <div className="flex flex-col lg:flex-row gap-0">
+          <div className={`flex flex-col lg:flex-row gap-0 ${isArabic ? 'rtl-row' : ''}`}>
             {/* LEFT SIDE */}
             <div className="w-full lg:w-[25%] flex flex-col justify-start mb-8 lg:mb-0">
               <div
                 ref={highlightRef}
-                className="bg-[#07119B] p-6 md:p-10 lg:absolute lg:w-[28%] lg:min-h-[400px] lg:top-[-10.9%] lg:left-[7%]"
+                className={`bg-[#07119B] p-6 md:p-10 lg:absolute lg:w-[28%] lg:min-h-[400px] lg:top-[-10.9%] lg:left-[7%] ${isArabic ? 'rtl-pin-right rtl-text' : ''}`}
               >
                 <p className="text-white/80 text-sm mb-4">
                   {content.highlight.label}
@@ -149,13 +151,13 @@ const ValueProp: React.FC = () => {
             </div>
 
             {/* RIGHT SIDE */}
-            <div className="w-full lg:w-[75%] flex flex-col gap-4 sm:gap-0 lg:mt-12">
+            <div className={`w-full lg:w-[75%] flex flex-col gap-4 sm:gap-0 lg:mt-12 ${isArabic ? 'rtl-text' : ''}`}>
               <div className="flex justify-center">
                 <div
                   ref={el => (cardRefs.current[0] = el)}
                   className="bg-[#1E1E1E] p-6 md:p-10 flex flex-col w-full sm:w-[60%] md:w-[40%] lg:w-[25%] min-h-[180px] md:h-[200px] relative"
                 >
-                  <img src={content.cards[0].icon} alt={content.cards[0].title} className="absolute top-6 right-6 w-12 h-12" />
+                  <img src={content.cards[0].icon} alt={content.cards[0].title} className={`absolute top-6 right-6 w-12 h-12 ${isArabic ? 'rtl-left-auto rtl-pin-left' : ''}`} />
                   <div className="mt-auto">
                     <h3 className="text-white text-xl font-semibold mb-2">
                       {content.cards[0].title}
@@ -177,7 +179,7 @@ const ValueProp: React.FC = () => {
                     ref={el => (cardRefs.current[idx] = el)}
                     className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
                   >
-                    <img src={content.cards[idx].icon} alt={content.cards[idx].title} className="absolute top-6 right-6 w-10 h-10" />
+                    <img src={content.cards[idx].icon} alt={content.cards[idx].title} className={`absolute top-6 right-6 w-10 h-10 ${isArabic ? 'rtl-left-auto rtl-pin-left' : ''}`} />
                     <div className="mt-auto">
                       <h3 className="text-white text-lg font-semibold mb-2">
                         {content.cards[idx].title}
@@ -195,7 +197,7 @@ const ValueProp: React.FC = () => {
                   ref={el => (cardRefs.current[3] = el)}
                   className="w-full sm:w-[60%] md:w-[40%] lg:w-[25%] bg-[#1E1E1E] p-6 md:p-10 min-h-[180px] md:h-[200px] relative flex flex-col"
                 >
-                  <img src={content.cards[3].icon} alt={content.cards[3].title} className="absolute top-6 right-6 w-10 h-10" />
+                  <img src={content.cards[3].icon} alt={content.cards[3].title} className={`absolute top-6 right-6 w-10 h-10 ${isArabic ? 'rtl-left-auto rtl-pin-left' : ''}`} />
                   <div className="mt-auto">
                     <h3 className="text-white text-xl font-semibold mb-2">
                       {content.cards[3].title}
@@ -210,7 +212,7 @@ const ValueProp: React.FC = () => {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 sm:mt-0">
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className={`flex flex-col lg:flex-row gap-4 ${isArabic ? 'rtl-row' : ''}`}>
 
             {/* Spacer to align with left column */}
             <div className="hidden lg:block lg:w-[25%]" />
@@ -221,7 +223,7 @@ const ValueProp: React.FC = () => {
                 ref={el => (cardRefs.current[4] = el)}
                 className="w-full sm:w-[48%] md:w-[40%] lg:w-[25%] bg-[#07119B] p-6 md:p-8 min-h-[180px] md:h-[200px] relative flex flex-col"
               >
-                <img src={content.cards[4].icon} alt={content.cards[4].title} className="absolute top-6 right-6 w-12 h-12" />
+                <img src={content.cards[4].icon} alt={content.cards[4].title} className={`absolute top-6 right-6 w-12 h-12 ${isArabic ? 'rtl-left-auto rtl-pin-left' : ''}`} />
                 <div className="mt-auto">
                   <h3 className="text-white text-lg font-semibold mb-2">
                     {content.cards[4].title}

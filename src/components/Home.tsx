@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useWebsiteContent } from '../hooks/useWebsiteContent'
+import { useLanguage } from '../context/LanguageContext'
 
 interface HomeSectionProps {
   sectionData?: {
@@ -14,6 +16,8 @@ interface HomeSectionProps {
 }
 
 const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
+  const websiteContent = useWebsiteContent()
+  const { isArabic } = useLanguage()
   if (!sectionData) return null
 
   const backgroundColor = sectionData.bgColor || '#ffffff'
@@ -59,10 +63,10 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
   return (
     <section className="py-24" style={{ backgroundColor }}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12">
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12 ${isArabic ? 'rtl-text' : ''}`}>
 
           {/* Label Column - 2/12 */}
-          <div className="lg:col-span-2 lg:text-right text-left">
+          <div className={`lg:col-span-2 ${isArabic ? 'text-right' : 'lg:text-right text-left'}`}>
             <span className="text-gray-400 font-medium tracking-wide text-sm top-32">{sectionData.label}</span>
           </div>
 
@@ -75,7 +79,7 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
 
           {/* Content Column - 4/12 */}
           {(sectionData.image || sectionData.firstText) && (
-            <div className="lg:col-span-4 flex flex-col gap-8 lg:pl-8" ref={contentRef}>
+            <div className={`lg:col-span-4 flex flex-col gap-8 ${isArabic ? 'lg:pr-8' : 'lg:pl-8'}`} ref={contentRef}>
               {sectionData.image && (
                 <img
                   src={sectionData.image}
@@ -127,7 +131,7 @@ const Home: React.FC<HomeSectionProps> = ({ sectionData, setIsVisible }) => {
                       }`}
                     style={{ transitionDelay: isContentVisible ? '300ms' : '0ms' }}
                   >
-                    More about us
+                    {websiteContent.ui.common.moreAboutUs}
                     <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#07119B] transition-all duration-300 group-hover:w-full"></span>
                   </a>
                 )}

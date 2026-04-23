@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { websiteContent } from '../data/websiteContent';
 import pkFlag from '../assets/pk.svg';
 import saFlag from '../assets/sa.svg';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 interface Country {
     name: string;
     code: string;
 }
 
-const countries: Country[] = websiteContent.countries;
-
 const NetworkLocations: React.FC = () => {
+    const websiteContent = useWebsiteContent();
+    const countries: Country[] = websiteContent.countries;
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -42,7 +42,7 @@ const NetworkLocations: React.FC = () => {
                 <div className={`text-center mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}>
                     <h2 className="text-3xl lg:text-4xl font-medium tracking-tight">
-                        WORLDWIDE <span className="font-bold">LOCATIONS</span>
+                        {websiteContent.ui.network.locationsTitle}
                     </h2>
                 </div>
 

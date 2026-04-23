@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { websiteContent } from '../data/websiteContent';
 import { Link } from 'react-router';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Specialization: React.FC = () => {
+  const websiteContent = useWebsiteContent();
   const content = websiteContent.specialization;
   const [isVisible, setIsVisible] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
@@ -119,7 +120,7 @@ const Specialization: React.FC = () => {
               className="bg-white text-[#07119B] font-bold py-4 px-10 text-lg rounded-sm transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg"
             >
               <Link to={'/service'} key={'/service'}>
-                Visit More
+                {websiteContent.ui.common.visitMore}
               </Link>
             </button>
           </div>

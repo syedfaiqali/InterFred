@@ -5,12 +5,12 @@ import '../styles/Answer.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Answer: React.FC = () => {
-  const content = websiteContent.answer;
+  const content = useWebsiteContent().answer;
   const words = [content.heading, ...content.mainText.split(' ')];
   const [isContainerLoaded, setIsContainerLoaded] = React.useState(false);
   const [isPlaneLoaded, setIsPlaneLoaded] = React.useState(false);

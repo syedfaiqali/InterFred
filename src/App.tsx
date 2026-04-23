@@ -5,7 +5,8 @@ import Hero from './components/Hero'
 import Answer from './components/Answer'
 import ScrollToTop from './components/ScrollToTop'
 import Loader from './components/Loader'
-import { websiteContent } from './data/websiteContent'
+import { useWebsiteContent } from './hooks/useWebsiteContent'
+import { useLanguage } from './context/LanguageContext'
 const About = React.lazy(() => import('./components/About'))
 const AboutFoundation = React.lazy(() => import('./components/AboutFoundation'))
 const SlideGallery = React.lazy(() => import('./components/SlideGallery'))
@@ -27,8 +28,9 @@ const Tracking = React.lazy(() => import('./components/Tracking'))
 const CookieConsent = React.lazy(() => import('./components/CookieConsent'))
 
 const App: React.FC = () => {
+  const websiteContent = useWebsiteContent()
+  const { isArabic } = useLanguage()
   const location = useLocation()
-  const isHomePage = location.pathname === '/'
   const [isAssetsLoaded, setIsAssetsLoaded] = React.useState(false)
 
   React.useEffect(() => {
@@ -86,7 +88,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen text-gray-800 overflow-x-hidden">
+    <div className={`min-h-screen text-gray-800 overflow-x-hidden ${isArabic ? 'font-sans' : ''}`}>
       <main className="relative">
         <ScrollToTop />
         <div className="absolute top-0 left-0 right-0 z-50">

@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShipSVG from '../Assets/Ship.svg';
 import TruckSVG from '../Assets/Truck.svg';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +12,7 @@ interface SlideGalleryProps {
 }
 
 const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
-  const content = websiteContent.slideGallery;
+  const content = useWebsiteContent().slideGallery;
   const containerRef = useRef<HTMLDivElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLDivElement>(null);
@@ -120,12 +120,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            {content.slides[0].title.split('from').map((part, i) => (
-              <React.Fragment key={i}>
-                {part}
-                {i === 0 && <span className="text-blue-600">from</span>}
-              </React.Fragment>
-            ))}
+            <span className="text-blue-600">{content.slides[0].title}</span>
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-gray-600">
             {content.slides[0].description}
@@ -163,12 +158,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            {content.slides[1].title.split('to').map((part, i) => (
-              <React.Fragment key={i}>
-                {i === 0 && <span className="text-blue-600">to</span>}
-                {part}
-              </React.Fragment>
-            ))}
+            <span className="text-blue-600">{content.slides[1].title}</span>
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-blue-600 font-bold">
             {content.slides[1].description}
@@ -210,12 +200,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
       >
         <div>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold">
-            {content.slides[2].title.split('AI & ML').map((part, i) => (
-              <React.Fragment key={i}>
-                {part}
-                {i === 0 && <span className="text-blue-600">AI & ML</span>}
-              </React.Fragment>
-            ))}
+            <span className="text-blue-600">{content.slides[2].title}</span>
           </h2>
           <p className="text-xl sm:text-2xl mt-4 text-gray-600">
             {content.slides[2].description}

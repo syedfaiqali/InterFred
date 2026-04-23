@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import networkHero from '../assets/Network1.webp';
 import networkMap from '../assets/Network2.webp';
 import NetworkLocations from './NetworkLocations';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 const Network: React.FC = () => {
-    const content = websiteContent.network;
+    const content = useWebsiteContent().network;
+    const { isArabic } = useLanguage();
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -51,23 +53,12 @@ const Network: React.FC = () => {
                         {/* Content Section */}
                         <div className='lg:col-span-1 hidden lg:block'></div>
                         <div className={`lg:col-span-4 space-y-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                            }`}>
+                            } ${isArabic ? 'rtl-text' : ''}`
+                        }>
                             <div className="space-y-6">
                                 <span className="text-gray-400 font-medium tracking-widest text-sm block mb-4">{content.hero.label}</span>
                                 <h2 className="text-4xl lg:text-5xl font-medium text-[#1A1A1A] leading-tight">
-                                    {(() => {
-                                        const target = "Inter-Fret";
-                                        return content.hero.title.split(target).map((part: string, i: number) => (
-                                            <React.Fragment key={i}>
-                                                {part}
-                                                {i === 0 && (
-                                                    <span className="text-[#07119B] font-bold block">
-                                                        {target}
-                                                    </span>
-                                                )}
-                                            </React.Fragment>
-                                        ));
-                                    })()}
+                                    <span className="text-[#07119B] font-bold block">{content.hero.title}</span>
                                 </h2>
                             </div>
                         </div>

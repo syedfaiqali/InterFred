@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { websiteContent } from '../data/websiteContent';
 import CoreFreight from '../assets/CFLMain.webp';
 import CFL1 from '../assets/CFL1.webp';
 import CFL2 from '../assets/CFL2.webp';
@@ -27,6 +26,7 @@ import VAS2 from '../assets/VAS2.webp';
 import VAS3 from '../assets/VAS3.webp';
 import VAS4 from '../assets/VAS4.webp';
 import VAS5 from '../assets/VAS5.webp';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 interface ServiceSection {
     title: string;
@@ -76,9 +76,8 @@ const serviceImages: Record<string, { heroImage: string; sectionImages: string[]
 };
 
 // Merge content from websiteContent with images
-const buildServiceDetails = (): Record<string, ServiceDetailData> => {
+const buildServiceDetails = (contentDetails: Record<string, any>): Record<string, ServiceDetailData> => {
     const details: Record<string, ServiceDetailData> = {};
-    const contentDetails = websiteContent.serviceDetails;
 
     Object.keys(contentDetails).forEach(key => {
         const content = contentDetails[key as keyof typeof contentDetails];
@@ -104,9 +103,9 @@ const buildServiceDetails = (): Record<string, ServiceDetailData> => {
     return details;
 };
 
-const serviceDetails = buildServiceDetails();
-
 const ServiceDetail: React.FC = () => {
+    const websiteContent = useWebsiteContent();
+    const serviceDetails = React.useMemo(() => buildServiceDetails(websiteContent.serviceDetails), [websiteContent]);
     const { id } = useParams<{ id: string }>();
     const data = (id && serviceDetails[id]) ? serviceDetails[id] : serviceDetails["default"];
     const [visibleSections, setVisibleSections] = React.useState<Set<number>>(new Set());
@@ -219,7 +218,7 @@ const ServiceDetail: React.FC = () => {
                             state={{ fromDetail: true }}
                             className="text-[#07119B] font-semibold hover:underline flex items-center gap-2 transition-all duration-300 hover:gap-3"
                         >
-                            &larr; Back to Services
+                            &larr; {websiteContent.ui.common.backToServices}
                         </Link>
                     </div>
 

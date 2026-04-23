@@ -1,66 +1,21 @@
 import React, { useState } from 'react'
 import Home from './Home'
 import ChallengeGrid from './ChallengeGrid'
-import { websiteContent } from '../data/websiteContent'
+import { useWebsiteContent } from '../hooks/useWebsiteContent'
 
 const Highlights: React.FC = () => {
-  const content = websiteContent.highlights;
+  const content = useWebsiteContent().highlights;
   const [isVisible, setIsVisible] = useState(false);
   const [isIndustryVisible, setIsIndustryVisible] = useState(false);
 
-  const welcomeTarget = "Inter-Fret Consolidators,";
-  const industryTarget = "Inter-Fret solves";
-
   const welcomeSectionData = {
     ...content.welcomeSection,
-    title: (
-      <>
-        {content.welcomeSection.title.split(welcomeTarget).map((part, i) => (
-          <React.Fragment key={i}>
-            <span
-              className={`inline-block transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-              style={{ transitionDelay: `${(i + 1) * 100}ms` }}
-            >
-              {part}
-            </span>
-            {i === 0 && (
-              <span
-                className={`inline-block text-[#07119B] font-bold transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-                style={{ transitionDelay: `${150}ms` }}
-              >
-                {welcomeTarget}
-              </span>
-            )}
-          </React.Fragment>
-        ))}
-      </>
-    )
+    title: content.welcomeSection.title
   };
 
   const IndustrySectionData = {
     ...content.industrySection,
-    title: (
-      <>
-        {content.industrySection.title.split(industryTarget).map((part, i) => (
-          <React.Fragment key={i}>
-            <span
-              className={`inline-block transition-all duration-500 ${isIndustryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-              style={{ transitionDelay: `${(i + 1) * 100}ms` }}
-            >
-              {part}
-            </span>
-            {i === 0 && (
-              <span
-                className={`inline-block text-[#07119B] font-bold transition-all duration-500 ${isIndustryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-                style={{ transitionDelay: `${150}ms` }}
-              >
-                {industryTarget}
-              </span>
-            )}
-          </React.Fragment>
-        ))}
-      </>
-    ),
+    title: content.industrySection.title,
     firstText: <><span>{content.industrySection.firstText}</span></>
   };
 

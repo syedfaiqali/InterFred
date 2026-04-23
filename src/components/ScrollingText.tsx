@@ -1,8 +1,10 @@
 import { FC, useState, useEffect } from 'react';
 import ContactModal from './ContactModal';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 const ScrollingText: FC = () => {
-    const text = "Let's discuss today! Are you Interested?";
+    const content = useWebsiteContent().ui.scrollingText;
+    const text = content.text;
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +48,7 @@ const ScrollingText: FC = () => {
                     }}
                 >
                     <div className="bg-[#07119B] w-24 h-24 md:w-28 md:h-28 flex flex-col items-center justify-center rounded-[4px] text-white shadow-2xl">
-                        <span className="text-[12px] md:text-sm font-bold mb-2 tracking-wider">Say Hi!</span>
+                        <span className="text-[12px] md:text-sm font-bold mb-2 tracking-wider">{content.cursorLabel}</span>
                         <svg
                             width="20"
                             height="20"

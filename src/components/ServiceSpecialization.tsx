@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 interface SpecializationItem {
     id: number;
@@ -7,8 +7,6 @@ interface SpecializationItem {
     description: string;
     image: string;
 }
-
-const items: SpecializationItem[] = websiteContent.services.specializations.items;
 
 const AnimatedRow: React.FC<{ item: SpecializationItem; index: number }> = ({ item, index }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -62,7 +60,8 @@ const AnimatedRow: React.FC<{ item: SpecializationItem; index: number }> = ({ it
 };
 
 const ServiceSpecialization: React.FC = () => {
-    const config = websiteContent.services.specializations;
+    const config = useWebsiteContent().services.specializations;
+    const items: SpecializationItem[] = config.items;
     const [headerVisible, setHeaderVisible] = useState(false);
     const [truckVisible, setTruckVisible] = useState(false);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -102,12 +101,7 @@ const ServiceSpecialization: React.FC = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             <div className={`space-y-6 transition-all duration-1000 delay-100 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                                 <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
-                                    {config.header.title.split(' ').map((word: string, i: number) => (
-                                        <React.Fragment key={i}>
-                                            {i === 2 ? <span className="text-[#5EAFEA] font-bold">{word}</span> : word}{' '}
-                                            {i === 1 && <br />}
-                                        </React.Fragment>
-                                    ))}
+                                    <span className="text-[#5EAFEA] font-bold">{config.header.title}</span>
                                 </h2>
                                 <p className="text-gray-400 text-lg max-w-md leading-relaxed">
                                     {config.header.description}

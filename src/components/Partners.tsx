@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
-import { websiteContent } from '../data/websiteContent';
 import ContactModal from './ContactModal';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 const Partners: React.FC = () => {
+  const websiteContent = useWebsiteContent();
   const content = websiteContent.partners;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -35,16 +36,11 @@ const Partners: React.FC = () => {
           {content.label}
         </p>
         <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-10 tracking-tight leading-[1.1] transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {content.title.split('top').map((part, i) => (
-            <React.Fragment key={i}>
-              {part}
-              {i === 0 && <>top<br /></>}
-            </React.Fragment>
-          ))}
+          {content.title}
         </h2>
         <div className={`inline-block transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <button className="bg-[#07119B] text-white font-medium py-4 px-10 rounded-sm hover:bg-[#050D8A] transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl active:scale-95 shadow-lg text-sm tracking-wider" onClick={() => setIsContactModalOpen(true)}>
-            Partner with us today
+            {websiteContent.ui.partners.cta}
           </button>
         </div>
       </div>
@@ -75,7 +71,7 @@ const Partners: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center">
           <h3 className={`text-3xl md:text-4xl font-medium text-gray-900 mb-10 transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            Awards & Recognition
+            {websiteContent.ui.partners.awardsTitle}
           </h3>
         </div>
       </div>

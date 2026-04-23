@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import cargoPlane from '../assets/AboutUsPlane.webp';
 import howWeDoItImage from '../assets/how we do it.webp';
-import { websiteContent } from '../data/websiteContent';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 const About: React.FC = () => {
-  const content = websiteContent.about;
+  const content = useWebsiteContent().about;
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
   const [isPlaneLoaded, setIsPlaneLoaded] = useState(false);
@@ -58,21 +58,7 @@ const About: React.FC = () => {
               <div className={`transition-all duration-700 delay-100 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <span className="text-gray-400 font-medium tracking-wide text-sm block mb-6">{content.whatWeDo.label}</span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-[1.1]">
-                  {(() => {
-                    const target = "Pakistan worldwide.";
-                    const parts = content.whatWeDo.title.split(target);
-                    return (
-                      <React.Fragment>
-                        {parts[0].split(',').map((sub, j) => (
-                          <React.Fragment key={j}>
-                            {sub}{j === 0 && <>,<br /></>}
-                          </React.Fragment>
-                        ))}
-                        <span className="text-[#07119B] font-bold">{target}</span>
-                        {parts[1]}
-                      </React.Fragment>
-                    );
-                  })()}
+                  {content.whatWeDo.title}
                 </h2>
               </div>
 

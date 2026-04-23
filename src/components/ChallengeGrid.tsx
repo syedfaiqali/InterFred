@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
 interface Challenge {
     title: string;
@@ -7,6 +8,7 @@ interface Challenge {
 }
 
 const ChallengeGrid: React.FC<{ challenges?: Challenge[] }> = ({ challenges }) => {
+    const { isArabic } = useLanguage()
     const [isSec2Visible, setIsSec2Visible] = useState(false)
     const [isSec4Visible, setIsSec4Visible] = useState(false)
     const [isSecLackVisible, setIsSecLackVisible] = useState(false)
@@ -53,7 +55,7 @@ const ChallengeGrid: React.FC<{ challenges?: Challenge[] }> = ({ challenges }) =
     if (!challenges || challenges.length < 4) return null;
 
     return (
-        <div className="max-w-7xl mx-auto px-6">
+        <div className={`max-w-7xl mx-auto px-6 ${isArabic ? 'rtl-text' : ''}`}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                 {/* Section 2: Complex Oversized Cargo */}
