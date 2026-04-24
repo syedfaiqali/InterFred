@@ -34,6 +34,11 @@
   }
 }
 
+.animate-marquee {
+  display: flex;
+  animation: marqueeInfinite 30s linear infinite;
+}
+
 .animate-marquee-ltr {
   display: flex;
   animation: marqueeLeftToRight 40s linear infinite;
@@ -47,6 +52,70 @@
 .animate-marquee-infinite-reverse {
   display: flex;
   animation: marqueeInfiniteReverse 35s linear infinite;
+}
+
+@keyframes marqueeInfiniteTriplicate {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.3333%);
+  }
+}
+
+@keyframes marqueeInfiniteTriplicateReverse {
+  0% {
+    transform: translateX(-33.3333%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-triplicate {
+  display: flex;
+  animation: marqueeInfiniteTriplicate 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-triplicate-reverse {
+  display: flex;
+  animation: marqueeInfiniteTriplicateReverse 35s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marqueeDynamic {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+}
+
+@keyframes marqueeDynamicReverse {
+  0% {
+    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-dynamic {
+  display: flex;
+  animation: marqueeDynamic var(--marquee-duration, 24s) linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-dynamic-reverse {
+  display: flex;
+  animation: marqueeDynamicReverse var(--marquee-duration, 24s) linear infinite;
+  will-change: transform;
 }
 
 :root {
@@ -85,6 +154,26 @@ code {
 
 .animate-slide-in-right {
   animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInLeftLoop {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-in-left {
+  display: flex;
+  animation: slideInLeftLoop 22s linear infinite;
+  will-change: transform;
+}
+
+.hero-scrolling-track {
+  min-width: max-content;
 }
 
 html[lang='ar'] body,

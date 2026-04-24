@@ -1,9 +1,11 @@
 import { FC, useState, useEffect } from 'react';
 import ContactModal from './ContactModal';
 import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 const ScrollingText: FC = () => {
     const content = useWebsiteContent().ui.scrollingText;
+    const { isArabic } = useLanguage();
     const text = content.text;
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
@@ -67,12 +69,13 @@ const ScrollingText: FC = () => {
                     </div>
                 </div>
 
-                <div className="flex whitespace-nowrap">
+                <div className="flex overflow-hidden whitespace-nowrap [direction:ltr]">
                     {/* First instance of text */}
-                    <div className="animate-marquee flex flex-row items-center">
+                    <div className="hero-scrolling-track animate-marquee flex flex-none flex-row items-center">
                         {[...Array(6)].map((_, i) => (
                             <div key={i} className="flex items-center">
                                 <span
+                                    dir={isArabic ? 'rtl' : 'ltr'}
                                     className="text-5xl md:text-8xl lg:text-9xl font-medium text-white/20 mx-8 tracking-tighter hover:text-white transition-colors duration-500"
                                 >
                                     {text}
@@ -81,10 +84,11 @@ const ScrollingText: FC = () => {
                         ))}
                     </div>
                     {/* Second instance for seamless loop */}
-                    <div className="animate-marquee flex flex-row items-center">
+                    <div className="hero-scrolling-track animate-marquee flex flex-none flex-row items-center">
                         {[...Array(6)].map((_, i) => (
                             <div key={i} className="flex items-center">
                                 <span
+                                    dir={isArabic ? 'rtl' : 'ltr'}
                                     className="text-5xl md:text-8xl lg:text-9xl font-medium text-white/20 mx-8 tracking-tighter hover:text-white transition-colors duration-500"
                                 >
                                     {text}

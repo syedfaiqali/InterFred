@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShipSVG from '../Assets/Ship.svg';
 import TruckSVG from '../Assets/Truck.svg';
 import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ interface SlideGalleryProps {
 
 const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
   const content = useWebsiteContent().slideGallery;
+  const { language } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
   const shipRef = useRef<HTMLDivElement>(null);
@@ -84,7 +86,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [content, language]);
 
   useEffect(() => {
     // Force refresh after a short delay to ensure everything is settled, 
@@ -105,7 +107,7 @@ const SlideGallery: React.FC<SlideGalleryProps> = ({ className }) => {
         window.removeEventListener('load', handleLoad);
         clearTimeout(timer);
     };
-  }, []);
+  }, [language]);
 
   return (
     <section

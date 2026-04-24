@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import ContactModal from './ContactModal';
 import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
@@ -8,7 +8,58 @@ const Partners: React.FC = () => {
   const content = websiteContent.partners;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+  const partnersViewportRef = useRef<HTMLDivElement>(null);
+  const partnersSetRef = useRef<HTMLDivElement>(null);
+  const awardsViewportRef = useRef<HTMLDivElement>(null);
+  const awardsSetRef = useRef<HTMLDivElement>(null);
+  const [partnerCopies, setPartnerCopies] = useState(4);
+  const [awardCopies, setAwardCopies] = useState(4);
+  const [partnerSetWidth, setPartnerSetWidth] = useState(0);
+  const [awardSetWidth, setAwardSetWidth] = useState(0);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  useLayoutEffect(() => {
+    const updateTrackMetrics = (
+      viewport: HTMLDivElement | null,
+      setNode: HTMLDivElement | null,
+      setCopies: React.Dispatch<React.SetStateAction<number>>,
+      setWidth: React.Dispatch<React.SetStateAction<number>>
+    ) => {
+      if (!viewport || !setNode) return;
+
+      const singleSetWidth = setNode.scrollWidth;
+      const viewportWidth = viewport.clientWidth;
+
+      if (!singleSetWidth || !viewportWidth) return;
+
+      setWidth(singleSetWidth);
+      setCopies(Math.max(4, Math.ceil((viewportWidth * 2) / singleSetWidth) + 1));
+    };
+
+    const refresh = () => {
+      updateTrackMetrics(partnersViewportRef.current, partnersSetRef.current, setPartnerCopies, setPartnerSetWidth);
+      updateTrackMetrics(awardsViewportRef.current, awardsSetRef.current, setAwardCopies, setAwardSetWidth);
+    };
+
+    refresh();
+
+    const resizeObserver = new ResizeObserver(() => {
+      refresh();
+    });
+
+    if (partnersViewportRef.current) resizeObserver.observe(partnersViewportRef.current);
+    if (partnersSetRef.current) resizeObserver.observe(partnersSetRef.current);
+    if (awardsViewportRef.current) resizeObserver.observe(awardsViewportRef.current);
+    if (awardsSetRef.current) resizeObserver.observe(awardsSetRef.current);
+
+    window.addEventListener('resize', refresh);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', refresh);
+    };
+  }, [content.partnerLogos.length, content.awards.length]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -46,11 +97,26 @@ const Partners: React.FC = () => {
       </div>
 
       {/* Partners Logo Track - Continuous Infinite Marquee */}
-      <div className={`relative mb-32 border-y border-gray-300 py-2 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-        <div className="flex w-max animate-marquee-infinite">
-          {/* Two sets are enough for -50% infinite loop */}
-          {[...Array(2)].map((_, groupIndex) => (
-            <div key={groupIndex} className="flex flex-nowrap">
+      <div
+        ref={partnersViewportRef}
+        dir="ltr"
+        className={`relative overflow-hidden mb-32 border-y border-gray-300 py-2 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}
+      >
+        <div
+          className="flex w-max [direction:ltr] animate-marquee-dynamic"
+          style={
+            {
+              '--marquee-distance': `${partnerSetWidth}px`,
+              '--marquee-duration': `${Math.max(partnerSetWidth / 55, 16)}s`,
+            } as React.CSSProperties
+          }
+        >
+          {[...Array(partnerCopies)].map((_, groupIndex) => (
+            <div
+              key={groupIndex}
+              ref={groupIndex === 0 ? partnersSetRef : undefined}
+              className="hero-scrolling-track flex flex-none flex-nowrap"
+            >
               {content.partnerLogos.map((logo, index) => (
                 <div
                   key={`${groupIndex}-${index}`}
@@ -77,10 +143,26 @@ const Partners: React.FC = () => {
       </div>
 
       {/* Awards Track - Continuous Infinite Marquee */}
-      <div className={`relative overflow-hidden mb-12 border-y border-gray-300 py-2 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
-        <div className="flex w-max animate-marquee-infinite-reverse">
-          {[...Array(2)].map((_, groupIndex) => (groupIndex === 0 || groupIndex === 1) && (
-            <div key={groupIndex} className="flex flex-nowrap">
+      <div
+        ref={awardsViewportRef}
+        dir="ltr"
+        className={`relative overflow-hidden mb-12 border-y border-gray-300 py-2 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
+      >
+        <div
+          className="flex w-max [direction:ltr] animate-marquee-dynamic-reverse"
+          style={
+            {
+              '--marquee-distance': `${awardSetWidth}px`,
+              '--marquee-duration': `${Math.max(awardSetWidth / 55, 18)}s`,
+            } as React.CSSProperties
+          }
+        >
+          {[...Array(awardCopies)].map((_, groupIndex) => (
+            <div
+              key={groupIndex}
+              ref={groupIndex === 0 ? awardsSetRef : undefined}
+              className="hero-scrolling-track flex flex-none flex-nowrap"
+            >
               {content.awards.map((src, index) => (
                 <div
                   key={`${groupIndex}-${index}`}

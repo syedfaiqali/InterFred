@@ -29,7 +29,7 @@ const CookieConsent = React.lazy(() => import('./components/CookieConsent'))
 
 const App: React.FC = () => {
   const websiteContent = useWebsiteContent()
-  const { isArabic } = useLanguage()
+  const { isArabic, language } = useLanguage()
   const location = useLocation()
   const [isAssetsLoaded, setIsAssetsLoaded] = React.useState(false)
 
@@ -98,7 +98,7 @@ const App: React.FC = () => {
         <React.Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={
-              <>
+              <React.Fragment key={`${location.pathname}-${language}`}>
                 <Hero />
                 <div className="">
                   <div className="space-y-6">
@@ -112,17 +112,17 @@ const App: React.FC = () => {
                   <Partners />
                   <FAQ />
                 </div>
-              </>
+              </React.Fragment>
             } />
             <Route path="/about" element={
-              <div className="space-y-0">
+              <div key={`${location.pathname}-${language}`} className="space-y-0">
                 <About />
                 <AboutFoundation />
                 <ValuePropSub />
               </div>
             } />
             <Route path="/service" element={
-              <div className="space-y-0 text-gray-800">
+              <div key={`${location.pathname}-${language}`} className="space-y-0 text-gray-800">
                 <ServicesSection />
                 <ServiceSpecialization />
                 <ServiceSlider />
@@ -135,7 +135,7 @@ const App: React.FC = () => {
             <Route path="/tracking" element={<Tracking />} />
           </Routes>
           {/* Common Footer Sections for all pages as requested */}
-          <div className="mt-12">
+          <div key={`footer-${language}`} className="mt-12">
             {/* <Subscribe /> */}
             <ScrollingText />
           </div>

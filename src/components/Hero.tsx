@@ -10,16 +10,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const content = useWebsiteContent().hero;
-  const { isArabic } = useLanguage();
+  const { isArabic, language } = useLanguage();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
+    setIsImageLoaded(false);
+
     const img = new Image();
     img.src = content.bgImage;
     img.onload = () => setIsImageLoaded(true);
+    img.onerror = () => setIsImageLoaded(true);
 
     if (location.pathname !== '/' || !heroRef.current || !contentRef.current) return;
 
@@ -56,7 +59,7 @@ const Hero: React.FC = () => {
       ctx.revert();
       ScrollTrigger.refresh();
     };
-  }, [location.pathname, content.bgImage]);
+  }, [location.pathname, content.bgImage, language]);
 
   return (
     <section
@@ -97,12 +100,19 @@ const Hero: React.FC = () => {
               <span className="text-white font-bold">{content.description.bold}</span>
             </h4>
 
-            <div className="overflow-hidden flex">
+            <div className="flex overflow-hidden [direction:ltr]">
               {[0, 1].map((i) => (
-                <div key={i} className="flex gap-4 whitespace-nowrap pr-4 animate-slide-in-left">
+                <div
+                  key={`${language}-${i}`}
+                  className={`hero-scrolling-track flex flex-none gap-4 whitespace-nowrap ${isArabic ? 'pl-4' : 'pr-4'} animate-slide-in-left`}
+                >
                   {content.scrollingTexts.map((text, index) => (
-                    <p key={`${i}-${index}`} className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-white/70">
-                      <span className="text-blue-400">•</span> {text}
+                    <p
+                      key={`${i}-${index}`}
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                      className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-white/70"
+                    >
+                      <span className="text-blue-400">&bull;</span> {text}
                     </p>
                   ))}
                 </div>

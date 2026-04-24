@@ -6,11 +6,13 @@ import '../styles/Answer.css';
 gsap.registerPlugin(ScrollTrigger);
 
 import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Answer: React.FC = () => {
   const content = useWebsiteContent().answer;
+  const { language } = useLanguage();
   const words = [content.heading, ...content.mainText.split(' ')];
   const [isContainerLoaded, setIsContainerLoaded] = React.useState(false);
   const [isPlaneLoaded, setIsPlaneLoaded] = React.useState(false);
@@ -21,14 +23,19 @@ const Answer: React.FC = () => {
   const infoBoxRefs = useRef<HTMLDivElement[]>([]);
 
   useLayoutEffect(() => {
+    setIsContainerLoaded(false);
+    setIsPlaneLoaded(false);
+
     // Preload images
     const containerImgLoader = new Image();
     containerImgLoader.src = content.containerImg;
     containerImgLoader.onload = () => setIsContainerLoaded(true);
+    containerImgLoader.onerror = () => setIsContainerLoaded(true);
 
     const planeImgLoader = new Image();
     planeImgLoader.src = content.planeImg;
     planeImgLoader.onload = () => setIsPlaneLoaded(true);
+    planeImgLoader.onerror = () => setIsPlaneLoaded(true);
 
     if (!textSectionRef.current) return;
 
@@ -86,14 +93,14 @@ const Answer: React.FC = () => {
     }, textSectionRef);
 
     return () => ctx.revert();
-  }, [words.length]);
+  }, [content, words.length, language]);
 
   // Refresh ScrollTrigger when images load to prevent layout shifts affecting downstream sections
   useEffect(() => {
     if (isContainerLoaded || isPlaneLoaded) {
       ScrollTrigger.refresh();
     }
-  }, [isContainerLoaded, isPlaneLoaded]);
+  }, [isContainerLoaded, isPlaneLoaded, language]);
 
   return (
     <div className="answer-wrapper">
