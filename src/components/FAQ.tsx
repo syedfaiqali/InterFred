@@ -125,12 +125,12 @@ const FAQ: React.FC = () => {
                   address={content.SaudiEnglishAddress}
                   linkText={websiteContent.ui.common.mapLink}
                 />
-                <AddressBlock
+                {/* <AddressBlock
                   flag={<SaudiFlag />}
                   address={content.SaudiArabicAddress}
                   mapQuery={content.SaudiEnglishAddress}
                   linkText={websiteContent.ui.common.mapLink}
-                />
+                /> */}
               </div>
             </div>
           </div>
