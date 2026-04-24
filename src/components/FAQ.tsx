@@ -10,7 +10,7 @@ const PakistanFlag = () => (
   <img
     src={pkFlag}
     alt="Pakistan Flag"
-    className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
+    className="h-6 w-9 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
     aria-hidden="true"
   />
 )
@@ -19,7 +19,7 @@ const SaudiFlag = () => (
   <img
     src={saFlag}
     alt="Saudi Arabia Flag"
-    className="h-5 w-7 shrink-0 shadow-sm object-cover rounded-sm border border-gray-100"
+    className="h-6 w-9 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
     aria-hidden="true"
   />
 )
@@ -41,7 +41,7 @@ const AddressBlock = ({
   mapQuery?: string
 }) => (
   <div className="flex items-start text-lg text-gray-700 font-medium whitespace-pre-line">
-    <span className="mr-3 mt-1.5 ring-1 ring-gray-100 rounded-sm overflow-hidden flex-shrink-0">
+    <span className="mr-3 mt-1 rounded-sm overflow-hidden flex-shrink-0">
       {flag}
     </span>
     <div className="flex flex-col gap-2">
