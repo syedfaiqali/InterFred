@@ -250,8 +250,8 @@ export const websiteContent = {
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@inter-fret.com',
         pakistanAddress: '2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan',
-        SaudiEnglishAddress: 'Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia',
-        SaudiArabicAddress: 'شارع فراس بن حمد، حي الرويس، جدة 23214، منطقة مكة المكرمة، المملكة العربية السعودية',
+        SaudiEnglishAddress: 'Abu Firas Al Hamadani, Al-Ruwais, Jeddah 23214, Saudi Arabia',
+        SaudiArabicAddress: 'أبو فراس الحمداني، الرويس، جدة 23214، المملكة العربية السعودية',
         items: [
             {
                 question: "Do you handle dangerous goods?",
@@ -275,7 +275,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Firas Bin Hamad Street, Al-Ruwais District,\nJeddah 23214, Makkah Region, Saudi Arabia"
+                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Abu Firas Al Hamadani, Al-Ruwais, Jeddah 23214, Saudi Arabia"
             }
         ]
     },
