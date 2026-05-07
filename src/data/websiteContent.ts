@@ -317,9 +317,9 @@ export const websiteContent = {
             title: 'How we do it',
             description: 'IFCL is being the only company in Pakistan who has been accredited for IMS certification (Integrated Management System) for Quality, Environment, Health and Safety as follows:',
             certifications: [
-                'Quality 19001:2000',
-                'Environment: 14001:2004',
-                'Health and Safety: 18001:1999'
+                'Quality: 9001:2015',
+                'Environment: 14001:2015',
+                'Health and Safety: 45001:2018'
             ],
             mainText: 'IFCL provides end-to-end supply chain and logistics solutions, delivering dependable support to clients 24/7. Positioned in central Karachi, only 15 minutes from both Karachi International Airport and Karachi Port, the company offers convenient access for customers. Beyond Karachi, IFCL has established additional offices in northern Pakistan near key airports to ensure seamless service across the country.',
             image: howWeDoItImg
