@@ -103,34 +103,38 @@ const FAQ: React.FC = () => {
               {content.title}
             </h2>
 
-            <div className={`space-y-4 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <p className="text-xl text-gray-900 font-semibold whitespace-pre-line">
-                {content.contactText}
-              </p>
-              <a
-                href={`mailto:${content.contactEmail}`}
-                className="inline-flex items-center text-xl text-blue-800 font-bold underline transition-colors hover:text-blue-600"
-              >
-                <Mail className="ml-2 mr-2 h-6 w-6 shrink-0" />
-                {content.contactEmail}
-              </a>
-              <div className="space-y-10 pt-6 border-t border-gray-100 mt-6">
-                <AddressBlock
-                  flag={<PakistanFlag />}
-                  address={content.pakistanAddress}
-                  linkText={websiteContent.ui.common.mapLink}
-                />
-                <AddressBlock
-                  flag={<SaudiFlag />}
-                  address={content.SaudiEnglishAddress}
-                  linkText={websiteContent.ui.common.mapLink}
-                />
-                {/* <AddressBlock
-                  flag={<SaudiFlag />}
-                  address={content.SaudiArabicAddress}
-                  mapQuery={content.SaudiEnglishAddress}
-                  linkText={websiteContent.ui.common.mapLink}
-                /> */}
+            <div className={`space-y-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="space-y-4">
+                <p className="text-xl text-gray-900 font-semibold whitespace-pre-line">
+                  {content.contactText}
+                </p>
+                <a
+                  href={`mailto:${content.contactEmail}`}
+                  className="inline-flex items-center text-xl text-blue-800 font-bold underline transition-colors hover:text-blue-600"
+                >
+                  <Mail className="ml-2 mr-2 h-6 w-6 shrink-0" />
+                  {content.contactEmail}
+                </a>
+              </div>
+
+              {/* Head Office - Pakistan */}
+              <div className="pt-6 border-t border-gray-100">
+                {content.globalPresence
+                  .filter((office: any) => office.code === 'PK')
+                  .map((office: any, index: number) => (
+                    <AddressBlock
+                      key={index}
+                      flag={
+                        <img
+                          src={`https://flagcdn.com/w320/${office.code.toLowerCase()}.png`}
+                          alt={`${office.country} flag`}
+                          className="h-6 w-9 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
+                        />
+                      }
+                      address={office.address}
+                      linkText={websiteContent.ui.common.mapLink}
+                    />
+                  ))}
               </div>
             </div>
           </div>
@@ -167,6 +171,32 @@ const FAQ: React.FC = () => {
             </div>
           </div>
           <div className="hidden lg:block lg:col-span-1"></div>
+        </div>
+
+        {/* Global Presence Section Below the Line */}
+        <div className={`mt-20 pt-16 border-t-2 border-red-600 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <h3 className="text-3xl text-[#07119B] font-bold uppercase tracking-wider mb-12 text-center">
+            {content.globalPresenceLabel}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+            {content.globalPresence
+              .filter((office: any) => office.code !== 'PK')
+              .map((office: any, index: number) => (
+                <div key={index} className="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-lg transition-shadow">
+                  <AddressBlock
+                    flag={
+                      <img
+                        src={`https://flagcdn.com/w320/${office.code.toLowerCase()}.png`}
+                        alt={`${office.country} flag`}
+                        className="h-8 w-12 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
+                      />
+                    }
+                    address={office.address}
+                    linkText={websiteContent.ui.common.mapLink}
+                  />
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </section>

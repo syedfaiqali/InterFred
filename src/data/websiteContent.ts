@@ -249,9 +249,35 @@ export const websiteContent = {
         title: 'Quick answers to questions you may have',
         contactText: 'Can\'t find what you\'re looking for? Contact us here:',
         contactEmail: 'info@inter-fret.com',
-        pakistanAddress: '2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan',
-        SaudiEnglishAddress: 'Abu Firas Al Hamadani, Al-Ruwais, Jeddah 23214, Saudi Arabia',
-        SaudiArabicAddress: 'أبو فراس الحمداني، الرويس، جدة 23214، المملكة العربية السعودية',
+        globalPresenceLabel: 'Global Presence',
+        globalPresence: [
+            {
+                country: 'Pakistan (Head Office)',
+                address: '2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan',
+                code: 'PK'
+            },
+            {
+                country: 'KSA Office',
+                address: 'Abu Firas Al-Hamadani Street, District Al-Rawais, Jeddah 23214, Kingdom of Saudi Arabia.',
+                phone: '+966 599 686 962',
+                code: 'SA'
+            },
+            {
+                country: 'United States of America',
+                address: '3 The Green, Suite B Dover, Delaware 19901, USA',
+                code: 'US'
+            },
+            {
+                country: 'United Kingdom',
+                address: '4 St. Lawrences Road Coventry CV6 7AA England & Wales United Kingdom',
+                code: 'GB'
+            },
+            {
+                country: 'Singapore',
+                address: '68 Circular Road, #02-01 Singapore 049422',
+                code: 'SG'
+            }
+        ],
         items: [
             {
                 question: "Do you handle dangerous goods?",
@@ -275,7 +301,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "<b>Pakistan Office:</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>Saudi Arabia Office:</b> Abu Firas Al Hamadani, Al-Ruwais, Jeddah 23214, Saudi Arabia"
+                answer: "<b>Pakistan (Head Office):</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>KSA Office:</b> Abu Firas Al-Hamadani Street, District Al-Rawais, Jeddah 23214, Kingdom of Saudi Arabia.\n\n<b>USA Office:</b> 3 The Green, Suite B Dover, Delaware 19901, USA\n\n<b>UK Office:</b> 4 St. Lawrences Road Coventry CV6 7AA England & Wales United Kingdom\n\n<b>Singapore Office:</b> 68 Circular Road, #02-01 Singapore 049422"
             }
         ]
     },
