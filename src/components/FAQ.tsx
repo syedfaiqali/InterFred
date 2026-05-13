@@ -174,7 +174,7 @@ const FAQ: React.FC = () => {
         </div>
 
         {/* Global Presence Section Below the Line */}
-        <div className={`mt-20 pt-16 border-t-2 border-red-600 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+        <div className={`mt-20 pt-16 border-t-2 border-[#07119B] transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
           <h3 className="text-3xl text-[#07119B] font-bold uppercase tracking-wider mb-12 text-center">
             {content.globalPresenceLabel}
           </h3>
