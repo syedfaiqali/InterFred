@@ -273,6 +273,11 @@ export const websiteContent = {
                 code: 'GB'
             },
             {
+                country: 'China Office',
+                address: 'Office 1201, Building 2, BRETC Business Centre, No. 10 Wuqu Road, Dongnan Street, Changshu, Suzhou, Jiangsu Province, China',
+                code: 'CN'
+            },
+            {
                 country: 'Singapore',
                 address: '68 Circular Road, #02-01 Singapore 049422',
                 code: 'SG'
@@ -301,7 +306,7 @@ export const websiteContent = {
             },
             {
                 question: "What is your office address?",
-                answer: "<b>Pakistan (Head Office):</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>KSA Office:</b> Abu Firas Al-Hamadani Street, District Al-Rawais, Jeddah 23214, Kingdom of Saudi Arabia.\n\n<b>USA Office:</b> 3 The Green, Suite B Dover, Delaware 19901, USA\n\n<b>UK Office:</b> 4 St. Lawrences Road Coventry CV6 7AA England & Wales United Kingdom\n\n<b>Singapore Office:</b> 68 Circular Road, #02-01 Singapore 049422"
+                answer: "<b>Pakistan (Head Office):</b> 2nd Floor, Amir Trade Center, Block II PECHS Shahrah-e-Quaideen, Karachi, Pakistan\n\n<b>KSA Office:</b> Abu Firas Al-Hamadani Street, District Al-Rawais, Jeddah 23214, Kingdom of Saudi Arabia.\n\n<b>USA Office:</b> 3 The Green, Suite B Dover, Delaware 19901, USA\n\n<b>UK Office:</b> 4 St. Lawrences Road Coventry CV6 7AA England & Wales United Kingdom\n\n<b>China Office:</b> Office 1201, Building 2, BRETC Business Centre, No. 10 Wuqu Road, Dongnan Street, Changshu, Suzhou, Jiangsu Province, China\n\n<b>Singapore Office:</b> 68 Circular Road, #02-01 Singapore 049422"
             }
         ]
     },

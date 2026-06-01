@@ -1,28 +1,8 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Mail } from 'lucide-react'
-import pkFlag from '../assets/pk.svg'
-import saFlag from '../assets/sa.svg'
 import { useWebsiteContent } from '../hooks/useWebsiteContent'
 import { useLanguage } from '../context/LanguageContext'
-
-const PakistanFlag = () => (
-  <img
-    src={pkFlag}
-    alt="Pakistan Flag"
-    className="h-6 w-9 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
-    aria-hidden="true"
-  />
-)
-
-const SaudiFlag = () => (
-  <img
-    src={saFlag}
-    alt="Saudi Arabia Flag"
-    className="h-6 w-9 shrink-0 object-cover rounded-sm border border-gray-200 bg-white shadow-sm"
-    aria-hidden="true"
-  />
-)
 
 const getGoogleMapsUrl = (address: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
